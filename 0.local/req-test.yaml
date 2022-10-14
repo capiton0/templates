@@ -1,0 +1,69 @@
+id: req-test
+
+info:
+  name: req-test
+  author: capiton
+  severity: info
+  tags: fuck
+
+# self-contained: true
+requests:
+  # - method: GET
+  #   path:
+  #     - "{{RootURL}}"
+
+  # - raw:
+  #     - |
+  #       @{{wait_for(5)}}
+  #       @Host: http://127.0.0.1:8000
+  #       GET /HTTP/1.1
+  #       Host: 127.0.0.1:8000
+  #       Content-Type: application/json
+  #       {{domain}} 
+        
+  - raw:
+      - |
+        GET / HTTP/1.1
+        Host: 127.0.0.1:8000
+        Content-Type: application/json
+
+      - |
+        GET /{{test}} HTTP/1.1
+        Host: 127.0.0.1:8000
+        Content-Type: application/json
+        
+    
+    payloads:
+      test: 
+        - "2"
+    
+    redirects: false
+    matchers-condition: or
+    matchers:
+    - type: status
+      name: success
+      status:
+        - 200
+      #     - 201
+      #     - 202
+      #     - 204
+      #     - 301
+      #     - 302
+      #     - 303
+      #     - 307
+      #     - 401
+      #     - 403
+      #     - 404
+      #     - 500
+      #     - 501
+      #     - 502
+      #   condition: or
+
+    # extractors:
+    #   - type: regex
+    #     part: header  # part of the response (header,body,all)
+    #     name: test
+    #     # group: 1
+    #     internal: true        
+    #     regex:
+    #       - '.'

@@ -1,0 +1,110 @@
+id: urlscan
+
+info:
+  name: urlscan
+  author: capiton
+  severity: low
+  reference:
+    - https://blog.sorcery.ie/posts/adminer/
+  tags: urlscan
+
+
+requests:
+  - method: GET
+    id: error_path1
+    path:
+      - "{{BaseURL}}/{{randstr}}"
+  - method: GET
+    id: error_path2
+    path:
+      - "{{BaseURL}}/{{randstr}}.php"
+  - method: GET
+    id: error_path3
+    path:
+      - "{{BaseURL}}/{{randstr}}.asp"
+  - method: GET
+    id: error_path4
+    path:
+      - "{{BaseURL}}/{{randstr}}.jsp"
+  - method: GET
+    id: error_path5
+    path:
+      - "{{BaseURL}}/{{randstr}}.jspx"
+  - method: GET
+    id: error_path6
+    path:
+      - "{{BaseURL}}/{{randstr}}.zip"
+  - method: GET
+    id: error_path7
+    path:
+      - "{{BaseURL}}/.{{randstr}}"
+  - method: GET
+    id: error_path8
+    path:
+      - "{{BaseURL}}/{{randstr}}/{{randstr}}.html"
+  - method: GET
+    id: error_path9
+    path:
+      - "{{BaseURL}}/../../../../../../../../etc/passwd"
+  - method: GET
+    id: error_path10
+    path:
+      - "{{BaseURL}}/admin{{randstr}}/"
+  - method: GET
+    id: error_path11
+    path:
+      - "{{BaseURL}}/admin{{randstr}}/{{randstr}}"
+  - method: GET
+    id: error_path12
+    path:
+      - "{{BaseURL}}/{{randstr}}admin"
+  
+  
+  
+  - method: GET
+    path:
+      - "{{BaseURL}}/{{path}}"
+    # redirects: true
+    # max-redirects: 3
+    headers:
+      Referer: "{{BaseURL}}"
+
+    
+    payloads:
+      path: helpers/wordlists/url_fuzz.txt
+    # threads: 2
+    req-condition: true
+    matchers-condition: and
+
+    matchers:
+      - type: dsl
+        condition: and
+        dsl:
+          - "content_length != -1"
+          - "content_length != 0"
+          - "content_length != error_path1_content_length"
+          - "content_length != error_path2_content_length"
+          - "content_length != error_path3_content_length"
+          - "content_length != error_path4_content_length"
+          - "content_length != error_path5_content_length"
+          - "content_length != error_path6_content_length"
+          - "content_length != error_path7_content_length"
+          - "content_length != error_path8_content_length"
+          - "content_length != error_path9_content_length"
+          - "content_length != error_path10_content_length"
+          - "content_length != error_path11_content_length"
+          - "content_length != error_path12_content_length"
+
+      - type: status
+        condition: or
+        status:
+          - 200
+          - 302
+          - 301
+          # - 403
+
+    extractors:
+      - type: dsl  # type of the extractor
+        dsl:
+          - "status_code"
+          - "content_length"

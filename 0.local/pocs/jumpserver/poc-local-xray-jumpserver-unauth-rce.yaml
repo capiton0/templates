@@ -1,0 +1,42 @@
+id: poc-local-xray-jumpserver-unauth-rce
+
+info:
+  name: poc-local-xray-jumpserver-unauth-rce
+  author: capiton
+  severity: critical
+  reference:
+    - https://www.cnvd.org.cn/flaw/show/CNVD-2021-04128
+  tags: jumpserver
+
+variables:
+  r1: '{{rand_text_alphanumeric(5, "")}}'
+
+requests:
+  - raw:
+      - |
+        GET /api/v1/authentication/connection-token/?user-only={{r1}} HTTP/1.1
+        Host: {{Hostname}}
+
+      - |
+        GET /api/v1/users/connection-token/?user-only={{r1}} HTTP/1.1
+        Host: {{Hostname}}
+
+
+    matchers-condition: and
+    matchers:
+
+      - type: word
+        part: body
+        words:
+          - "\"\""
+        condition: and
+
+      - type: word
+        part: header
+        words:
+          - "application/json"
+        condition: and
+
+      - type: status
+        status:
+          - 404

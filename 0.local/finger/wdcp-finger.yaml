@@ -1,0 +1,43 @@
+id: wdcp-finger
+
+info:
+  name: wdCP云主机管理系统指纹
+  author: capiton
+  severity: info
+  description: description
+  reference:
+    - https://
+  tags: wdcp
+
+requests:
+  - raw:
+      - |
+        POST /login HTTP/1.1
+        Host: {{Hostname}}
+        Accept: */*
+        X-Requested-With: XMLHttpRequest
+        Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryCi5y7GhydKPxvq6e
+        Origin: "{{BaseURL}}"
+        Referer: "{{BaseURL}}/login"
+        Accept-Encoding: gzip, deflate
+        Accept-Language: zh-CN,zh;q=0.9
+
+        ------WebKitFormBoundaryCi5y7GhydKPxvq6e
+        Content-Disposition: form-data; name="username"
+
+        admin
+        ------WebKitFormBoundaryCi5y7GhydKPxvq6e
+        Content-Disposition: form-data; name="passwd"
+
+        {{randstr}}
+        ------WebKitFormBoundaryCi5y7GhydKPxvq6e--
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '{"errCode":"1","msg":'
+      - type: status
+        status:
+          - 200

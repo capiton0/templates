@@ -1,0 +1,58 @@
+id: finger-dir
+
+info:
+  name: 指纹探测-目录扫描
+  author: capiton
+  severity: info
+  description: finger-dir Technology Fingerprint tests run in nuclei.
+  tags: finger
+
+requests:
+  - method: GET
+    path:
+      - "{{RootURL}}/{{path}}"
+
+
+    payloads:
+      path:
+        - druid/
+        - nacos/
+
+
+    attack: clusterbomb
+    redirects: true
+    max-redirects: 1
+
+####################### 目录指纹匹配 ##################################
+
+    matchers-condition: or
+    matchers:
+
+      - type: word
+        name: Druid
+        part: body
+        condition: and
+        words:
+          - '<title>Apache Druid</title>'
+
+      - type: word
+        name: Druid
+        part: body
+        condition: and
+        words:
+          - Druid
+
+      - type: word
+        name: Nacos
+        part: body
+        condition: and
+        words:
+          - '<title>Nacos</title>'
+
+      - type: word
+        name: Nacos
+        part: body
+        condition: and
+        words:
+          - 'Nacos'
+

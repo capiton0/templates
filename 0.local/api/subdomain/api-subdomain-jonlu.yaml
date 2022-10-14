@@ -1,0 +1,29 @@
+id: api-subdomain-jonlu
+
+info:
+  name: 根据jonlu获取子域名
+  author: capiton
+  severity: info
+  reference:
+    - https://developer.fastly.com/reference/api/
+  tags: jonlu,api,getsubdomain
+self-contained: true
+
+requests:
+  - method: GET
+    path:
+      - "https://jonlu.ca/anubis/subdomains/{{domain}}"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+    extractors:
+      - type: json # type of the extractor
+        part: body
+        name: port
+        json:
+          - '.[]'
+

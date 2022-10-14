@@ -1,0 +1,58 @@
+id: api-subdomain-hunter
+
+info:
+  name: 根据hunter获取子域名
+  author: capiton
+  severity: info
+  reference:
+    - https://developer.fastly.com/reference/api/
+  tags: hunter,api,getsubdomain
+self-contained: true
+variables:
+  query: '{{base64("domain=\"" + domain + "\"||domain.suffix=\"" + domain+ "\"")}}'
+  # fofaquery: '{{base64("domain=\"" + domain + "\"")}}'
+requests:
+  - raw:
+      - |
+        @{{wait_for(3)}}
+        GET https://hunter.qianxin.com/openApi/search?api-key={{hunter_token}}&search={{query}}&page=1&page_size=100&is_web=3 HTTP/1.1
+        Host: hunter.qianxin.com
+
+  # - method: GET
+  #   path:
+  #     - 'https://hunter.qianxin.com/openApi/search?api-key={{hunter_token}}&search={{base64("domain=\"" + domain + "\"")}}&page=1&page_size=1&is_web=3'
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+    payloads:
+      hunter_token: helpers/api/hunter_token.txt
+    attack: clusterbomb
+
+
+    extractors:
+      - type: regex # type of the extractor
+        part: body
+        name: size
+        group: 1
+        internal: true
+        regex:
+          - '"total":(.*?),'
+
+      - type: regex # type of the extractor
+        part: body
+        name: subdomain0
+        internal: true
+        regex:
+          - '([0-9a-zA-Z-]{1,}\.)+([a-zA-Z]{2,})'
+
+      - type: json # type of the extractor
+        part: body
+        name: port
+        json:
+          - '.data.arr[].domain'
+          
+

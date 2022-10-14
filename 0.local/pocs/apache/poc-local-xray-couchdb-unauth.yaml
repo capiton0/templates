@@ -1,0 +1,29 @@
+id: poc-local-xray-couchdb-unauth
+
+info:
+  name: poc-local-xray-couchdb-unauth
+  author: capiton
+  severity: high
+  reference:
+    - https://www.seebug.org/vuldb/ssvid-91597
+  tags: apache,unauth,misconfig,storm
+
+requests:
+  - method: GET
+    path:
+      - '{{BaseURL}}/_config'
+
+    matchers-condition: and
+    matchers:
+
+      - type: word
+        part: body
+        words:
+          - "httpd_design_handlers"
+          - "external_manager"
+          - "replicator_manager"
+        condition: and
+
+      - type: status
+        status:
+          - 200

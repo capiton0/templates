@@ -1,0 +1,29 @@
+id: api-subdomain-threatminer
+
+info:
+  name: 根据threatminer获取子域名
+  author: capiton
+  severity: info
+  reference:
+    - https://developer.fastly.com/reference/api/
+  tags: threatminer,api,getsubdomain
+self-contained: true
+
+requests:
+  - method: GET
+    path:
+      - "https://api.threatminer.org/v2/domain.php?q={{domain}}&rt=5"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+    extractors:
+      - type: json # type of the extractor
+        part: body
+        name: port
+        json:
+          - '.results[]'
+

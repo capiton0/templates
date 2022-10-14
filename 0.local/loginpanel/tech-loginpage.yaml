@@ -1,0 +1,35 @@
+id: tech-loginpage
+info:
+  name: tech-loginpage
+  author: capiton
+  severity: info
+  description: finger-index Technology Fingerprint tests run in nuclei.
+  tags: login-panel
+
+requests:
+  - method: GET
+    path:
+      - "{{RootURL}}"
+
+
+
+    redirects: true
+    max-redirects: 1
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        name: 登录页面
+        words:
+        - type="password"
+
+      - type: word
+        condition: and
+        name: 登录页面
+        words:
+        - "验证码"
+        - "checkcode"
+        - "checkCode"
+        - "看不清"
+        negative: true

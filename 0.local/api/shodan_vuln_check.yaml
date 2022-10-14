@@ -1,0 +1,45 @@
+id: shodan_vuln_check
+
+info:
+  name: shodan_vuln_check
+  author: capiton
+  severity: info
+  reference:
+    - https://github.com/capiton0/nuclei-interesting-template/
+  tags: api
+
+self-contained: true
+requests:
+  - method: GET
+    path:
+      - "https://internetdb.shodan.io:443/{{ip}}"
+
+    attack: clusterbomb
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - '"vulns":['
+        part: body
+
+      - type: word
+        words:
+          - '"vulns":[]'
+        part: body
+        negative: true
+
+      # "vulns":[]
+
+    extractors:
+      - type: json # type of the extractor
+        part: body
+        name: vuln
+        json:
+          - '.vulns|.[]'
+          # - '"https://github.com/trickest/cve/search?q=\(.vulns|.[])&type=code"'
+
+

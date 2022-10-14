@@ -1,0 +1,86 @@
+id: poc-local-oa-yonyou-nc-bsh-bshservlet
+
+info:
+  name: poc-local-oa-yonyou-nc-bsh-bshservlet
+  author: capiton
+  severity: critical
+  description: ""
+  reference:
+    - https://mp.weixin.qq.com/s?__biz=MzU2OTUzNTI2OQ==&mid=2247484227&idx=1&sn=d7b1141a06a9d7d5052811d00a1f914c&chksm=fcfc7d09cb8bf41fee6019a35cd012d6b536302ca2add70bca15ad9ad63101eb913cd8002950&scene=178&cur_album_id=2577829014602514435#rd
+  metadata:
+    fofa-query: fofa:icon_hash="1085941792"
+    Vulnerability-Impact: 用友NC6.5
+  tags: yonyou,oa
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/service/{{path}}/bsh.servlet.BshServlet"
+
+    payloads:
+      path: 
+        - "~aim"
+        - "~alm"
+        - "~ampub"
+        - "~arap"
+        - "~aum"
+        - "~cc"
+        - "~cdm"
+        - "~cmp"
+        - "~ct"
+        - "~dm"
+        - "~erm"
+        - "~fa"
+        - "~fac"
+        - "~fbm"
+        - "~ff"
+        - "~fip"
+        - "~fipub"
+        - "~fp"
+        - "~fts"
+        - "~fvm"
+        - "~gl"
+        - "~hrhi"
+        - "~hrjf"
+        - "~hrpd"
+        - "~hrpub"
+        - "~hrtrn"
+        - "~hrwa"
+        - "~ia"
+        - "~ic"
+        - "~iufo"
+        - "~modules"
+        - "~mpp"
+        - "~obm"
+        - "~pu"
+        - "~qc"
+        - "~sc"
+        - "~scmpub"
+        - "~so"
+        - "~tam"
+        - "~tbb"
+        - "~to"
+        - "~uap"
+        - "~uapbd"
+        - "~uapde"
+        - "~uapeai"
+        - "~uapother"
+        - "~uapqe"
+        - "~uapweb"
+        - "~uapws"
+        - "~vrm"
+        - "~yer"
+    attack: clusterbomb
+    stop-at-first-match: true
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        part: body
+        words:
+          - "Script"
+          - "Output"
+          - "Return"

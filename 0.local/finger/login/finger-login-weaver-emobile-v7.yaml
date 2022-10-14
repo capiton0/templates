@@ -1,0 +1,36 @@
+id: finger-login-weaver-emobile-v7
+info:
+  name: finger-login-weaver-emobile-v7
+  author: capiton
+  severity: info
+  description: description
+  reference:
+    - https://
+  tags: e-mobile
+
+
+requests:
+  - raw:
+      - |-
+        POST /emp/passport/login HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/json
+
+
+        {"key":"","loginid":"sysadmin","password":"{{randstr}}","login_type":1}
+    
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: or
+        part: body
+        words:
+          - errcode
+          
+      - type: word
+        condition: or
+        part: body
+        words:
+          - 账号或密码错误
+          - Wrong account or password
+          - 用户名或密码错误

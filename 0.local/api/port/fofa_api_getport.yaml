@@ -1,0 +1,35 @@
+id: fofa_api_getport
+
+info:
+  name: 根据fofa获取host端口
+  author: capiton
+  severity: info
+  reference:
+    - https://developer.fastly.com/reference/api/
+  tags: fofa,api,getport
+self-contained: true
+requests:
+  - method: GET
+    path:
+      - "https://fofa.info:443/api/v1/host/{{host}}?detail=true&email={{fofa_email}}&key={{fofa_token}}"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+    payloads:
+      fofa_email: helpers/api/fofa_mail.txt
+      fofa_token: helpers/api/fofa_token.txt
+    attack: clusterbomb
+
+
+    extractors:
+      - type: json # type of the extractor
+        part: body
+        name: port
+        json:
+          # - '{port:"\(.host):\(.ports|.[]|.port)"}'
+          - '"\(.host):\(.ports|.[]|.port)"'
+

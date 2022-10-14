@@ -1,0 +1,43 @@
+id: api-subdomain-securitytrails
+
+info:
+  name: 根据securitytrails获取子域名
+  author: capiton
+  severity: info
+  reference:
+    - https://developer.fastly.com/reference/api/
+  tags: fofa,api,getsubdomain
+
+variables:
+ a: 1
+
+self-contained: true
+requests:
+  - method: GET
+    path:
+      - "https://api.securitytrails.com/v1/domain/{{domain}}/subdomains"
+    headers:
+      apikey: "{{securitytrails_token}}"
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+    payloads:
+      securitytrails_token: helpers/api/securitytrails_token.txt
+    attack: clusterbomb
+
+
+    extractors:
+      - type: json # type of the extractor
+        part: body
+        name: subdomain
+        json:
+          - '"\(.subdomains[]).{{domain}}"'
+
+      - type: regex # type of the extractor
+        part: body
+        name: subdomain
+        regex:
+          - '([0-9a-zA-Z-]{1,}\.)+([a-zA-Z]{2,})'

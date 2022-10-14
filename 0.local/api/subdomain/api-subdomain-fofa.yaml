@@ -1,0 +1,43 @@
+id: api-subdomain-fofa
+
+info:
+  name: 根据fofa获取子域名
+  author: capiton
+  severity: info
+  reference:
+    - https://developer.fastly.com/reference/api/
+  tags: fofa,api,getsubdomain
+self-contained: true
+variables:
+
+  fofaquery: '{{base64("domain=\"" + domain + "\"")}}'
+requests:
+  - method: GET
+    path:
+      - "https://fofa.info/api/v1/search/all?email={{fofa_email}}&key={{fofa_token}}&qbase64={{fofaquery}}&size=10000&fields=host&full=true"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+    payloads:
+      fofa_email: helpers/api/fofa_mail.txt
+      fofa_token: helpers/api/fofa_token.txt
+    attack: clusterbomb
+
+
+    extractors:
+      # - type: json # type of the extractor
+      #   part: body
+      #   name: port
+      #   json:
+          # - '{port:"\(.host):\(.ports|.[]|.port)"}'
+          # - '"\(.host):\(.ports|.[]|.port)"'
+      - type: regex # type of the extractor
+        part: body
+        name: subdomain
+        regex:
+          - '([0-9a-zA-Z-]{1,}\.)+([a-zA-Z]{2,})'
+

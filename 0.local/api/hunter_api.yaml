@@ -1,0 +1,59 @@
+id: hunter_api_getfinger
+
+info:
+  name: 奇安信鹰图指纹获取
+  author: capiton
+  severity: info
+  reference:
+    - https://developer.fastly.com/reference/api/
+  tags: hunter,api,getfinger
+
+self-contained: true
+requests:
+  - method: GET
+    path:
+      - 'https://hunter.qianxin.com:443/openApi/search?api-key={{hunter_token}}&search={{base64("ip={{host}}")}}&page=1&page_size=10&is_web=3&'
+    body: '{"query":"ip:{{host}}","start":0,"size":10,"ignore_cache":false}'
+    
+  # - raw:
+  #     - |
+  #       @Host: https://hunter.qianxin.com:443
+  #       GET /openApi/search?api-key={{hunter_token}}&search={{base64("ip={{Host}}")}}&page=1&page_size=5&is_web=3 HTTP/1.1
+  #       Host: hunter.qianxin.com
+  #       Accept: */*
+
+
+
+  #       {"query":"ip:{{host}}","start":0,"size":10,"ignore_cache":false}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        words:
+          - '"code":200'
+
+    payloads:
+      hunter_token: helpers/api/hunter_token.txt
+    attack: clusterbomb
+
+
+    extractors:
+      - type: json # type of the extractor
+        part: body
+        name: port
+        json:
+          # - '.ip'  # JQ like syntax for extraction
+          - '{url:.data.arr[].url, finger:.data.arr[].component|.[].name}'
+
+      # - type: regex # type of the extractor
+      #   part: body
+      #   name: host
+      #   regex:
+      #     # - '.ip'  # JQ like syntax for extraction
+      #     - "{{Host}}"
+
+

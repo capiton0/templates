@@ -1,0 +1,35 @@
+id: shodan_getport
+
+info:
+  name: shodan_getport
+  author: capiton
+  severity: info
+  reference:
+    - https://github.com/capiton0/nuclei-interesting-template/
+  tags: getport,api
+
+self-contained: true
+requests:
+  - method: GET
+    path:
+      - "https://internetdb.shodan.io:443/{{host}}"
+
+    attack: clusterbomb
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      # "vulns":[]
+
+    extractors:
+      - type: json # type of the extractor
+        part: body
+        name: vuln
+        json:
+          # - '{"port":"\(.ip):\(.ports[])"}'
+          - '"\(.ip):\(.ports[])"'
+          # - '"https://github.com/trickest/cve/search?q=\(.vulns|.[])&type=code"'
+
+

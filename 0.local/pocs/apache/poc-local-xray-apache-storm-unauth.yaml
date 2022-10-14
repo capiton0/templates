@@ -1,0 +1,28 @@
+id: poc-local-xray-apache-storm-unauth
+
+info:
+  name: poc-local-xray-apache-storm-unauth
+  author: capiton
+  severity: medium
+  reference:
+    - https://storm.apache.org/releases/current/STORM-UI-REST-API.html
+  tags: apache,unauth,misconfig,storm
+
+requests:
+  - method: GET
+    path:
+      - '{{BaseURL}}/api/v1/cluster/summary'
+
+    matchers-condition: and
+    matchers:
+
+      - type: word
+        part: body
+        words:
+          - '"totalMem":'
+          - '"stormVersion":'
+        condition: and
+
+      - type: status
+        status:
+          - 200

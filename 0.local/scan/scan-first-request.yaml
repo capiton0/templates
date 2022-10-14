@@ -1,0 +1,41 @@
+id: scan-first-request
+
+info:
+  name: scan-first-request
+  author: capiton
+  severity: info
+
+requests:
+  - method: GET
+    path:
+      - "{{RootURL}}"
+
+    redirects: false
+    matchers-condition: or
+    matchers:
+      - type: status
+        name: success
+        status:
+          - 200
+          - 201
+          - 202
+          - 204
+          - 301
+          - 302
+          - 303
+          - 304
+          - 307
+          - 401
+          - 403
+          - 404
+          - 500
+          - 501
+          - 502
+        condition: or
+
+      # - type: status
+      #   name: status_404
+      #   status:
+      #     - 200
+      #   condition: or
+

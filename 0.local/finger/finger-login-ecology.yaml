@@ -1,0 +1,38 @@
+id: finger-login-ecology
+
+info:
+  name: finger-login-ecology
+  author: capiton
+  severity: info
+  description: description
+  reference:
+    - https://
+  tags: ecology,fanwei
+
+requests:
+  - method: POST
+    path:
+      - "{{BaseURL}}/api/hrm/login/checkLogin"
+    headers:
+        X-Requested-With: XMLHttpRequest
+        Content-Type: application/x-www-form-urlencoded; charset=utf-8
+        Accept-Encoding: gzip, deflate
+    body: "islanguid=7&loginid={{randstr}}&userpassword={{randstr}}&dynamicPassword=&tokenAuthKey=&validatecode=&validateCodeKey=&logintype=1&messages=&isie=false&"
+
+    stop-at-first-match: true
+    req-condition: true
+    matchers-condition: and
+    matchers:
+      - type: word
+        name: ecologylogin
+        part: body
+        words:
+          - '{"msgcode":"16","msg":"用户名或密码错误"'
+      
+      - type: status
+        status:
+          - 200
+
+      # - type: dsl
+      #   dsl:
+      #     - 'contains(error_login_body, "{\"msgcode\":\"16\",\"msg\":\"用户名或密码错误\"")'

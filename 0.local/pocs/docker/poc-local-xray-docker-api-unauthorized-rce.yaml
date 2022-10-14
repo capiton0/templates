@@ -1,0 +1,31 @@
+id: poc-local-xray-docker-api-unauthorized-rce
+
+info:
+  name: poc-local-xray-docker-api-unauthorized-rce
+  author: capiton
+  severity: high
+  reference:
+    - https://github.com/vulhub/vulhub/tree/master/docker/unauthorized-rce
+  tags: docker
+
+requests:
+  - raw:
+      - |
+        GET /info HTTP/1.1
+        Host: {{Hostname}}
+
+    
+
+    matchers-condition: and
+    redirects: false
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        condition: and
+        words:
+          - "KernelVersion"
+          - "RegistryConfig"
+          - "DockerRootDir"

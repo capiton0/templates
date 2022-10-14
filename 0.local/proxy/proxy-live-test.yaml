@@ -1,0 +1,59 @@
+id: proxy-live-test
+
+info:
+  name: proxy-live-test
+  author: capiton
+  severity: info
+
+# self-contained: true
+
+
+requests:
+  - raw:
+    - |+
+      GET https://www.baidu.com HTTP/1.1
+      Host: www.baidu.com
+      Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+
+    # - |+
+    #   CONNECT baidu.com:443 HTTP/1.1
+    #   Host: baidu.com:443
+    #   Proxy-Connection: keep-alive
+
+  # - raw:
+  #   # - |+
+  #   #   GET http://www.cip.cc/ HTTP/1.1
+  #   #   Host: www.cip.cc
+  #   #   User-Agent: curl/7.79.1
+  #   #   Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+
+    # - |+
+    #   @Host: http://{{proxy}}
+    #   CONNECT cip.cc:80 HTTP/1.1
+    #   Host: cip.cc
+    #   Proxy-Connection: keep-alive
+
+
+          
+    matchers-condition: and
+    unsafe: true
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "百度一下，你就知道"
+        condition: and
+
+      # - type: word
+      #   part: header
+      #   words:
+      #     - "Connection"
+      #     - "established"
+      #   condition: and
+      
+      # - type: status
+      #   name: status_404
+      #   status:
+      #     - 200
+      #   condition: or
+

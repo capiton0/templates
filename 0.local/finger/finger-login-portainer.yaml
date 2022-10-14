@@ -1,0 +1,28 @@
+id: finger-login-portainer
+info:
+  name: finger-login-portainer
+  author: capiton
+  severity: info
+  description: description
+  reference:
+    - https://
+  tags: portainer
+requests:
+  - raw:
+      - |-
+        POST /api/auth HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/json
+
+        {"username":"admin","password":"{{randstr}"}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"message":"Invalid credentials"'
+          
+      - type: status
+        status:
+          - 422

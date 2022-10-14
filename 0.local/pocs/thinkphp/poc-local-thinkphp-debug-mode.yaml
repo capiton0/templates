@@ -1,0 +1,25 @@
+id: poc-local-thinkphp-debug-mode
+
+info:
+  name: ThinkPHP-debug-调试模式
+  author: capiton
+  severity: low
+  description: ""
+  tags: thinkphp
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "基本"
+          - "文件"
+          - "流程"
+          - "错误"
+          - "调试"
+        condition: and
+

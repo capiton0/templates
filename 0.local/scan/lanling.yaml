@@ -1,0 +1,48 @@
+id: lanling
+
+info:
+  name: 指纹漏洞探测
+  author: capiton
+  description: 根据finger-index.yaml识别的组件，进行自动匹配扫描
+
+workflows:
+
+#### 开始请求一次，忽略掉一些状态码异常的站点
+  - template: 0.local/scan/scan-first-request.yaml
+    matchers:
+    - name: success    
+      subtemplates:
+
+############################ icon图标匹配扫描 -  开始 #################################################################################
+        
+        - template: 0.local/finger/finger-index.yaml
+          matchers:
+
+#    首页指纹匹配扫描 -  蓝凌OA  
+            - name: landray
+              subtemplates:
+                - template: 0.local/pocs/oa/landray/poc-local-oa-landray-custom-rce.yaml
+
+            - name: landray-oa
+              subtemplates:
+                - template: 0.local/pocs/oa/landray/poc-local-oa-landray-custom-rce.yaml
+
+            - name: 蓝凌OA
+              subtemplates:
+                - template: 0.local/pocs/oa/landray/poc-local-oa-landray-custom-rce.yaml
+
+            - name: 蓝凌EIS智慧协同平台
+              subtemplates:
+                - template: 0.local/pocs/oa/landray/poc-local-oa-landray-custom-rce.yaml
+
+            - name: '蓝凌 智慧协同平台'
+              subtemplates:
+                - template: 0.local/pocs/oa/landray/poc-local-oa-landray-custom-rce.yaml
+
+            - name: landray-蓝凌eis智慧协同平台
+              subtemplates:
+                - template: 0.local/pocs/oa/landray/poc-local-oa-landray-custom-rce.yaml
+
+            - name: 蓝凌移动办公
+              subtemplates:
+                - template: 0.local/pocs/oa/landray/poc-local-oa-landray-custom-rce.yaml

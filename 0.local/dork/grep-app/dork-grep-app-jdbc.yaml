@@ -1,0 +1,52 @@
+id: dork-grep-app-jdbc
+
+info:
+  name: 通过grep-app获取jdbc数据库连接信息
+  author: capiton
+  severity: high
+  reference:
+    - ""
+  tags: dork,grep-app
+
+variables:
+  query: ''
+
+self-contained: true
+requests:
+  - method: GET
+    path:
+      - 'https://grep.app/api/search?q={{url_encode("(jdbc:[a-z:]+://" + host + ")")}}&regexp=true'
+
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        part: body
+        condition: and
+        words:
+          - '"count":0'
+        negative: true
+
+      - type: word
+        part: body
+        condition: and
+        words:
+          - '"count"'
+
+    extractors:
+      - type: json # type of the extractor
+        part: body
+        name: port
+        json:
+          - '"结果总数: \(.facets.count)"'
+
+
+      # - type: regex # type of the extractor
+      #   part: body
+      #   name: test
+      #   regex:
+      #     - '([0-9a-zA-Z-]{1,}\.)+([a-zA-Z]{2,})'

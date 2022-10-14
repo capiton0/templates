@@ -1,0 +1,19 @@
+id: vuln-scan
+
+info:
+  name: 漏洞扫描
+  author: capiton
+  description: A simple workflow that runs all 74cms related nuclei templates on a given target.
+
+workflows:
+    - template: cves/
+    - template: cnvd/
+    - template: vulnerabilities/
+    - template: takeovers/
+    - template: network/
+    - template: exposures/
+    - template: exposed-panels/
+    - template: misconfiguration/
+    - template: miscellaneous/
+    - template: 0.local/pocs/
+    

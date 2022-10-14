@@ -1,0 +1,35 @@
+id: poc-local-oa-yonyou-nc-uapws-service-Information-leak
+
+info:
+  name: poc-local-oa-yonyou-nc-uapws-service-Information-leak
+  author: capiton
+  severity: medium
+  description: "用友nc service接口信息泄露漏洞 nuclei"
+  reference:
+    - "https://mp.weixin.qq.com/s/nt4UpFtrFKX_3qOM3m6T4A"
+  metadata:
+    fofa-query: app="用友-UFIDA-NC"
+    Vulnerability-Impact: 用友NC UFIDA-NC
+  tags: yonyou,oa
+
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/uapws/service"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "{http://"
+          - "<html><body><p> <a"
+          - "</a> </p></body></html"
+        part: body
+        condition: and
+
+      - type: status
+        status:
+          - 200
+
+# Enhanced by mp on 2022/07/29

