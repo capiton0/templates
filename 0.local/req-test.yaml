@@ -5,7 +5,6 @@ info:
   author: capiton
   severity: info
   tags: fuck
-
 # self-contained: true
 requests:
   # - method: GET
