@@ -1,4 +1,4 @@
-# nuclei
+# nuclei 模板
 
 > 非官方维护的nuclei模板
 
