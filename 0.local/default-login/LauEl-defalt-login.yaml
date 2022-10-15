@@ -23,7 +23,7 @@ requests:
         Accept-Language: zh-CN,zh;q=0.9
     body: "User%5Buser_name%5D={{username}}&User%5Bpassword%5D={{password}}"
     payloads:
-      password: "helpers/wordlists/LauEl-yinghuo.txt"
+      password: "0.local/helpers/wordlists/LauEl-yinghuo.txt"
       username:
         - admin
     

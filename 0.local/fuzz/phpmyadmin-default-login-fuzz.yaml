@@ -32,7 +32,7 @@ requests:
       user:
         - root
         - mysql
-      password: "helpers/wordlists/password-TOP250"
+      password: "0.local/helpers/wordlists/password-TOP250"
 
     extractors:
       - type: regex

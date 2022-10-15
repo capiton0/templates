@@ -29,8 +29,8 @@ requests:
           - products
 
     payloads:
-      fofa_email: helpers/api/fofa_mail.txt
-      fofa_token: helpers/api/fofa_token.txt
+      fofa_email: 0.local/helpers/api/fofa_mail.txt
+      fofa_token: 0.local/helpers/api/fofa_token.txt
     attack: clusterbomb
 
 

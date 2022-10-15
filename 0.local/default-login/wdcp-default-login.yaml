@@ -31,7 +31,7 @@ requests:
         ------WebKitFormBoundaryCi5y7GhydKPxvq6e--
 
     payloads:
-      password: "helpers/wordlists/wdcp-linux-fuzz.txt"
+      password: "0.local/helpers/wordlists/wdcp-linux-fuzz.txt"
     # threads: 5
 
     stop-at-first-match: true

@@ -20,7 +20,7 @@ requests:
     body: "islanguid=7&loginid={{username}}&userpassword={{password}}&dynamicPassword=&tokenAuthKey=&validatecode=&validateCodeKey=&logintype=1&messages=&isie=false&"
 
     payloads:
-      username: "helpers/wordlists/username-TOP2000.txt"
+      username: "0.local/helpers/wordlists/username-TOP2000.txt"
 
       password: 
         - 123456

@@ -36,7 +36,7 @@ requests:
           - 200
 
     payloads:
-      quake_token: helpers/api/360quake_token.txt
+      quake_token: 0.local/helpers/api/360quake_token.txt
     attack: clusterbomb
 
 

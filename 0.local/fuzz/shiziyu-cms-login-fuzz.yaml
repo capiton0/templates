@@ -23,7 +23,7 @@ requests:
 
     attack: clusterbomb
     payloads:
-      password: "helpers/wordlists/password-TOP250"
+      password: "0.local/helpers/wordlists/password-TOP250"
 
     threads: 5
 

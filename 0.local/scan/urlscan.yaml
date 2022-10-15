@@ -71,7 +71,7 @@ requests:
 
     
     payloads:
-      path: helpers/wordlists/url_fuzz.txt
+      path: 0.local/helpers/wordlists/url_fuzz.txt
     # threads: 2
     req-condition: true
     matchers-condition: and

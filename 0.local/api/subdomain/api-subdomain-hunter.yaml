@@ -29,7 +29,7 @@ requests:
           - 200
 
     payloads:
-      hunter_token: helpers/api/hunter_token.txt
+      hunter_token: 0.local/helpers/api/hunter_token.txt
     attack: clusterbomb
 
 

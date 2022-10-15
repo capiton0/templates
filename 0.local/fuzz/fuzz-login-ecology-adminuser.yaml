@@ -24,7 +24,7 @@ requests:
        - admin
        - system
 
-      password: "helpers/wordlists/password-TOP250"
+      password: "0.local/helpers/wordlists/password-TOP250"
     
     attack: clusterbomb
     stop-at-first-match: true

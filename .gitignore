@@ -1,1 +1,7 @@
-helpers/api/*
+0.local/helpers/api/360quake_token.txt
+0.local/helpers/api/fofa_mail.txt
+0.local/helpers/api/fofa_token.txt
+0.local/helpers/api/hunter_token.txt
+0.local/helpers/api/securitytrails_token.txt
+0.local/helpers/api/shodan_token.txt
+.DS_Store
