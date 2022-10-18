@@ -10629,9 +10629,11 @@ workflows:
               subtemplates:
                 - tags: shortpixel
 
-#    首页指纹匹配扫描 - 
+#    首页指纹匹配扫描 - Showdoc API文档平台
             - name: 
               - showdoc
+              - ShowDoc
+              - Showdoc API文档平台
               condition: or
 
               subtemplates:
