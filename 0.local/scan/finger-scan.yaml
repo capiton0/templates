@@ -10585,13 +10585,17 @@ workflows:
               subtemplates:
                 - tags: shopware
 
-#    首页指纹匹配扫描 - 
+#    首页指纹匹配扫描 - shopXO商城
             - name: 
               - shopxo
+              - ShopXO
               condition: or
 
               subtemplates:
                 - tags: shopxo
+                - template: 0.local/login/finger/login-finger-shopxo.yaml
+                  subtemplates:
+                    - template: 0.local/login/fuzz/login-fuzz-shopxo.yaml
 
 #    首页指纹匹配扫描 - 
             - name: 

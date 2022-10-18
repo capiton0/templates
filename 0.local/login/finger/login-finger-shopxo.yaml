@@ -1,0 +1,49 @@
+id: login-finger-shopxo
+
+info:
+  name: login-finger-shopxo
+  author: capiton
+  severity: info
+  description: description
+  reference:
+    - https://
+  tags: shopxo
+
+variables:
+  password: "{{to_lower(rand_text_alpha(6))}}"
+
+requests:
+  - raw:
+      - |
+        POST /admin.php?s=admin/login.html HTTP/1.1
+        Host: {{Hostname}}
+        Accept: application/json, text/javascript, */*; q=0.01
+        X-Requested-With: XMLHttpRequest
+        Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryL5VxnPLwIBwiKB2E
+        Content-Length: 341
+
+
+        ------WebKitFormBoundaryL5VxnPLwIBwiKB2E
+        Content-Disposition: form-data; name="accounts"
+
+        admin
+        ------WebKitFormBoundaryL5VxnPLwIBwiKB2E
+        Content-Disposition: form-data; name="pwd"
+
+        {{password}}
+        ------WebKitFormBoundaryL5VxnPLwIBwiKB2E
+        Content-Disposition: form-data; name="type"
+
+        username
+        ------WebKitFormBoundaryL5VxnPLwIBwiKB2E--
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - 密码错误
+
+      - type: status
+        status:
+          - 200
