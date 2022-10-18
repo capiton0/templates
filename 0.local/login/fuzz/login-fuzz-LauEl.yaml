@@ -1,4 +1,4 @@
-id: fuzz-login-LauEl
+id: login-fuzz-LauEl
 
 info:
   name: 萤火商城-LauEl-后台默认登录
@@ -7,7 +7,6 @@ info:
   description: description
   reference:
     - https://
-  tags: lauel,LauEl,萤火商城
 
 requests:
   - method: POST
