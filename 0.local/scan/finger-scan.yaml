@@ -12819,9 +12819,11 @@ workflows:
               subtemplates:
                 - tags: xweb500
 
-#    首页指纹匹配扫描 - 
+#    首页指纹匹配扫描 - XXL-JOB 任务调度中心
             - name: 
-              - xxljob
+              - xxl
+              - xxl-job
+              - XXL-JOB
               condition: or
 
               subtemplates:
