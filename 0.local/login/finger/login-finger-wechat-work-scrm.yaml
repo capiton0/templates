@@ -1,0 +1,32 @@
+id: finger-login-wechat-work-scrm
+
+info:
+  name: finger-login-wechat-work-scrm
+  author: capiton
+  severity: info
+  description: description
+  reference:
+    - https://
+  tags: scrm
+
+requests:
+  - raw:
+      - |-
+        POST /manage/login.html HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+
+        fT08d9e827ffbba2efe4413cb064bbf847un=admin&fT08d9e827ffbba2efe4413cb064bbf847pwd={{randstr}}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - 登录信息不正确
+        negative: true
+
+      - type: status
+        status:
+          - 200

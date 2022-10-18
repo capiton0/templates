@@ -91,9 +91,9 @@ workflows:
 
               subtemplates:
                 - tags: emobile
-                - template: 0.local/finger/login/finger-login-weaver-emobile-v7.yaml
+                - template: 0.local/login/finger/oa/login-finger-oa-weaver-emobile-v7.yaml
                   subtemplates:
-                    - template: 0.local/fuzz/fuzz-login-weaver-emobile-v7.yaml
+                    - template: 0.local/login/fuzz/oa/login-fuzz-oa-weaver-emobile-v7.yaml
 
 
 #    icon图标匹配扫描 - 协达OA  
@@ -198,10 +198,10 @@ workflows:
                 - tags: weaver
                 - tags: fanwei
                 - tags: ecology
-                - template: 0.local/finger/finger-login-ecology.yaml
+                - template: 0.local/login/finger/oa/login-finger-oa-ecology.yaml
                   subtemplates:
-                    - template: 0.local/fuzz/fuzz-login-ecology-adminuser.yaml
-                    - template: 0.local/fuzz/fuzz-login-ecology-user.yaml
+                    - template: 0.local/login/fuzz/oa/login-fuzz-oa-ecology-adminuser.yaml
+                    - template: 0.local/login/fuzz/oa/login-fuzz-oa-ecology-user.yaml
 
 #  泛微-e-mobile
             - name: 
@@ -210,9 +210,9 @@ workflows:
 
               subtemplates:
                 - tags: emobile
-                - template: 0.local/finger/login/finger-login-weaver-emobile-v7.yaml
+                - template: 0.local/login/finger/oa/login-finger-oa-weaver-emobile-v7.yaml
                   subtemplates:
-                    - template: 0.local/fuzz/fuzz-login-weaver-emobile-v7.yaml
+                    - template: 0.local/login/fuzz/oa/login-fuzz-oa-weaver-emobile-v7.yaml
             
 
 #    首页指纹匹配扫描 -  通达OA  
@@ -414,9 +414,9 @@ workflows:
               condition: or
 
               subtemplates:
-                - template: 0.local/finger/wdcp-finger.yaml
+                - template: 0.local/login/finger/login-finger-wdcp.yaml
                   subtemplates:
-                    - template: 0.local/default-login/wdcp-default-login.yaml
+                    - template: 0.local/login/default/login-default-wdcp.yaml
 
 #    首页指纹匹配扫描 -  wordpress  
             - name: 
@@ -561,9 +561,9 @@ workflows:
 
               subtemplates:
                 - tags: jenkins
-                - template: 0.local/finger/finger-login-jenkins.yaml
+                - template: 0.local/login/finger/login-finger-jenkins.yaml
                   subtemplates:
-                    - template: 0.local/fuzz/jenkins-login-fuzz.yaml
+                    - template: 0.local/login/fuzz/login-fuzz-jenkins.yaml
 
 #    首页指纹匹配扫描 -  禅道 zentao  
             - name: 
@@ -606,9 +606,9 @@ workflows:
 
               subtemplates:
                 - tags: paloalto
-                - template: 0.local/finger/finger-login-paloalto.yaml
+                - template: 0.local/login/finger/login-finger-paloalto.yaml
                   subtemplates:
-                    - template: 0.local/fuzz/login-fuzz-paloalto.yaml
+                    - template: 0.local/login/fuzz/login-fuzz-paloalto.yaml
 
 #    首页指纹匹配扫描 -  EyouCms 易优CMS  
             - name: 
@@ -682,9 +682,9 @@ workflows:
               condition: or
 
               subtemplates:
-                - template: 0.local/finger/finger-login-LauEl.yaml
+                - template: 0.local/login/finger/login-finger-LauEl.yaml
                   subtemplates:
-                    - template: 0.local/default-login/LauEl-defalt-login.yaml
+                    - template: 0.local/login/fuzz/login-fuzz-LauEl.yaml
 
 #    首页指纹匹配扫描 -  nsfocus 绿盟产品
             - name: 
