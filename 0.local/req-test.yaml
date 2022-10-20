@@ -7,42 +7,38 @@ info:
   tags: fuck
 # self-contained: true
 requests:
-  # - method: GET
-  #   path:
-  #     - "{{RootURL}}"
-
-  # - raw:
-  #     - |
-  #       @{{wait_for(5)}}
-  #       @Host: http://127.0.0.1:8000
-  #       GET /HTTP/1.1
-  #       Host: 127.0.0.1:8000
-  #       Content-Type: application/json
-  #       {{domain}} 1
         
   - raw:
       - |
-        GET / HTTP/1.1
+        GET /1.txt HTTP/1.1
         Host: 127.0.0.1:8000
         Content-Type: application/json
 
       - |
-        GET /{{test}} HTTP/1.1
+        GET /2.txt HTTP/1.1
         Host: 127.0.0.1:8000
         Content-Type: application/json
         
     
-    payloads:
-      test: 
-        - "2"
-    
     redirects: false
-    matchers-condition: or
+    matchers-condition: and
     matchers:
-    - type: status
-      name: success
-      status:
-        - 200
+    # - type: status
+    #   name: success
+    #   status:
+    #     - 200
+
+      - type: word
+        part: body
+        condition: and   
+        words:  
+          - fuck1
+
+      # - type: word
+      #   part: body
+      #   condition: and   
+      #   words:  
+      #     - fuck2
       #     - 201
       #     - 202
       #     - 204
