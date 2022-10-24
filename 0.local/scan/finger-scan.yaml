@@ -13891,6 +13891,7 @@ workflows:
       subtemplates:        
         - template: exposures/
         - template: exposed-panels/
+        - template: misconfiguration/
 
 
 ############################ 403状态码匹配扫描 -  开始 #################################################################################
