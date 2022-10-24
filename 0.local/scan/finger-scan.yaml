@@ -10,7 +10,10 @@ workflows:
 #### 开始请求一次，忽略掉一些状态码异常的站点
   - template: 0.local/scan/scan-first-request.yaml
     matchers:
-    - name: success    
+    - name: 
+      - success    
+      condition: and
+
       subtemplates:
 ############################ icon图标匹配扫描 -  开始 #################################################################################
         
@@ -13879,3 +13882,21 @@ workflows:
             - template: 0.local/pocs/shiro/poc-local-shiro-secret-key-aes-gcm.yaml
 
 
+
+############################ 404状态码匹配扫描 -  开始 #################################################################################
+    - name: 
+      - 404   
+      condition: and
+
+      subtemplates:        
+        - template: exposures/
+        - template: exposed-panels/
+
+
+############################ 403状态码匹配扫描 -  开始 #################################################################################
+    - name: 
+      - 403   
+      condition: and
+      
+      subtemplates:        
+        - template: 0.local/fuzz/fuzz-403page-bypass.yaml

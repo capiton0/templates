@@ -33,9 +33,15 @@ requests:
           - 502
         condition: or
 
-      # - type: status
-      #   name: status_404
-      #   status:
-      #     - 200
-      #   condition: or
+      - type: status
+        name: 403
+        status:
+          - 403
+        condition: and
+
+      - type: status
+        name: 404
+        status:
+          - 404
+        condition: and
 
