@@ -23,7 +23,7 @@ nuclei官方模板版本：
 ## 🚀 快速使用
 ### 一、安装
 
-    ```bash
+    ```
     git clone https://github.com/capiton0/nuclei
     ```
 
