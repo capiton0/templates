@@ -22,11 +22,7 @@ nuclei官方模板版本：
 <a href="https://github.com/projectdiscovery/nuclei-templates/releases"><img src="https://img.shields.io/github/release/projectdiscovery/nuclei-templates"></a>
 ## 🚀 快速使用
 ### 一、安装
-
-    ```
     git clone https://github.com/capiton0/nuclei
-    ```
-
 下载仓库模板，替换nuclei-templates目录
 
 或
