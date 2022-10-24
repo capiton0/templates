@@ -4,4 +4,5 @@
 0.local/helpers/api/hunter_token.txt
 0.local/helpers/api/securitytrails_token.txt
 0.local/helpers/api/shodan_token.txt
+0.local/update/*
 .DS_Store
