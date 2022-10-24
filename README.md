@@ -1,6 +1,6 @@
 
 
-<h1 align="center">nuclei自动化渗透模板</h1>
+<h1 align="center">Nuclei Templates</h1>
 
 > 基于nuclei的自动化渗透模板。
 
@@ -21,7 +21,6 @@
 nuclei官方模板版本：
 <a href="https://github.com/projectdiscovery/nuclei-templates/releases"><img src="https://img.shields.io/github/release/projectdiscovery/nuclei-templates"></a>
 ## 🚀 快速使用
-> 下载仓库模板，替换nuclei-templates目录 或 移动 `0.local/` `1.other/`
 ### 一、安装
 
     ```bash
