@@ -14704,15 +14704,6 @@ workflows:
 
 #    首页指纹匹配扫描 -
             - name:
-              - upload
-              condition: or
-
-              subtemplates:
-                - tags: upload
-
-
-#    首页指纹匹配扫描 -
-            - name:
               - member-hero
               condition: or
 
