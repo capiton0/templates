@@ -1,0 +1,30 @@
+id: poc-local-wordpress-debug-log-leak
+
+info:
+  name: wordpress debug.php 日志文件泄露
+  author: capiton
+  severity: low
+  description: ""
+  reference: ""
+  tags: wordpress
+
+requests:
+  - raw:
+      - |+
+        GET /wp-content/debug.log HTTP/1.1
+        Host: {{Hostname}}
+
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        condition: or
+        words:
+          - "PHP Fatal error:"
+          - "PHP Warning:"
+          - "PHP Notice:"
+
