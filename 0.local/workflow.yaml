@@ -1,0 +1,63 @@
+id: dir-scan
+
+info:
+  name: 目录扫描探测
+  author: capiton
+  description: 对目标站点目录进行扫描发现
+
+workflows:
+
+#### 开始请求一次，忽略掉一些状态码异常的站点
+  - template: 0.local/scan/scan-first-request.yaml
+    matchers:
+############################ 目录文件扫描 -  开始 #################################################################################
+    - name: 
+      - 200
+      - 301
+      - 302
+      - 404   
+      condition: or
+
+      subtemplates:
+        - template: 0.local/dirsearch/index_path_content_length.yaml
+
+          subtemplates:
+            - template: 0.local/dirsearch/error_path1_content_length.yaml
+              
+              subtemplates:
+              - template: 0.local/dirsearch/error_path2_content_length.yaml
+                
+                subtemplates:
+                - template: 0.local/dirsearch/error_path3_content_length.yaml
+                  
+                  subtemplates:
+                  - template: 0.local/dirsearch/error_path4_content_length.yaml
+
+                    subtemplates:
+                    - template: 0.local/dirsearch/error_path5_content_length.yaml
+
+                      subtemplates:
+                      - template: 0.local/dirsearch/error_path6_content_length.yaml
+
+                        subtemplates:
+                        - template: 0.local/dirsearch/error_path7_content_length.yaml
+
+                          subtemplates:
+                          - template: 0.local/dirsearch/error_path8_content_length.yaml
+
+                            subtemplates:
+                              - template: 0.local/dirsearch/error_path9_content_length.yaml
+
+                                subtemplates:
+                                - template: 0.local/dirsearch/error_path10_content_length.yaml
+
+                                  subtemplates:
+                                    - template: 0.local/dirsearch/error_path11_content_length.yaml
+
+                                      subtemplates:
+                                      - template: 0.local/dirsearch/error_path12_content_length.yaml
+
+                                        subtemplates:
+                                        - template: 0.local/dirsearch/dirsearch.yaml
+        
+        

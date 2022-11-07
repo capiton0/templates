@@ -1,0 +1,56 @@
+id: dirsearch
+
+info:
+  name: dirsearch
+  author: capiton
+  severity: low
+  reference: " "
+  tags: urlscan
+
+requests:
+  - raw:
+      - |
+        GET /{{path}} HTTP/1.1
+        Host: {{Hostname}}
+        Referer: {{BaseURL}}
+
+    redirects: false
+
+    payloads:
+      path: 0.local/helpers/wordlists/url_fuzz.txt
+    threads: 30
+    matchers-condition: and
+
+    matchers:
+      - type: dsl
+        condition: and
+        dsl:
+          - "len(body) != -1"
+          - "len(body) != 0"
+          - "len(body) != to_number(index_path_content_length)"
+          - "len(body) != to_number(error_path1_content_length)"
+          - "len(body) != to_number(error_path2_content_length)"
+          - "len(body) != to_number(error_path3_content_length)"
+          - "len(body) != to_number(error_path4_content_length)"
+          - "len(body) != to_number(error_path5_content_length)"
+          - "len(body) != to_number(error_path6_content_length)"
+          - "len(body) != to_number(error_path7_content_length)"
+          - "len(body) != to_number(error_path8_content_length)"
+          - "len(body) != to_number(error_path9_content_length)"
+          - "len(body) != to_number(error_path10_content_length)"
+          - "len(body) != to_number(error_path11_content_length)"
+          - "len(body) != to_number(error_path12_content_length)"
+
+      - type: status
+        condition: or
+        status:
+          - 200
+          - 302
+          - 301
+          # - 403
+
+    extractors:
+      - type: dsl  # type of the extractor
+        dsl:
+          - "status_code"
+          - "len(body)"
