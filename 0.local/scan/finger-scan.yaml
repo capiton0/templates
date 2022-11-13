@@ -339,6 +339,18 @@ workflows:
               subtemplates:
                 - tags: kingdee
 
+#    首页指纹匹配扫描 - 金和OA
+            - name: 
+              - jinher
+              - 金和协同管理平台
+              - JC6金和协同管理平台
+              - 金和OA
+              - 金和网络
+              condition: or
+
+              subtemplates:
+                - tags: jinher
+
 #    首页指纹匹配扫描 -  O2OA  
             - name: 
               - O2OA
@@ -6039,14 +6051,6 @@ workflows:
 
               subtemplates:
                 - tags: jinfornet
-
-#    首页指纹匹配扫描 - 
-            - name: 
-              - jinher
-              condition: or
-
-              subtemplates:
-                - tags: jinher
 
 
 #    首页指纹匹配扫描 - 
