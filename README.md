@@ -47,4 +47,4 @@ nuclei官方模板版本：
     nuclei -t ~/nuclei-templates/0.local/finger/finger-index.yaml -u http://example.com 
     ```
 
-其他用法请阅读文档： https://www.yuque.com/yuxin_0/nuclei/
+其他用法请阅读文档： https://www.yuque.com/yuxin_0/templates/
