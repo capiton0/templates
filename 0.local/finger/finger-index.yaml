@@ -95968,3 +95968,17 @@ requests:
         condition: and    
         words:
           - nccloud
+
+      - type: word
+        name: zktime考勤管理系统
+        part: header
+        condition: and    
+        words:
+          - sessionidadms
+
+      - type: word
+        condition: and
+        name: 微擎
+        words:
+          - www.w7.cc
+          - login
