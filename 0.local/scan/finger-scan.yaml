@@ -13495,12 +13495,15 @@ workflows:
               - zkeco
               - ZKECO
               - ZKTeco 中控智慧
-              - ZKTeco ZKTime 中控智慧 考勤管理系统
+              - ZKTeco ZKTime 中控智慧 考勤管理系统'
               - 中控智慧时间安全管理平台
+              - zktime考勤管理系统
               condition: or
 
               subtemplates:
                 - tags: zkeco
+                - tags: zktime
+                - template: 0.local/login/fuzz/login-fuzz-zktime.yaml
 
 #    首页指纹匹配扫描 - 
             - name: 
@@ -15127,6 +15130,14 @@ workflows:
 
               subtemplates:
                 - tags: telnet
+
+#    首页指纹匹配扫描 - 微擎 - 公众平台自助引擎
+            - name:
+              - 微擎 - 公众平台自助引擎
+              condition: or
+
+              subtemplates:
+                - tags: weiqing
 
 
 ############################ 目录匹配扫描 -  开始 ######################################################################################
