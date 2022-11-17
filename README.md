@@ -1,6 +1,6 @@
 
 
-<h1 align="center">Nuclei Templates</h1>
+<h1 align="center">Templates</h1>
 
 > 基于nuclei的自动化渗透模板。
 
