@@ -1,0 +1,22 @@
+id: shiro-scan
+
+info:
+  name: shiro服务扫描
+  author: capiton
+  description: shiro服务rememberMe关键字探测，cbc、gcm秘钥爆破
+
+workflows:
+
+#### 开始请求一次，忽略掉一些状态码异常的站点
+  - template: 0.local/scan/scan-first-request.yaml
+    matchers:
+    - name: 
+      - success    
+      condition: and
+
+      subtemplates:
+############################ shiro匹配扫描 -  开始 #################################################################################
+        - template: 0.local/finger/shiro/finger-shiro-rememberMe.yaml
+          subtemplates:
+            - template: 0.local/pocs/shiro/poc-local-shiro-secret-key-aes-cbc.yaml
+            - template: 0.local/pocs/shiro/poc-local-shiro-secret-key-aes-gcm.yaml
