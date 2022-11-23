@@ -1,25 +1,27 @@
-id: led-imediacloud-panel
+id: hetzner-cloud-detect
 
 info:
-  name: LEDiMediaCloud Panel Detect
-  author: ritikchaddha
+  name: Hetzner Cloud Detect
+  author: DhiyaneshDk
   severity: info
   metadata:
     verified: true
-    shodan-query: http.html:"LEDiMediaCloud"
-  tags: panel,led,mediacloud
+    shodan-query: title:"Hetzner Cloud"
+  tags: tech,hetzner
 
 requests:
   - method: GET
     path:
-      - "{{BaseURL}}/login"
+      - '{{BaseURL}}'
 
     matchers-condition: and
     matchers:
       - type: word
         part: body
         words:
-          - 'LEDiMediaCloud'
+          - 'Hetzner Cloud'
+          - 'Hetzner Logo'
+        condition: and
 
       - type: status
         status:
