@@ -1,0 +1,34 @@
+id: api-ipReverseDomain-fofa
+
+info:
+  name: IP反查域名-FOFA接口
+  author: capiton
+  severity: info
+  reference:
+    - https://developer.fastly.com/reference/api/
+  tags: ipdomain
+
+self-contained: true
+requests:
+  - method: GET
+    path:
+      - 'https://fofa.info/api/v1/search/all?email={{fofa_email}}&key={{fofa_token}}&qbase64={{base64("ip=\"" + ip + "\" && is_domain=true")}}&size=10000&fields=domain&full=true'
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+    payloads:
+      fofa_email: 0.local/helpers/api/fofa_mail.txt
+      fofa_token: 0.local/helpers/api/fofa_token.txt
+    attack: clusterbomb
+
+
+    extractors:
+      - type: json # type of the extractor
+        part: body
+        name: ip
+        json:
+          - '.results[]'
