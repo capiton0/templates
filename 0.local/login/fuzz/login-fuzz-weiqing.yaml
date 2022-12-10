@@ -48,7 +48,7 @@ requests:
     payloads:
       username:
         - admin
-      password: "0.local/helpers/wordlists/password-TOP250"
+      password: "0.local/helpers/wordlists/password-TOP250.txt"
     
     attack: clusterbomb
     stop-at-first-match: true

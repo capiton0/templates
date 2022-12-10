@@ -29,7 +29,7 @@ requests:
     attack: clusterbomb
     stop-at-first-match: true
     payloads:
-      password: "0.local/helpers/wordlists/password-TOP250"
+      password: "0.local/helpers/wordlists/password-TOP250.txt"
     matchers-condition: and
     matchers:
       - type: word
