@@ -15,7 +15,8 @@ requests:
       # - "https://apidatav2.chinaz.com/single/icp?key=a6c5ac5b134e4cdeb1914b69443861e8&domain={{domain}}"
       # - "https://api.emoao.com/api/icp?domain={{domain}}"
       # - "https://icp.chinaz.com/{{domain}}"
-      - "https://www.cloudapi.vip/api/icp_cx?domain={{domain}}"
+      # - "https://www.cloudapi.vip/api/icp_cx?domain={{domain}}"
+      - "https://cloudapi.vip/api/icp_cx?domain={{domain}}"
 
     matchers-condition: and
     matchers:
