@@ -1,12 +1,12 @@
 |    TAG    | COUNT |    AUTHOR    | COUNT |    DIRECTORY     | COUNT | SEVERITY | COUNT |  TYPE   | COUNT |
 |-----------|-------|--------------|-------|------------------|-------|----------|-------|---------|-------|
-| cve       |  1575 | dhiyaneshdk  |   707 | cves             |  1552 | info     |  1919 | http    |  4630 |
-| panel     |   803 | daffainfo    |   662 | exposed-panels   |   805 | high     |  1169 | network |    84 |
-| wordpress |   684 | pikpikcu     |   344 | technologies     |   529 | medium   |   849 | file    |    78 |
-| edb       |   583 | pdteam       |   273 | vulnerabilities  |   528 | critical |   568 | dns     |    17 |
-| wp-plugin |   579 | geeknik      |   220 | misconfiguration |   371 | low      |   294 |         |       |
-| exposure  |   573 | ricardomaia  |   210 | exposures        |   325 | unknown  |    26 |         |       |
-| tech      |   567 | pussycat0x   |   181 | token-spray      |   237 |          |       |         |       |
-| xss       |   548 | 0x_akoko     |   171 | workflows        |   190 |          |       |         |       |
-| lfi       |   522 | dwisiswant0  |   171 | default-logins   |   122 |          |       |         |       |
-| cve2021   |   375 | ritikchaddha |   167 | file             |    78 |          |       |         |       |
+| cve       |  1604 | dhiyaneshdk  |   727 | cves             |  1583 | info     |  2038 | http    |  4772 |
+| panel     |   850 | daffainfo    |   662 | exposed-panels   |   835 | high     |  1166 | network |    86 |
+| wordpress |   690 | pikpikcu     |   348 | technologies     |   548 | medium   |   892 | file    |    80 |
+| exposure  |   598 | pdteam       |   274 | vulnerabilities  |   536 | critical |   592 | dns     |    18 |
+| edb       |   587 | geeknik      |   221 | misconfiguration |   412 | low      |   260 |         |       |
+| wp-plugin |   585 | ricardomaia  |   212 | exposures        |   331 | unknown  |    25 |         |       |
+| tech      |   585 | pussycat0x   |   205 | token-spray      |   239 |          |       |         |       |
+| xss       |   563 | ritikchaddha |   191 | workflows        |   190 |          |       |         |       |
+| lfi       |   525 | 0x_akoko     |   175 | default-logins   |   124 |          |       |         |       |
+| cve2021   |   377 | dwisiswant0  |   171 | file             |    80 |          |       |         |       |
