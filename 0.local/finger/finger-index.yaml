@@ -10,7 +10,7 @@ info:
 requests:
   - method: GET
     path:
-      - "{{RootURL}}"
+      - "{{BaseURL}}"
 
 
 
