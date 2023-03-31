@@ -1,53 +1,14 @@
-id: template-id
+id: scan-first-request1
 
 info:
-  name: Template Name
-  author: apple
+  name: scan-first-request
+  author: capiton
   severity: info
-  description: description
-  reference:
-    - https://
-  tags: tags
 
 requests:
-  - raw:
-      - |-
-        POST /app/order/order/list.aspx?ts___=1677513875780&am___=LoadDataToJSON HTTP/1.1
-        Host: {{Hostname}}
-        Cookie: acw_tc=2760779116775130252924996e6151623c8a88290740c130d6df7474f6ec1d; _ati=4329260271457; 3AB9D23F7A4B3C9B=NQB7EG6FVHCCO2FM4VNX5MYXAQ7CUDIGBPTKXDYA4JJ7R4ZM2GK7S4UIKGWYTU27QPYFRYXIKG2WVO5V5JUTPIVK3I; u_name=%e6%9d%8e%e6%85%a7%e9%9d%99; u_lid=18667916348; j_d_3=NQB7EG6FVHCCO2FM4VNX5MYXAQ7CUDIGBPTKXDYA4JJ7R4ZM2GK7S4UIKGWYTU27QPYFRYXIKG2WVO5V5JUTPIVK3I; u_json=%7b%22t%22%3a%222023-2-27+23%3a50%3a43%22%2c%22co_type%22%3a%22%e6%a0%87%e5%87%86%e5%95%86%e5%ae%b6%22%2c%22proxy%22%3anull%2c%22ug_id%22%3a%2213607310%22%2c%22dbc%22%3a%221478%22%2c%22tt%22%3a%2241%22%2c%22apps%22%3a%221.4.150.151.152%22%2c%22pwd_valid%22%3a%221%22%2c%22ssi%22%3anull%2c%22sign%22%3a%223561083.6A18D193C4F84C2899A5FA5210CFD7DE%2cff9f2dfda82a6f180fbd3835445377a6%22%7d; u_ssi=; u_co_name=%e6%9d%ad%e5%b7%9e%e5%8a%a0%e7%82%b9%e6%bb%8b%e5%91%b3%e7%a7%91%e6%8a%80%e6%9c%89%e9%99%90%e5%85%ac%e5%8f%b8; u_drp=; v_d_144=1677513029459_c3c7a5e2aa03f01329e191030f694b44; u_cid=133219866437103295; u_r=; u_sso_token=CS@56d5584a971d4f29861b4c0de4593255; u_id=16060273; u_shop=; u_co_id=10814631; p_50=BAB93616529D53572A8A0971698DC0EF638131386437112559%7c10814631; u_env=www; SessionCode=34b3aa8a-92ff-4b43-ed031869391b500; m_inav=false; u_menu=
-        Content-Length: 712
-        Sec-Ch-Ua: "Chromium";v="103", ".Not/A)Brand";v="99"
-        Accept: */*
-        Content-Type: application/x-www-form-urlencoded; charset=UTF-8
-        X-Requested-With: XMLHttpRequest
-        Sec-Ch-Ua-Mobile: ?0
-        User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36
-        Sec-Ch-Ua-Platform: "macOS"
-        Origin: https://erp321.com
-        Sec-Fetch-Site: same-origin
-        Sec-Fetch-Mode: cors
-        Sec-Fetch-Dest: empty
-        Referer: https://erp321.com/app/order/order/list.aspx
-        Accept-Encoding: gzip, deflate
-        Accept-Language: zh-CN,zh;q=0.9
-        Connection: close
-
-        __VIEWSTATE=%2FwEPDwUKLTE5NDM5NzMyNWRkH8Nb9wV7szbd2WtVJKcJQIXZy48%3D&__VIEWSTATEGENERATOR=C8154B07&insurePrice=&_jt_page_count_enabled=&_jt_page_increament_enabled=true&_jt_page_increament_page_mode=&_jt_page_increament_key_value=&_jt_page_increament_business_values=&_jt_page_increament_key_name=o_id&_jt_page_size=50&fe_node_desc=&receiver_state=&receiver_city=&receiver_district=&receiver_address=&receiver_name=&receiver_phone=&receiver_mobile=&check_name=&check_address=&fe_remark_type=single&feedback=choose_arc_date&fe_flag=&fe_is_append_remark=&__CALLBACKID=JTable1&__CALLBACKPARAM={"Method":"LoadDataToJSON","Args":["1","[{\"k\":\"l_id\",\"v\":\"{{order}},@JT2916373266212\",\"c\":\"@=\"}]","{}"]}
-
-    matchers-condition: and
-    matchers:
-      - type: status
-        status:
-          - 200
-
-      - type: word
-        condition: or
-        part: body
-        negative: true
-        words:
-          - "1005"
-          - "(收"
-          - "（收"
+  - method: GET
+    path:
+      - "{{RootURL}}"
 
     extractors:
       - type: regex # type of the extractor
@@ -56,4 +17,64 @@ requests:
         group: 1
         # internal: true
         regex:
-          - '"remark\\"(.*?)"\,\\"ext_datas'
+          - '.*'
+
+
+    redirects: false
+    matchers-condition: or
+    matchers:
+      - type: status
+        name: success
+        status:
+          - 200
+          - 201
+          - 202
+          - 204
+          - 301
+          - 302
+          - 303
+          - 304
+          - 307
+          - 401
+          - 403
+          - 404
+          - 500
+          - 501
+          - 502
+        condition: or
+
+      - type: status
+        name: 200
+        status:
+          - 200
+        condition: and
+
+      - type: status
+        name: 301
+        status:
+          - 301
+        condition: and
+
+      - type: status
+        name: 302
+        status:
+          - 302
+        condition: and
+
+      - type: status
+        name: 401
+        status:
+          - 401
+        condition: and
+
+      - type: status
+        name: 403
+        status:
+          - 403
+        condition: and
+
+      - type: status
+        name: 404
+        status:
+          - 404
+        condition: and
